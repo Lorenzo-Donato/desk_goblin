@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.deskgoblin.model.datastructures.SinglyLinkedListTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-08-01T02:34:21" hostname="DESKTOP-FE9UO8M" time="0.009">
+  <properties/>
+  <testcase name="testSizeAndIsEmpty()" classname="com.deskgoblin.model.datastructures.SinglyLinkedListTest" time="0.001"/>
+  <testcase name="testPushBackAndPeek()" classname="com.deskgoblin.model.datastructures.SinglyLinkedListTest" time="0.001"/>
+  <testcase name="testPopFrontSingleElement()" classname="com.deskgoblin.model.datastructures.SinglyLinkedListTest" time="0.001"/>
+  <testcase name="testToString()" classname="com.deskgoblin.model.datastructures.SinglyLinkedListTest" time="0.001"/>
+  <testcase name="testPopBack()" classname="com.deskgoblin.model.datastructures.SinglyLinkedListTest" time="0.0"/>
+  <testcase name="testPopBackSingleElement()" classname="com.deskgoblin.model.datastructures.SinglyLinkedListTest" time="0.0"/>
+  <testcase name="testContains()" classname="com.deskgoblin.model.datastructures.SinglyLinkedListTest" time="0.0"/>
+  <testcase name="testPushFrontAndPeek()" classname="com.deskgoblin.model.datastructures.SinglyLinkedListTest" time="0.0"/>
+  <testcase name="testPopEmptyList()" classname="com.deskgoblin.model.datastructures.SinglyLinkedListTest" time="0.0"/>
+  <testcase name="testPopFront()" classname="com.deskgoblin.model.datastructures.SinglyLinkedListTest" time="0.001"/>
+  <system-out><![CDATA[[LinkedList] Lista criada.
+[LinkedList] size: 0
+[LinkedList] pushFront: adicionado 1 no início.
+[LinkedList] size: 1
+[LinkedList] popFront: removido 1 do início.
+[LinkedList] size: 0
+[LinkedList] Lista criada.
+[LinkedList] pushBack: adicionado 10 no final.
+[LinkedList] pushBack: adicionado 20 no final.
+[LinkedList] peekFront: acessado 10
+[LinkedList] peekBack: acessado 20
+[LinkedList] Lista criada.
+[LinkedList] pushBack: adicionado 42 no final.
+[LinkedList] popFront: removido 42 do início.
+[LinkedList] peekBack: lista vazia.
+[LinkedList] Lista criada.
+[LinkedList] pushBack: adicionado 1 no final.
+[LinkedList] pushBack: adicionado 2 no final.
+[LinkedList] pushBack: adicionado 3 no final.
+[LinkedList] Lista criada.
+[LinkedList] pushBack: adicionado 10 no final.
+[LinkedList] pushBack: adicionado 20 no final.
+[LinkedList] popBack: removido 20 do final.
+[LinkedList] peekBack: acessado 10
+[LinkedList] size: 1
+[LinkedList] Lista criada.
+[LinkedList] pushFront: adicionado 42 no início.
+[LinkedList] popBack: removido 42 do final.
+[LinkedList] peekFront: lista vazia.
+[LinkedList] Lista criada.
+[LinkedList] pushBack: adicionado 100 no final.
+[LinkedList] pushBack: adicionado 200 no final.
+[LinkedList] contains: elemento 100 encontrado.
+[LinkedList] contains: elemento 200 encontrado.
+[LinkedList] contains: elemento 300 não encontrado.
+[LinkedList] Lista criada.
+[LinkedList] pushFront: adicionado 10 no início.
+[LinkedList] pushFront: adicionado 20 no início.
+[LinkedList] peekFront: acessado 20
+[LinkedList] peekBack: acessado 10
+[LinkedList] Lista criada.
+[LinkedList] popFront: lista vazia.
+[LinkedList] popBack: lista vazia.
+[LinkedList] Lista criada.
+[LinkedList] pushBack: adicionado 10 no final.
+[LinkedList] pushBack: adicionado 20 no final.
+[LinkedList] popFront: removido 10 do início.
+[LinkedList] peekFront: acessado 20
+[LinkedList] size: 1
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.deskgoblin.model.datastructures.QueueWithTwoStacksTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-08-01T02:34:21" hostname="DESKTOP-FE9UO8M" time="0.015">
+  <properties/>
+  <testcase name="testQueueOrderIntegrity()" classname="com.deskgoblin.model.datastructures.QueueWithTwoStacksTest" time="0.003"/>
+  <testcase name="testSize()" classname="com.deskgoblin.model.datastructures.QueueWithTwoStacksTest" time="0.001"/>
+  <testcase name="testToString()" classname="com.deskgoblin.model.datastructures.QueueWithTwoStacksTest" time="0.001"/>
+  <testcase name="testMultipleInterleavedOps()" classname="com.deskgoblin.model.datastructures.QueueWithTwoStacksTest" time="0.001"/>
+  <testcase name="testTransferMechanism()" classname="com.deskgoblin.model.datastructures.QueueWithTwoStacksTest" time="0.001"/>
+  <testcase name="testEnqueueAndPeek()" classname="com.deskgoblin.model.datastructures.QueueWithTwoStacksTest" time="0.001"/>
+  <testcase name="testPeekEmptyQueue()" classname="com.deskgoblin.model.datastructures.QueueWithTwoStacksTest" time="0.0"/>
+  <testcase name="testDequeue()" classname="com.deskgoblin.model.datastructures.QueueWithTwoStacksTest" time="0.001"/>
+  <testcase name="testIsEmpty()" classname="com.deskgoblin.model.datastructures.QueueWithTwoStacksTest" time="0.001"/>
+  <testcase name="testDequeueEmptyQueue()" classname="com.deskgoblin.model.datastructures.QueueWithTwoStacksTest" time="0.001"/>
+  <system-out><![CDATA[[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[Queue] Fila com duas pilhas criada.
+[LinkedList] pushFront: adicionado 0 no início.
+[Stack] push: elemento 0 empilhado.
+[Queue] enqueue: elemento 0 adicionado à fila.
+[LinkedList] pushFront: adicionado 1 no início.
+[Stack] push: elemento 1 empilhado.
+[Queue] enqueue: elemento 1 adicionado à fila.
+[LinkedList] pushFront: adicionado 2 no início.
+[Stack] push: elemento 2 empilhado.
+[Queue] enqueue: elemento 2 adicionado à fila.
+[LinkedList] pushFront: adicionado 3 no início.
+[Stack] push: elemento 3 empilhado.
+[Queue] enqueue: elemento 3 adicionado à fila.
+[LinkedList] pushFront: adicionado 4 no início.
+[Stack] push: elemento 4 empilhado.
+[Queue] enqueue: elemento 4 adicionado à fila.
+[LinkedList] pushFront: adicionado 5 no início.
+[Stack] push: elemento 5 empilhado.
+[Queue] enqueue: elemento 5 adicionado à fila.
+[LinkedList] pushFront: adicionado 6 no início.
+[Stack] push: elemento 6 empilhado.
+[Queue] enqueue: elemento 6 adicionado à fila.
+[LinkedList] pushFront: adicionado 7 no início.
+[Stack] push: elemento 7 empilhado.
+[Queue] enqueue: elemento 7 adicionado à fila.
+[LinkedList] pushFront: adicionado 8 no início.
+[Stack] push: elemento 8 empilhado.
+[Queue] enqueue: elemento 8 adicionado à fila.
+[LinkedList] pushFront: adicionado 9 no início.
+[Stack] push: elemento 9 empilhado.
+[Queue] enqueue: elemento 9 adicionado à fila.
+[Queue] transfer: movendo elementos da inStack para a outStack.
+[LinkedList] popFront: removido 9 do início.
+[Stack] pop: elemento 9 desempilhado.
+[LinkedList] pushFront: adicionado 9 no início.
+[Stack] push: elemento 9 empilhado.
+[LinkedList] popFront: removido 8 do início.
+[Stack] pop: elemento 8 desempilhado.
+[LinkedList] pushFront: adicionado 8 no início.
+[Stack] push: elemento 8 empilhado.
+[LinkedList] popFront: removido 7 do início.
+[Stack] pop: elemento 7 desempilhado.
+[LinkedList] pushFront: adicionado 7 no início.
+[Stack] push: elemento 7 empilhado.
+[LinkedList] popFront: removido 6 do início.
+[Stack] pop: elemento 6 desempilhado.
+[LinkedList] pushFront: adicionado 6 no início.
+[Stack] push: elemento 6 empilhado.
+[LinkedList] popFront: removido 5 do início.
+[Stack] pop: elemento 5 desempilhado.
+[LinkedList] pushFront: adicionado 5 no início.
+[Stack] push: elemento 5 empilhado.
+[LinkedList] popFront: removido 4 do início.
+[Stack] pop: elemento 4 desempilhado.
+[LinkedList] pushFront: adicionado 4 no início.
+[Stack] push: elemento 4 empilhado.
+[LinkedList] popFront: removido 3 do início.
+[Stack] pop: elemento 3 desempilhado.
+[LinkedList] pushFront: adicionado 3 no início.
+[Stack] push: elemento 3 empilhado.
+[LinkedList] popFront: removido 2 do início.
+[Stack] pop: elemento 2 desempilhado.
+[LinkedList] pushFront: adicionado 2 no início.
+[Stack] push: elemento 2 empilhado.
+[LinkedList] popFront: removido 1 do início.
+[Stack] pop: elemento 1 desempilhado.
+[LinkedList] pushFront: adicionado 1 no início.
+[Stack] push: elemento 1 empilhado.
+[LinkedList] popFront: removido 0 do início.
+[Stack] pop: elemento 0 desempilhado.
+[LinkedList] pushFront: adicionado 0 no início.
+[Stack] push: elemento 0 empilhado.
+[LinkedList] popFront: removido 0 do início.
+[Stack] pop: elemento 0 desempilhado.
+[Queue] dequeue: elemento 0 removido da fila.
+[LinkedList] popFront: removido 1 do início.
+[Stack] pop: elemento 1 desempilhado.
+[Queue] dequeue: elemento 1 removido da fila.
+[LinkedList] popFront: removido 2 do início.
+[Stack] pop: elemento 2 desempilhado.
+[Queue] dequeue: elemento 2 removido da fila.
+[LinkedList] popFront: removido 3 do início.
+[Stack] pop: elemento 3 desempilhado.
+[Queue] dequeue: elemento 3 removido da fila.
+[LinkedList] popFront: removido 4 do início.
+[Stack] pop: elemento 4 desempilhado.
+[Queue] dequeue: elemento 4 removido da fila.
+[LinkedList] pushFront: adicionado 10 no início.
+[Stack] push: elemento 10 empilhado.
+[Queue] enqueue: elemento 10 adicionado à fila.
+[LinkedList] pushFront: adicionado 11 no início.
+[Stack] push: elemento 11 empilhado.
+[Queue] enqueue: elemento 11 adicionado à fila.
+[LinkedList] pushFront: adicionado 12 no início.
+[Stack] push: elemento 12 empilhado.
+[Queue] enqueue: elemento 12 adicionado à fila.
+[LinkedList] pushFront: adicionado 13 no início.
+[Stack] push: elemento 13 empilhado.
+[Queue] enqueue: elemento 13 adicionado à fila.
+[LinkedList] pushFront: adicionado 14 no início.
+[Stack] push: elemento 14 empilhado.
+[Queue] enqueue: elemento 14 adicionado à fila.
+[LinkedList] popFront: removido 5 do início.
+[Stack] pop: elemento 5 desempilhado.
+[Queue] dequeue: elemento 5 removido da fila.
+[LinkedList] popFront: removido 6 do início.
+[Stack] pop: elemento 6 desempilhado.
+[Queue] dequeue: elemento 6 removido da fila.
+[LinkedList] popFront: removido 7 do início.
+[Stack] pop: elemento 7 desempilhado.
+[Queue] dequeue: elemento 7 removido da fila.
+[LinkedList] popFront: removido 8 do início.
+[Stack] pop: elemento 8 desempilhado.
+[Queue] dequeue: elemento 8 removido da fila.
+[LinkedList] popFront: removido 9 do início.
+[Stack] pop: elemento 9 desempilhado.
+[Queue] dequeue: elemento 9 removido da fila.
+[Queue] transfer: movendo elementos da inStack para a outStack.
+[LinkedList] popFront: removido 14 do início.
+[Stack] pop: elemento 14 desempilhado.
+[LinkedList] pushFront: adicionado 14 no início.
+[Stack] push: elemento 14 empilhado.
+[LinkedList] popFront: removido 13 do início.
+[Stack] pop: elemento 13 desempilhado.
+[LinkedList] pushFront: adicionado 13 no início.
+[Stack] push: elemento 13 empilhado.
+[LinkedList] popFront: removido 12 do início.
+[Stack] pop: elemento 12 desempilhado.
+[LinkedList] pushFront: adicionado 12 no início.
+[Stack] push: elemento 12 empilhado.
+[LinkedList] popFront: removido 11 do início.
+[Stack] pop: elemento 11 desempilhado.
+[LinkedList] pushFront: adicionado 11 no início.
+[Stack] push: elemento 11 empilhado.
+[LinkedList] popFront: removido 10 do início.
+[Stack] pop: elemento 10 desempilhado.
+[LinkedList] pushFront: adicionado 10 no início.
+[Stack] push: elemento 10 empilhado.
+[LinkedList] popFront: removido 10 do início.
+[Stack] pop: elemento 10 desempilhado.
+[Queue] dequeue: elemento 10 removido da fila.
+[LinkedList] popFront: removido 11 do início.
+[Stack] pop: elemento 11 desempilhado.
+[Queue] dequeue: elemento 11 removido da fila.
+[LinkedList] popFront: removido 12 do início.
+[Stack] pop: elemento 12 desempilhado.
+[Queue] dequeue: elemento 12 removido da fila.
+[LinkedList] popFront: removido 13 do início.
+[Stack] pop: elemento 13 desempilhado.
+[Queue] dequeue: elemento 13 removido da fila.
+[LinkedList] popFront: removido 14 do início.
+[Stack] pop: elemento 14 desempilhado.
+[Queue] dequeue: elemento 14 removido da fila.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[Queue] Fila com duas pilhas criada.
+[LinkedList] size: 0
+[Stack] size: 0
+[LinkedList] size: 0
+[Stack] size: 0
+[Queue] size: 0
+[LinkedList] pushFront: adicionado 1 no início.
+[Stack] push: elemento 1 empilhado.
+[Queue] enqueue: elemento 1 adicionado à fila.
+[LinkedList] pushFront: adicionado 2 no início.
+[Stack] push: elemento 2 empilhado.
+[Queue] enqueue: elemento 2 adicionado à fila.
+[LinkedList] size: 2
+[Stack] size: 2
+[LinkedList] size: 0
+[Stack] size: 0
+[Queue] size: 2
+[Queue] transfer: movendo elementos da inStack para a outStack.
+[LinkedList] popFront: removido 2 do início.
+[Stack] pop: elemento 2 desempilhado.
+[LinkedList] pushFront: adicionado 2 no início.
+[Stack] push: elemento 2 empilhado.
+[LinkedList] popFront: removido 1 do início.
+[Stack] pop: elemento 1 desempilhado.
+[LinkedList] pushFront: adicionado 1 no início.
+[Stack] push: elemento 1 empilhado.
+[LinkedList] popFront: removido 1 do início.
+[Stack] pop: elemento 1 desempilhado.
+[Queue] dequeue: elemento 1 removido da fila.
+[LinkedList] size: 0
+[Stack] size: 0
+[LinkedList] size: 1
+[Stack] size: 1
+[Queue] size: 1
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[Queue] Fila com duas pilhas criada.
+[LinkedList] pushFront: adicionado 1 no início.
+[Stack] push: elemento 1 empilhado.
+[Queue] enqueue: elemento 1 adicionado à fila.
+[LinkedList] pushFront: adicionado 2 no início.
+[Stack] push: elemento 2 empilhado.
+[Queue] enqueue: elemento 2 adicionado à fila.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[Queue] Fila com duas pilhas criada.
+[LinkedList] pushFront: adicionado 100 no início.
+[Stack] push: elemento 100 empilhado.
+[Queue] enqueue: elemento 100 adicionado à fila.
+[Queue] transfer: movendo elementos da inStack para a outStack.
+[LinkedList] popFront: removido 100 do início.
+[Stack] pop: elemento 100 desempilhado.
+[LinkedList] pushFront: adicionado 100 no início.
+[Stack] push: elemento 100 empilhado.
+[LinkedList] popFront: removido 100 do início.
+[Stack] pop: elemento 100 desempilhado.
+[Queue] dequeue: elemento 100 removido da fila.
+[LinkedList] pushFront: adicionado 200 no início.
+[Stack] push: elemento 200 empilhado.
+[Queue] enqueue: elemento 200 adicionado à fila.
+[LinkedList] pushFront: adicionado 300 no início.
+[Stack] push: elemento 300 empilhado.
+[Queue] enqueue: elemento 300 adicionado à fila.
+[Queue] transfer: movendo elementos da inStack para a outStack.
+[LinkedList] popFront: removido 300 do início.
+[Stack] pop: elemento 300 desempilhado.
+[LinkedList] pushFront: adicionado 300 no início.
+[Stack] push: elemento 300 empilhado.
+[LinkedList] popFront: removido 200 do início.
+[Stack] pop: elemento 200 desempilhado.
+[LinkedList] pushFront: adicionado 200 no início.
+[Stack] push: elemento 200 empilhado.
+[LinkedList] peekFront: acessado 200
+[Stack] peek: elemento 200 acessado.
+[Queue] peek: elemento 200 acessado na fila.
+[LinkedList] popFront: removido 200 do início.
+[Stack] pop: elemento 200 desempilhado.
+[Queue] dequeue: elemento 200 removido da fila.
+[LinkedList] pushFront: adicionado 400 no início.
+[Stack] push: elemento 400 empilhado.
+[Queue] enqueue: elemento 400 adicionado à fila.
+[LinkedList] popFront: removido 300 do início.
+[Stack] pop: elemento 300 desempilhado.
+[Queue] dequeue: elemento 300 removido da fila.
+[Queue] transfer: movendo elementos da inStack para a outStack.
+[LinkedList] popFront: removido 400 do início.
+[Stack] pop: elemento 400 desempilhado.
+[LinkedList] pushFront: adicionado 400 no início.
+[Stack] push: elemento 400 empilhado.
+[LinkedList] popFront: removido 400 do início.
+[Stack] pop: elemento 400 desempilhado.
+[Queue] dequeue: elemento 400 removido da fila.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[Queue] Fila com duas pilhas criada.
+[LinkedList] pushFront: adicionado 1 no início.
+[Stack] push: elemento 1 empilhado.
+[Queue] enqueue: elemento 1 adicionado à fila.
+[LinkedList] pushFront: adicionado 2 no início.
+[Stack] push: elemento 2 empilhado.
+[Queue] enqueue: elemento 2 adicionado à fila.
+[Queue] transfer: movendo elementos da inStack para a outStack.
+[LinkedList] popFront: removido 2 do início.
+[Stack] pop: elemento 2 desempilhado.
+[LinkedList] pushFront: adicionado 2 no início.
+[Stack] push: elemento 2 empilhado.
+[LinkedList] popFront: removido 1 do início.
+[Stack] pop: elemento 1 desempilhado.
+[LinkedList] pushFront: adicionado 1 no início.
+[Stack] push: elemento 1 empilhado.
+[LinkedList] popFront: removido 1 do início.
+[Stack] pop: elemento 1 desempilhado.
+[Queue] dequeue: elemento 1 removido da fila.
+[LinkedList] pushFront: adicionado 3 no início.
+[Stack] push: elemento 3 empilhado.
+[Queue] enqueue: elemento 3 adicionado à fila.
+[LinkedList] pushFront: adicionado 4 no início.
+[Stack] push: elemento 4 empilhado.
+[Queue] enqueue: elemento 4 adicionado à fila.
+[LinkedList] popFront: removido 2 do início.
+[Stack] pop: elemento 2 desempilhado.
+[Queue] dequeue: elemento 2 removido da fila.
+[Queue] transfer: movendo elementos da inStack para a outStack.
+[LinkedList] popFront: removido 4 do início.
+[Stack] pop: elemento 4 desempilhado.
+[LinkedList] pushFront: adicionado 4 no início.
+[Stack] push: elemento 4 empilhado.
+[LinkedList] popFront: removido 3 do início.
+[Stack] pop: elemento 3 desempilhado.
+[LinkedList] pushFront: adicionado 3 no início.
+[Stack] push: elemento 3 empilhado.
+[LinkedList] popFront: removido 3 do início.
+[Stack] pop: elemento 3 desempilhado.
+[Queue] dequeue: elemento 3 removido da fila.
+[LinkedList] popFront: removido 4 do início.
+[Stack] pop: elemento 4 desempilhado.
+[Queue] dequeue: elemento 4 removido da fila.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[Queue] Fila com duas pilhas criada.
+[LinkedList] pushFront: adicionado 10 no início.
+[Stack] push: elemento 10 empilhado.
+[Queue] enqueue: elemento 10 adicionado à fila.
+[Queue] transfer: movendo elementos da inStack para a outStack.
+[LinkedList] popFront: removido 10 do início.
+[Stack] pop: elemento 10 desempilhado.
+[LinkedList] pushFront: adicionado 10 no início.
+[Stack] push: elemento 10 empilhado.
+[LinkedList] peekFront: acessado 10
+[Stack] peek: elemento 10 acessado.
+[Queue] peek: elemento 10 acessado na fila.
+[LinkedList] pushFront: adicionado 20 no início.
+[Stack] push: elemento 20 empilhado.
+[Queue] enqueue: elemento 20 adicionado à fila.
+[LinkedList] peekFront: acessado 10
+[Stack] peek: elemento 10 acessado.
+[Queue] peek: elemento 10 acessado na fila.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[Queue] Fila com duas pilhas criada.
+[Queue] peek: fila vazia.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[Queue] Fila com duas pilhas criada.
+[LinkedList] pushFront: adicionado 10 no início.
+[Stack] push: elemento 10 empilhado.
+[Queue] enqueue: elemento 10 adicionado à fila.
+[LinkedList] pushFront: adicionado 20 no início.
+[Stack] push: elemento 20 empilhado.
+[Queue] enqueue: elemento 20 adicionado à fila.
+[Queue] transfer: movendo elementos da inStack para a outStack.
+[LinkedList] popFront: removido 20 do início.
+[Stack] pop: elemento 20 desempilhado.
+[LinkedList] pushFront: adicionado 20 no início.
+[Stack] push: elemento 20 empilhado.
+[LinkedList] popFront: removido 10 do início.
+[Stack] pop: elemento 10 desempilhado.
+[LinkedList] pushFront: adicionado 10 no início.
+[Stack] push: elemento 10 empilhado.
+[LinkedList] popFront: removido 10 do início.
+[Stack] pop: elemento 10 desempilhado.
+[Queue] dequeue: elemento 10 removido da fila.
+[LinkedList] peekFront: acessado 20
+[Stack] peek: elemento 20 acessado.
+[Queue] peek: elemento 20 acessado na fila.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[Queue] Fila com duas pilhas criada.
+[LinkedList] pushFront: adicionado 5 no início.
+[Stack] push: elemento 5 empilhado.
+[Queue] enqueue: elemento 5 adicionado à fila.
+[Queue] transfer: movendo elementos da inStack para a outStack.
+[LinkedList] popFront: removido 5 do início.
+[Stack] pop: elemento 5 desempilhado.
+[LinkedList] pushFront: adicionado 5 no início.
+[Stack] push: elemento 5 empilhado.
+[LinkedList] popFront: removido 5 do início.
+[Stack] pop: elemento 5 desempilhado.
+[Queue] dequeue: elemento 5 removido da fila.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[Queue] Fila com duas pilhas criada.
+[Queue] dequeue: fila vazia.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

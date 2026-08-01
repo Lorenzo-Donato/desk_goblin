@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.deskgoblin.model.datastructures.StackTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-08-01T02:34:21" hostname="DESKTOP-FE9UO8M" time="0.007">
+  <properties/>
+  <testcase name="testPushAndPeek()" classname="com.deskgoblin.model.datastructures.StackTest" time="0.001"/>
+  <testcase name="testPop()" classname="com.deskgoblin.model.datastructures.StackTest" time="0.001"/>
+  <testcase name="testSize()" classname="com.deskgoblin.model.datastructures.StackTest" time="0.001"/>
+  <testcase name="testMultiplePushAndPop()" classname="com.deskgoblin.model.datastructures.StackTest" time="0.001"/>
+  <testcase name="testToString()" classname="com.deskgoblin.model.datastructures.StackTest" time="0.0"/>
+  <testcase name="testPeekEmptyStack()" classname="com.deskgoblin.model.datastructures.StackTest" time="0.0"/>
+  <testcase name="testIsEmpty()" classname="com.deskgoblin.model.datastructures.StackTest" time="0.0"/>
+  <testcase name="testPopEmptyStack()" classname="com.deskgoblin.model.datastructures.StackTest" time="0.001"/>
+  <system-out><![CDATA[[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[LinkedList] pushFront: adicionado Goblin no início.
+[Stack] push: elemento Goblin empilhado.
+[LinkedList] peekFront: acessado Goblin
+[Stack] peek: elemento Goblin acessado.
+[LinkedList] pushFront: adicionado Orc no início.
+[Stack] push: elemento Orc empilhado.
+[LinkedList] peekFront: acessado Orc
+[Stack] peek: elemento Orc acessado.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[LinkedList] pushFront: adicionado A no início.
+[Stack] push: elemento A empilhado.
+[LinkedList] pushFront: adicionado B no início.
+[Stack] push: elemento B empilhado.
+[LinkedList] popFront: removido B do início.
+[Stack] pop: elemento B desempilhado.
+[LinkedList] peekFront: acessado A
+[Stack] peek: elemento A acessado.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[LinkedList] size: 0
+[Stack] size: 0
+[LinkedList] pushFront: adicionado Item1 no início.
+[Stack] push: elemento Item1 empilhado.
+[LinkedList] size: 1
+[Stack] size: 1
+[LinkedList] pushFront: adicionado Item2 no início.
+[Stack] push: elemento Item2 empilhado.
+[LinkedList] size: 2
+[Stack] size: 2
+[LinkedList] popFront: removido Item2 do início.
+[Stack] pop: elemento Item2 desempilhado.
+[LinkedList] size: 1
+[Stack] size: 1
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[LinkedList] pushFront: adicionado 0 no início.
+[Stack] push: elemento 0 empilhado.
+[LinkedList] pushFront: adicionado 1 no início.
+[Stack] push: elemento 1 empilhado.
+[LinkedList] pushFront: adicionado 2 no início.
+[Stack] push: elemento 2 empilhado.
+[LinkedList] pushFront: adicionado 3 no início.
+[Stack] push: elemento 3 empilhado.
+[LinkedList] pushFront: adicionado 4 no início.
+[Stack] push: elemento 4 empilhado.
+[LinkedList] popFront: removido 4 do início.
+[Stack] pop: elemento 4 desempilhado.
+[LinkedList] popFront: removido 3 do início.
+[Stack] pop: elemento 3 desempilhado.
+[LinkedList] popFront: removido 2 do início.
+[Stack] pop: elemento 2 desempilhado.
+[LinkedList] popFront: removido 1 do início.
+[Stack] pop: elemento 1 desempilhado.
+[LinkedList] popFront: removido 0 do início.
+[Stack] pop: elemento 0 desempilhado.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[LinkedList] pushFront: adicionado C no início.
+[Stack] push: elemento C empilhado.
+[LinkedList] pushFront: adicionado B no início.
+[Stack] push: elemento B empilhado.
+[LinkedList] pushFront: adicionado A no início.
+[Stack] push: elemento A empilhado.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[Stack] peek: pilha vazia.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[LinkedList] pushFront: adicionado Test no início.
+[Stack] push: elemento Test empilhado.
+[LinkedList] popFront: removido Test do início.
+[Stack] pop: elemento Test desempilhado.
+[LinkedList] Lista criada.
+[Stack] Pilha criada.
+[Stack] pop: pilha vazia.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
