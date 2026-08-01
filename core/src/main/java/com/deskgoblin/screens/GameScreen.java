@@ -1,81 +1,63 @@
 package com.deskgoblin.screens;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Cursor;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.deskgoblin.DeskGoblinGame;
+import com.deskgoblin.model.HospitalManager;
+import com.deskgoblin.model.entities.Patient;
+import com.deskgoblin.model.entities.Bed;
 
 public class GameScreen extends ScreenAdapter {
+    private DeskGoblinGame game;
     private SpriteBatch batch;
     private OrthographicCamera camera;
     private Viewport viewport;
 
-    private Texture groundTexture;
-    private Texture tableTexture;
-    private Texture orbOneTexture;
-    private Texture orbTwoTexture;
-    private Texture scrollTexture;
-    private Texture inkwellTexture;
-    private Texture greenButtonTexture;
-    private Texture redButtonTexture;
-    private Texture handTexture;
-    private Texture patientTexture;
+    private Texture groundTexture, tableTexture, orbOneTexture, orbTwoTexture, scrollTexture, 
+                    inkwellTexture, greenButtonTexture, redButtonTexture, handTexture, patientTexture;
     
     private BitmapFont font;
-    private BitmapFont techFont;
-    private String uiLogText = "";
-    private String uiTechText = "";
-    private float logTimer = 0f;
-    
     private Vector3 mousePos;
     
-    private com.deskgoblin.model.HospitalManager hospitalManager;
-    private com.deskgoblin.model.entities.Patient currentPatient;
+    private HospitalManager hospitalManager;
+    private Patient currentPatient; // Paciente que o jogador focou temporariamente
+    private String selectedBedId = "M1"; // Para o Right Orb
+    
+    // UI states
+    private enum UIState { MAIN, SCROLL, SCROLL_REGISTER, SCROLL_VIEW, LEFT_ORB, RIGHT_ORB, HEAL_MINIGAME, ID_POPUP }
+    private UIState currentState = UIState.MAIN;
+    
+    private boolean rightButtonBlinking = false;
+    private float blinkTimer = 0f;
 
     // Coordenadas base
-    private float tableX = 0;
-    private float tableY = 0;
-    
-    // Orbe Verde (orb_one.png) - Na parte direita da mesa
-    private float orbOneX = 400;
-    private float orbOneY = 40;
-    
-    // Orbe Rosa/Avermelhado (orb_two.png) - Colado na parte de cima do balcão à esquerda
-    // Se a mesa tem 138px de altura, Y=125 coloca o objeto um pouco mais para baixo
-    private float orbTwoX = 148;
-    private float orbTwoY = 125;
-    
-    // Scroll na esquerda da mesa
-    private float scrollX = 88;
-    private float scrollY = 25;
-    
-    // Inkwell ao lado direito superior do scroll
-    private float inkwellX = 186;
-    private float inkwellY = 82;
-    
-    // Botões de Ação
-    private float greenBtnX = 390;
-    private float greenBtnY = 15;
-    private float redBtnX = 430;
-    private float redBtnY = 15;
+    private float tableX = 0, tableY = 0;
+    private float orbOneX = 400, orbOneY = 40;     // Orbe Esquerdo
+    private float orbTwoX = 148, orbTwoY = 125;    // Orbe Direito
+    private float scrollX = 88, scrollY = 25;      // Pergaminho
+    private float inkwellX = 186, inkwellY = 82;
+    private float greenBtnX = 390, greenBtnY = 15; // Botão Esquerdo (Cura)
+    private float redBtnX = 430, redBtnY = 15;     // Botão Direito (Retirar)
 
-    public GameScreen() {
+    public GameScreen(DeskGoblinGame game) {
+        this.game = game;
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
-        // Set the internal resolution to 640x360 for pixel art scaling
         viewport = new FitViewport(640, 360, camera);
 
-        // Load individual elements
         groundTexture = new Texture("ground.png");
         tableTexture = new Texture("table.png");
         orbOneTexture = new Texture("orb_one.png");
@@ -84,159 +66,209 @@ public class GameScreen extends ScreenAdapter {
         inkwellTexture = new Texture("inkwell.png");
         greenButtonTexture = new Texture("green_button.png");
         redButtonTexture = new Texture("red_button.png");
-        
         handTexture = new Texture("hand.png");
         patientTexture = new Texture("patient.png");
+        
         mousePos = new Vector3();
 
-        // Configurar a fonte Pixel Art usando FreeType
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("VT323-Regular.ttf"));
-        
-        FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-        parameter.size = 24; // Tamanho ideal para pixel art legível
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 24;
         parameter.color = Color.WHITE;
         parameter.shadowColor = Color.BLACK;
         parameter.shadowOffsetX = 1;
         parameter.shadowOffsetY = 1;
         font = generator.generateFont(parameter);
-        
-        FreeTypeFontParameter techParameter = new FreeTypeFontParameter();
-        techParameter.size = 18; // Menor para a legenda
-        techParameter.color = Color.YELLOW; // Amarelo para destacar que é metadado do projeto
-        techParameter.shadowColor = Color.BLACK;
-        techParameter.shadowOffsetX = 1;
-        techParameter.shadowOffsetY = 1;
-        techFont = generator.generateFont(techParameter);
-        
         generator.dispose();
 
-        // Hide the default OS cursor
         Gdx.graphics.setSystemCursor(Cursor.SystemCursor.None);
         
-        // --- INICIALIZAÇÃO DA LÓGICA DO JOGO ---
-        hospitalManager = new com.deskgoblin.model.HospitalManager();
-        hospitalManager.addPatient(new com.deskgoblin.model.entities.Patient("P001", "Bob o Fazendeiro", "Tosse com Faíscas", 2));
-        hospitalManager.addPatient(new com.deskgoblin.model.entities.Patient("P002", "Garn, o Orc", "Ossos de Gelatina", 1));
+        hospitalManager = new HospitalManager();
         
-        // Adicionamos um caso de emergência (Severidade Alta)
-        hospitalManager.addEmergencyPatient(new com.deskgoblin.model.entities.Patient("E001", "Rei Elfo", "Pele Escamosa Verde", 99));
+        // Simular pacientes já na fila e cadastrados para testes de gameplay
+        Patient p1 = new Patient("P001", "Bob", "Tosse", 2);
+        Patient p2 = new Patient("P002", "Garn", "Febre", 1);
+        Patient p3 = new Patient("E001", "Rei", "Escamas", 99);
+        hospitalManager.registerPatient(p1);
+        hospitalManager.registerPatient(p2);
+        hospitalManager.registerPatient(p3);
     }
 
     @Override
     public void render(float delta) {
+        // Atualizar processos médicos (S17 -> X segundos -> piscar botão)
+        if (hospitalManager.updateMedicalProcesses(delta)) {
+            rightButtonBlinking = true;
+        }
+
         ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1f);
-        
         camera.update();
         batch.setProjectionMatrix(camera.combined);
 
         batch.begin();
-        
-        // 1. Draw Ground (Background)
         batch.draw(groundTexture, 0, 0, 640, 360);
         
         // 1.5 Draw Patient (behind the table)
-        if (currentPatient != null) {
+        Patient visiblePatient = null;
+        if (currentState == UIState.ID_POPUP) {
+            visiblePatient = currentPatient;
+        } else if (currentState == UIState.LEFT_ORB) {
+            visiblePatient = hospitalManager.peekNextPatient();
+        }
+        
+        if (visiblePatient != null) {
             float patientX = (640 - patientTexture.getWidth()) / 2f;
             batch.draw(patientTexture, patientX, 90);
         }
         
-        // 2. Draw Table
-        if(tableX == 0) {
-            tableX = (640 - tableTexture.getWidth()) / 2f;
-        }
+        if (tableX == 0) tableX = (640 - tableTexture.getWidth()) / 2f;
         batch.draw(tableTexture, tableX, tableY);
         
-        // 3. Draw Interactable Items
         batch.draw(orbOneTexture, orbOneX, orbOneY);
         batch.draw(orbTwoTexture, orbTwoX, orbTwoY);
         batch.draw(scrollTexture, scrollX, scrollY);
         batch.draw(inkwellTexture, inkwellX, inkwellY);
         batch.draw(greenButtonTexture, greenBtnX, greenBtnY);
-        batch.draw(redButtonTexture, redBtnX, redBtnY);
         
-        // 4. Draw Custom Cursor (Hand) on top of everything
+        // Efeito de piscar no botão direito
+        if (rightButtonBlinking) {
+            blinkTimer += delta;
+            if (blinkTimer % 0.5f < 0.25f) {
+                batch.setColor(Color.RED);
+            }
+        }
+        batch.draw(redButtonTexture, redBtnX, redBtnY);
+        batch.setColor(Color.WHITE); // Reset color
+        
+        // Desenhar UI OVerlays baseados no estado
+        drawOverlays(delta);
+
+        // Draw Mouse
         mousePos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
         viewport.unproject(mousePos);
         batch.draw(handTexture, mousePos.x, mousePos.y - handTexture.getHeight());
         
-        // 5. Draw UI Log Text
-        if (logTimer > 0) {
-            logTimer -= delta;
-            font.draw(batch, uiLogText, 20, 340);
-            techFont.draw(batch, uiTechText, 20, 315);
-        }
-        
         batch.end();
         
-        // --- DETECÇÃO DE CLIQUES E INTEGRAÇÃO LÓGICA ---
-        if (Gdx.input.isButtonJustPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
-            // Recria as hitboxes toda frame pra garantir que acompanhem as variáveis caso a gente as mova no futuro
-            com.badlogic.gdx.math.Rectangle orbOneBounds = new com.badlogic.gdx.math.Rectangle(orbOneX, orbOneY, orbOneTexture.getWidth(), orbOneTexture.getHeight());
-            com.badlogic.gdx.math.Rectangle orbTwoBounds = new com.badlogic.gdx.math.Rectangle(orbTwoX, orbTwoY, orbTwoTexture.getWidth(), orbTwoTexture.getHeight());
-            com.badlogic.gdx.math.Rectangle scrollBounds = new com.badlogic.gdx.math.Rectangle(scrollX, scrollY, scrollTexture.getWidth(), scrollTexture.getHeight());
-            com.badlogic.gdx.math.Rectangle inkwellBounds = new com.badlogic.gdx.math.Rectangle(inkwellX, inkwellY, inkwellTexture.getWidth(), inkwellTexture.getHeight());
-            com.badlogic.gdx.math.Rectangle greenBtnBounds = new com.badlogic.gdx.math.Rectangle(greenBtnX, greenBtnY, greenButtonTexture.getWidth(), greenButtonTexture.getHeight());
-            com.badlogic.gdx.math.Rectangle redBtnBounds = new com.badlogic.gdx.math.Rectangle(redBtnX, redBtnY, redButtonTexture.getWidth(), redButtonTexture.getHeight());
+        handleInput();
+    }
 
-            if (orbOneBounds.contains(mousePos.x, mousePos.y)) {
-                // Orbe Verde: Chama o próximo paciente (MaxHeap/Fila)
-                if (currentPatient == null) {
-                    currentPatient = hospitalManager.getNextPatient();
-                    if (currentPatient != null) {
-                        showLog("[Orbe Verde] Novo Paciente na Mesa: " + currentPatient.getName(), 
-                                "Estrutura: extractMax() O(log n) do MaxHeap ou dequeue() O(1) da Fila");
-                    } else {
-                        showLog("[Orbe Verde] Nenhum paciente aguardando lá fora.", "Fila e Heap vazios");
-                    }
+    private void drawOverlays(float delta) {
+        // Fundos semi-transparentes para overlays
+        if (currentState != UIState.MAIN) {
+            font.draw(batch, "[ ESC para fechar tela atual ]", 10, 350);
+        }
+
+        switch (currentState) {
+            case SCROLL:
+                font.draw(batch, "--- PERGAMINHO (AVL Tree) ---", 180, 320);
+                font.draw(batch, "1. Cadastrar Paciente", 180, 290);
+                font.draw(batch, "2. Ver Pacientes", 180, 260);
+                break;
+            case SCROLL_REGISTER:
+                font.draw(batch, "Simulando Cadastro (S10) -> Salvo na BST, enviado pro MinHeap", 10, 320);
+                font.draw(batch, "Pressione ENTER para cadastrar um paciente teste.", 10, 290);
+                break;
+            case SCROLL_VIEW:
+                font.draw(batch, "Visualizando Pacientes (Pesquisa na BST)", 150, 320);
+                font.draw(batch, "Pressione ID '1' para pesquisar P001", 150, 290);
+                break;
+            case LEFT_ORB:
+                font.draw(batch, "--- ORBE ESQUERDO (Min Heap) ---", 180, 320);
+                Patient next = hospitalManager.peekNextPatient();
+                if (next != null) {
+                    font.draw(batch, "Próximo Paciente: " + next.getName() + " (Sev: " + next.getSeverityScore() + ")", 150, 290);
+                    font.draw(batch, "Pressione 'M' para associar à Maca 1 e começar tratamento.", 60, 260);
                 } else {
-                    showLog("[Orbe Verde] Já há um paciente sendo atendido!", "Validação de fluxo de UI");
+                    font.draw(batch, "Fila vazia.", 250, 290);
                 }
-            } else if (orbTwoBounds.contains(mousePos.x, mousePos.y)) {
-                // Orbe Rosa: Diagnostica sintoma do paciente atual (AVL Tree)
+                break;
+            case RIGHT_ORB:
+                font.draw(batch, "--- ORBE DIREITO (Hash Table das Macas) ---", 100, 320);
+                Bed b = hospitalManager.getBed(selectedBedId);
+                if (b != null) {
+                    font.draw(batch, b.toString(), 100, 290);
+                }
+                font.draw(batch, "Use os botões na tela principal para gerenciar.", 100, 260);
+                break;
+            case HEAL_MINIGAME:
+                font.draw(batch, "--- MINI-GAME DE CURA ---", 200, 320);
+                font.draw(batch, "Work In Progress...", 220, 290);
+                break;
+            case ID_POPUP:
+                font.draw(batch, "--- DADOS DO PACIENTE ---", 200, 320);
                 if (currentPatient != null) {
-                    com.deskgoblin.model.entities.Disease d = hospitalManager.diagnose(currentPatient.getSymptom());
-                    if (d != null) {
-                        showLog("Diagnóstico: " + d.getName() + " -> Dar " + d.getCure(), 
-                                "Estrutura: Busca O(log n) na Árvore AVL pelo sintoma '" + currentPatient.getSymptom() + "'");
-                    } else {
-                        showLog("Doença desconhecida para o sintoma: " + currentPatient.getSymptom(), "Busca na AVL Tree falhou (Null)");
-                    }
-                } else {
-                    showLog("[Orbe Rosa] Chame um paciente primeiro!", "Validação de fluxo de UI");
+                    font.draw(batch, currentPatient.toString(), 150, 290);
                 }
-            } else if (scrollBounds.contains(mousePos.x, mousePos.y)) {
-                showLog("[Click] Pergaminho tocado!", "");
-            } else if (inkwellBounds.contains(mousePos.x, mousePos.y)) {
-                showLog("[Click] Tinteiro tocado!", "");
-            } else if (greenBtnBounds.contains(mousePos.x, mousePos.y)) {
-                // Botão Verde: Internar paciente (Gravar na Hash Table)
-                if (currentPatient != null) {
-                    hospitalManager.recordDecision(currentPatient, true);
-                    showLog("[Botão Verde] Você INTERNOU " + currentPatient.getName(), 
-                            "Estrutura: put(ID) O(1) na HashTable (Usando Chaining com LinkedList)");
-                    currentPatient = null;
-                } else {
-                    showLog("[Botão Verde] Nenhum paciente para internar.", "Validação de fluxo de UI");
-                }
-            } else if (redBtnBounds.contains(mousePos.x, mousePos.y)) {
-                // Botão Vermelho: Expulsar paciente (Gravar na Hash Table)
-                if (currentPatient != null) {
-                    hospitalManager.recordDecision(currentPatient, false);
-                    showLog("[Botão Vermelho] Você EXPULSOU " + currentPatient.getName(), 
-                            "Estrutura: put(ID) O(1) na HashTable (Usando Chaining com LinkedList)");
-                    currentPatient = null;
-                } else {
-                    showLog("[Botão Vermelho] Nenhum paciente para expulsar.", "Validação de fluxo de UI");
-                }
-            }
+                break;
         }
     }
 
-    private void showLog(String text, String techText) {
-        this.uiLogText = text;
-        this.uiTechText = techText;
-        this.logTimer = 4.0f; // Mostrar por 4 segundos
-        Gdx.app.log("UI", text + " | " + techText); 
+    private void handleInput() {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            if (currentState == UIState.MAIN) {
+                // S4 -> Pausar o jogo
+                game.setScreen(new OptionsScreen(game, this));
+            } else {
+                currentState = UIState.MAIN;
+            }
+            return;
+        }
+
+        if (currentState == UIState.MAIN) {
+            if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
+                Rectangle orbOneBounds = new Rectangle(orbOneX, orbOneY, orbOneTexture.getWidth(), orbOneTexture.getHeight());
+                Rectangle orbTwoBounds = new Rectangle(orbTwoX, orbTwoY, orbTwoTexture.getWidth(), orbTwoTexture.getHeight());
+                Rectangle scrollBounds = new Rectangle(scrollX, scrollY, scrollTexture.getWidth(), scrollTexture.getHeight());
+                Rectangle greenBtnBounds = new Rectangle(greenBtnX, greenBtnY, greenButtonTexture.getWidth(), greenButtonTexture.getHeight());
+                Rectangle redBtnBounds = new Rectangle(redBtnX, redBtnY, redButtonTexture.getWidth(), redButtonTexture.getHeight());
+                
+                // Clicar no ID do Paciente (Simulando clique no personagem)
+                Rectangle patientBounds = new Rectangle((640 - patientTexture.getWidth()) / 2f, 90, patientTexture.getWidth(), patientTexture.getHeight());
+                if (patientBounds.contains(mousePos.x, mousePos.y)) {
+                    currentState = UIState.ID_POPUP;
+                    currentPatient = hospitalManager.peekNextPatient();
+                    return;
+                }
+
+                if (scrollBounds.contains(mousePos.x, mousePos.y)) {
+                    currentState = UIState.SCROLL;
+                } else if (orbOneBounds.contains(mousePos.x, mousePos.y)) {
+                    currentState = UIState.LEFT_ORB;
+                } else if (orbTwoBounds.contains(mousePos.x, mousePos.y)) {
+                    currentState = UIState.RIGHT_ORB;
+                } else if (greenBtnBounds.contains(mousePos.x, mousePos.y)) {
+                    currentState = UIState.HEAL_MINIGAME;
+                } else if (redBtnBounds.contains(mousePos.x, mousePos.y)) {
+                    // S15 -> Retirar o paciente da maca selecionada
+                    if (hospitalManager.removePatientFromBed("M1")) {
+                        rightButtonBlinking = false;
+                    }
+                }
+            }
+        } else if (currentState == UIState.SCROLL) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) currentState = UIState.SCROLL_REGISTER;
+            if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) currentState = UIState.SCROLL_VIEW;
+        } else if (currentState == UIState.SCROLL_REGISTER) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+                Patient p = new Patient("P999", "Novo_Paciente", "Gripe", 5);
+                hospitalManager.registerPatient(p);
+                currentState = UIState.SCROLL;
+            }
+        } else if (currentState == UIState.SCROLL_VIEW) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
+                Patient p = hospitalManager.getPatientRecord("P001");
+                // Pesquisa concluída (a mensagem foi removida, o log só aparece no terminal agora se você colocar System.out)
+            }
+        } else if (currentState == UIState.LEFT_ORB) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
+                Patient p = hospitalManager.popNextPatient();
+                if (p != null) {
+                    hospitalManager.assignPatientToBed(p, "M1", 3.0f); // Demora 3 segundos o tratamento
+                    currentState = UIState.MAIN;
+                }
+            }
+        }
     }
 
     @Override
@@ -258,7 +290,6 @@ public class GameScreen extends ScreenAdapter {
         handTexture.dispose();
         patientTexture.dispose();
         font.dispose();
-        techFont.dispose();
         Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
     }
 }

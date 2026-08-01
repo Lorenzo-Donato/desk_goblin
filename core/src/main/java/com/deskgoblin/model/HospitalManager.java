@@ -8,76 +8,122 @@ import com.deskgoblin.model.entities.*;
  */
 public class HospitalManager {
     
-    // 1. Fila de Espera Normal
-    private QueueWithTwoStacks<Patient> regularQueue;
+    // 1. Pergaminho: Armazena todos os pacientes registrados (BST / AVL Tree)
+    // Chave: ID do Paciente
+    private AVLTree<String, Patient> patientRecords;
     
-    // 2. Triagem de Emergência (Ativada pelos orbes)
-    private MaxHeap<Patient> emergencyQueue;
+    // 2. Orbe Esquerdo: Fila de prioridade de pacientes (Min Heap)
+    private MinHeap<Patient> patientQueue;
     
-    // 3. Grimório de Doenças (Chave: Sintoma, Valor: Doença)
-    private AVLTree<String, Disease> grimoire;
-    
-    // 4. Arquivo de Decisões do dia (Chave: ID do paciente, Valor: Registro)
-    private HashTable<String, MedicalRegistry> dailyRecords;
+    // 3. Orbe Direito: Gerenciamento de Macas (Hash Table)
+    // Chave: ID da Maca
+    private HashTable<String, Bed> beds;
+
+    // 4. Processos Médicos: Fila de processos acontecendo no momento
+    private QueueWithTwoStacks<MedicalProcess> medicalProcesses;
 
     public HospitalManager() {
-        regularQueue = new QueueWithTwoStacks<>();
-        emergencyQueue = new MaxHeap<>();
-        grimoire = new AVLTree<>();
-        dailyRecords = new HashTable<>();
+        patientRecords = new AVLTree<>();
+        patientQueue = new MinHeap<>();
+        beds = new HashTable<>();
+        medicalProcesses = new QueueWithTwoStacks<>();
         
-        populateGrimoire();
+        initializeBeds();
     }
 
-    /**
-     * Alimenta a AVL Tree com doenças iniciais.
-     */
-    private void populateGrimoire() {
-        grimoire.insert("Tosse com Faíscas", new Disease("Fadiga de Fogo", "Tosse com Faíscas", "Xarope de Gelo"));
-        grimoire.insert("Pele Escamosa Verde", new Disease("Maldição do Lagarto", "Pele Escamosa Verde", "Erva de Escama"));
-        grimoire.insert("Visão Turva e Flutuante", new Disease("Sindrome do Fantasma", "Visão Turva e Flutuante", "Chá de Ancoragem"));
-        grimoire.insert("Ossos de Gelatina", new Disease("Mal da Gosma", "Ossos de Gelatina", "Pó de Cálcio Mágico"));
-    }
-
-    /**
-     * Adiciona paciente na fila normal.
-     */
-    public void addPatient(Patient p) {
-        regularQueue.enqueue(p);
-    }
-    
-    /**
-     * Adiciona paciente direto na fila de prioridade (Emergência).
-     */
-    public void addEmergencyPatient(Patient p) {
-        emergencyQueue.insert(p);
-    }
-
-    /**
-     * Chama o próximo paciente, priorizando casos de emergência (MaxHeap).
-     */
-    public Patient getNextPatient() {
-        if (!emergencyQueue.isEmpty()) {
-            System.out.println("[Manager] Retirando paciente da Fila de EMERGÊNCIA!");
-            return emergencyQueue.extractMax();
+    private void initializeBeds() {
+        // Criar algumas macas iniciais
+        for (int i = 1; i <= 3; i++) {
+            beds.put("M" + i, new Bed("M" + i));
         }
-        System.out.println("[Manager] Retirando paciente da Fila Normal.");
-        return regularQueue.dequeue();
     }
 
     /**
-     * Analisa o sintoma na Árvore AVL em O(log n).
+     * S10: Salvar cadastro na BST -> Mandar os dados para o min heap
      */
-    public Disease diagnose(String symptom) {
-        return grimoire.search(symptom);
+    public void registerPatient(Patient p) {
+        patientRecords.insert(p.getId(), p);
+        patientQueue.insert(p);
+        System.out.println("[Manager] Paciente registrado na AVL e adicionado ao MinHeap: " + p.getName());
     }
 
     /**
-     * Registra a decisão sobre o paciente na Tabela Hash.
+     * S12: Filtrar os pacientes pelo ID inserido (Pesquisa na AVL)
      */
-    public void recordDecision(Patient p, boolean admitted) {
-        MedicalRegistry registry = new MedicalRegistry(p.getId(), admitted, "Atendido pelo Goblin.");
-        dailyRecords.put(p.getId(), registry);
-        System.out.println("[Manager] Decisão salva: " + registry);
+    public Patient getPatientRecord(String id) {
+        return patientRecords.search(id);
+    }
+
+    /**
+     * Retorna o próximo paciente do Orbe Esquerdo (primeira posição da Min Heap) sem remover
+     */
+    public Patient peekNextPatient() {
+        return patientQueue.peekMin();
+    }
+
+    /**
+     * Remove o próximo paciente do Orbe Esquerdo (Min Heap)
+     */
+    public Patient popNextPatient() {
+        return patientQueue.extractMin();
+    }
+
+    /**
+     * S19: Pesquisar maca (Orbe Direito - HashTable)
+     */
+    public Bed getBed(String id) {
+        return beds.get(id);
+    }
+
+    /**
+     * S17: Associar paciente a maca -> Começar processos médicos
+     */
+    public boolean assignPatientToBed(Patient p, String bedId, float processTime) {
+        Bed bed = beds.get(bedId);
+        if (bed != null && !bed.isOccupied()) {
+            bed.setPatient(p);
+            medicalProcesses.enqueue(new MedicalProcess(p, bed, processTime));
+            System.out.println("[Manager] Paciente " + p.getName() + " associado a maca " + bedId);
+            return true;
+        }
+        System.out.println("[Manager] Falha ao associar paciente " + p.getName() + " a maca " + bedId);
+        return false;
+    }
+
+    /**
+     * S15: Retirar o paciente da maca selecionada (Botão Direito)
+     */
+    public boolean removePatientFromBed(String bedId) {
+        Bed bed = beds.get(bedId);
+        if (bed != null && bed.isOccupied()) {
+            System.out.println("[Manager] Paciente " + bed.getPatient().getName() + " retirado da maca " + bedId);
+            bed.setPatient(null);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Atualiza o estado dos processos médicos.
+     * Retorna true se algum processo terminou nesta iteração (para piscar o botão).
+     */
+    public boolean updateMedicalProcesses(float delta) {
+        boolean processFinished = false;
+        
+        // Como não podemos iterar facilmente na fila sem remover, vamos retirar e recolocar
+        int size = medicalProcesses.size();
+        for (int i = 0; i < size; i++) {
+            MedicalProcess process = medicalProcesses.dequeue();
+            process.updateTime(delta);
+            if (process.isFinished()) {
+                System.out.println("[Manager] Processo médico concluído para: " + process.getPatient().getName());
+                processFinished = true;
+                // Não recolocamos na fila, o processo terminou
+            } else {
+                medicalProcesses.enqueue(process);
+            }
+        }
+        
+        return processFinished;
     }
 }

@@ -1,1563 +1,0 @@
-[AVL] Árvore criada.
-"[AVL] insert: inserindo chave 30
-.[AVL] insert: chave 30 inserida com sucesso.
-"[AVL] insert: inserindo chave 10
-.[AVL] insert: chave 10 inserida com sucesso.
-"[AVL] insert: inserindo chave 20
-B[AVL] rebalance: nó 30 desbalanceado para a esquerda (fator 2).
->[AVL] rotateLeft: realizando rotação à ESQUERDA no nó 10
->[AVL] rotateRight: realizando rotação à DIREITA no nó 30
-.[AVL] insert: chave 20 inserida com sucesso.
-![AVL] search: buscando chave 20
-$[AVL] search: chave 20 encontrada.
-[AVL] Árvore criada.
-"[AVL] insert: inserindo chave 10
-.[AVL] insert: chave 10 inserida com sucesso.
-![AVL] search: buscando chave 10
-$[AVL] search: chave 10 encontrada.
-![AVL] search: buscando chave 20
-)[AVL] search: chave 20 não encontrada.
-[AVL] Árvore criada.
-[AVL] size: 0
-![AVL] insert: inserindo chave 1
--[AVL] insert: chave 1 inserida com sucesso.
-[AVL] size: 1
-([AVL] delete: tentando remover chave 1
-![AVL] delete: chave 1 removida.
-[AVL] size: 0
-[AVL] Árvore criada.
-"[AVL] insert: inserindo chave 10
-.[AVL] insert: chave 10 inserida com sucesso.
-)[AVL] delete: tentando remover chave 99
-8[AVL] delete: chave 99 não encontrada para remoção.
-[AVL] size: 1
-[AVL] Árvore criada.
-![AVL] insert: inserindo chave 5
--[AVL] insert: chave 5 inserida com sucesso.
-![AVL] insert: inserindo chave 5
-#[AVL] insert: chave 5 atualizada.
- [AVL] search: buscando chave 5
-#[AVL] search: chave 5 encontrada.
-[AVL] size: 1
-[AVL] Árvore criada.
-"[AVL] insert: inserindo chave 10
-.[AVL] insert: chave 10 inserida com sucesso.
-"[AVL] insert: inserindo chave 20
-.[AVL] insert: chave 20 inserida com sucesso.
-"[AVL] insert: inserindo chave 30
-B[AVL] rebalance: nó 10 desbalanceado para a direita (fator -2).
->[AVL] rotateLeft: realizando rotação à ESQUERDA no nó 10
-.[AVL] insert: chave 30 inserida com sucesso.
-,[AVL] inOrder: gerando travessia em ordem.
-[LinkedList] Lista criada.
-1[LinkedList] pushBack: adicionado Dez no final.
-3[LinkedList] pushBack: adicionado Vinte no final.
-4[LinkedList] pushBack: adicionado Trinta no final.
-1[LinkedList] popFront: removido Dez do início.
-3[LinkedList] popFront: removido Vinte do início.
-4[LinkedList] popFront: removido Trinta do início.
-[AVL] Árvore criada.
-"[AVL] insert: inserindo chave 50
-.[AVL] insert: chave 50 inserida com sucesso.
-"[AVL] insert: inserindo chave 30
-.[AVL] insert: chave 30 inserida com sucesso.
-"[AVL] insert: inserindo chave 70
-.[AVL] insert: chave 70 inserida com sucesso.
-"[AVL] insert: inserindo chave 20
-.[AVL] insert: chave 20 inserida com sucesso.
-"[AVL] insert: inserindo chave 40
-.[AVL] insert: chave 40 inserida com sucesso.
-,[AVL] inOrder: gerando travessia em ordem.
-[LinkedList] Lista criada.
-3[LinkedList] pushBack: adicionado Vinte no final.
-4[LinkedList] pushBack: adicionado Trinta no final.
-6[LinkedList] pushBack: adicionado Quarenta no final.
-7[LinkedList] pushBack: adicionado Cinquenta no final.
-5[LinkedList] pushBack: adicionado Setenta no final.
-3[LinkedList] popFront: removido Vinte do início.
-4[LinkedList] popFront: removido Trinta do início.
-6[LinkedList] popFront: removido Quarenta do início.
-7[LinkedList] popFront: removido Cinquenta do início.
-5[LinkedList] popFront: removido Setenta do início.
-	[AVL] Árvore criada.
-	"[AVL] insert: inserindo chave 30
-	.[AVL] insert: chave 30 inserida com sucesso.
-	"[AVL] insert: inserindo chave 20
-	.[AVL] insert: chave 20 inserida com sucesso.
-	"[AVL] insert: inserindo chave 10
-	B[AVL] rebalance: nó 30 desbalanceado para a esquerda (fator 2).
-	>[AVL] rotateRight: realizando rotação à DIREITA no nó 30
-	.[AVL] insert: chave 10 inserida com sucesso.
-	,[AVL] inOrder: gerando travessia em ordem.
-	[LinkedList] Lista criada.
-	1[LinkedList] pushBack: adicionado Dez no final.
-	3[LinkedList] pushBack: adicionado Vinte no final.
-	4[LinkedList] pushBack: adicionado Trinta no final.
-	1[LinkedList] popFront: removido Dez do início.
-	3[LinkedList] popFront: removido Vinte do início.
-	4[LinkedList] popFront: removido Trinta do início.
-
-[AVL] Árvore criada.
-
-"[AVL] insert: inserindo chave 10
-
-.[AVL] insert: chave 10 inserida com sucesso.
-
-![AVL] insert: inserindo chave 5
-
--[AVL] insert: chave 5 inserida com sucesso.
-
-"[AVL] insert: inserindo chave 15
-
-.[AVL] insert: chave 15 inserida com sucesso.
-
-"[AVL] insert: inserindo chave 12
-
-.[AVL] insert: chave 12 inserida com sucesso.
-
-"[AVL] insert: inserindo chave 17
-
-.[AVL] insert: chave 17 inserida com sucesso.
-
-)[AVL] delete: tentando remover chave 15
-
-"[AVL] delete: chave 15 removida.
-
-![AVL] search: buscando chave 15
-
-)[AVL] search: chave 15 não encontrada.
-
-![AVL] search: buscando chave 12
-
-$[AVL] search: chave 12 encontrada.
-
-![AVL] search: buscando chave 17
-
-$[AVL] search: chave 17 encontrada.
-
-[AVL] size: 4
-[AVL] Árvore criada.
-"[AVL] insert: inserindo chave 10
-.[AVL] insert: chave 10 inserida com sucesso.
-)[AVL] delete: tentando remover chave 10
-"[AVL] delete: chave 10 removida.
-![AVL] search: buscando chave 10
-)[AVL] search: chave 10 não encontrada.
-[AVL] size: 0
-[AVL] Árvore criada.
-"[AVL] insert: inserindo chave 10
-.[AVL] insert: chave 10 inserida com sucesso.
-![AVL] insert: inserindo chave 5
--[AVL] insert: chave 5 inserida com sucesso.
-)[AVL] delete: tentando remover chave 10
-"[AVL] delete: chave 10 removida.
- [AVL] search: buscando chave 5
-#[AVL] search: chave 5 encontrada.
-[AVL] size: 1
-[AVL] Árvore criada.
-"[AVL] insert: inserindo chave 10
-.[AVL] insert: chave 10 inserida com sucesso.
-"[AVL] insert: inserindo chave 30
-.[AVL] insert: chave 30 inserida com sucesso.
-"[AVL] insert: inserindo chave 20
-B[AVL] rebalance: nó 10 desbalanceado para a direita (fator -2).
->[AVL] rotateRight: realizando rotação à DIREITA no nó 30
->[AVL] rotateLeft: realizando rotação à ESQUERDA no nó 10
-.[AVL] insert: chave 20 inserida com sucesso.
-![AVL] search: buscando chave 20
-$[AVL] search: chave 20 encontrada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
--[HashTable] Tabela criada com capacidade 16
-[HashTable] size: 0
-4[HashTable] put: inserindo/atualizando chave Teste
-[LinkedList] Lista criada.
-7[LinkedList] pushBack: adicionado Teste=999 no final.
-[LinkedList] size: 1
-7[LinkedList] popFront: removido Teste=999 do início.
-7[LinkedList] pushBack: adicionado Teste=999 no final.
-[HashTable] size: 1
-2[HashTable] remove: tentando remover chave Teste
-[LinkedList] Lista criada.
-7[LinkedList] popFront: removido Teste=999 do início.
-+[HashTable] remove: chave Teste removida.
-[HashTable] size: 0
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
--[HashTable] Tabela criada com capacidade 16
-4[HashTable] put: inserindo/atualizando chave Moeda
-[LinkedList] Lista criada.
-7[LinkedList] pushBack: adicionado Moeda=100 no final.
-[LinkedList] size: 1
-7[LinkedList] popFront: removido Moeda=100 do início.
-7[LinkedList] pushBack: adicionado Moeda=100 no final.
-4[HashTable] put: inserindo/atualizando chave Moeda
-[LinkedList] Lista criada.
-7[LinkedList] popFront: removido Moeda=100 do início.
-7[LinkedList] pushBack: adicionado Moeda=150 no final.
-7[LinkedList] popFront: removido Moeda=150 do início.
-7[LinkedList] pushBack: adicionado Moeda=150 no final.
-'[HashTable] get: buscando chave Moeda
-[LinkedList] Lista criada.
-7[LinkedList] popFront: removido Moeda=150 do início.
-7[LinkedList] pushBack: adicionado Moeda=150 no final.
-7[LinkedList] popFront: removido Moeda=150 do início.
-7[LinkedList] pushBack: adicionado Moeda=150 no final.
-*[HashTable] get: chave Moeda encontrada.
-[HashTable] size: 1
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
--[HashTable] Tabela criada com capacidade 16
-0[HashTable] put: inserindo/atualizando chave A
-[LinkedList] Lista criada.
-2[LinkedList] pushBack: adicionado A=10 no final.
-[LinkedList] size: 1
-2[LinkedList] popFront: removido A=10 do início.
-2[LinkedList] pushBack: adicionado A=10 no final.
-0[HashTable] put: inserindo/atualizando chave B
-[LinkedList] Lista criada.
-2[LinkedList] pushBack: adicionado B=20 no final.
-[LinkedList] size: 1
-2[LinkedList] popFront: removido B=20 do início.
-2[LinkedList] pushBack: adicionado B=20 no final.
-0[HashTable] put: inserindo/atualizando chave C
-[LinkedList] Lista criada.
-2[LinkedList] pushBack: adicionado C=30 no final.
-[LinkedList] size: 1
-2[LinkedList] popFront: removido C=30 do início.
-2[LinkedList] pushBack: adicionado C=30 no final.
-.[HashTable] keys: coletando todas as chaves.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-2[LinkedList] popFront: removido A=10 do início.
-/[LinkedList] pushBack: adicionado A no final.
-2[LinkedList] pushBack: adicionado A=10 no final.
-2[LinkedList] popFront: removido A=10 do início.
-2[LinkedList] pushBack: adicionado A=10 no final.
-[LinkedList] Lista criada.
-2[LinkedList] popFront: removido B=20 do início.
-/[LinkedList] pushBack: adicionado B no final.
-2[LinkedList] pushBack: adicionado B=20 no final.
-2[LinkedList] popFront: removido B=20 do início.
-2[LinkedList] pushBack: adicionado B=20 no final.
-[LinkedList] Lista criada.
-2[LinkedList] popFront: removido C=30 do início.
-/[LinkedList] pushBack: adicionado C no final.
-2[LinkedList] pushBack: adicionado C=30 no final.
-2[LinkedList] popFront: removido C=30 do início.
-2[LinkedList] pushBack: adicionado C=30 no final.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] size: 3
-/[LinkedList] popFront: removido A do início.
-/[LinkedList] popFront: removido B do início.
-/[LinkedList] popFront: removido C do início.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
--[HashTable] Tabela criada com capacidade 16
-0[HashTable] put: inserindo/atualizando chave A
-[LinkedList] Lista criada.
-1[LinkedList] pushBack: adicionado A=1 no final.
-[LinkedList] size: 1
-1[LinkedList] popFront: removido A=1 do início.
-1[LinkedList] pushBack: adicionado A=1 no final.
-#[HashTable] get: buscando chave A
-[LinkedList] Lista criada.
-1[LinkedList] popFront: removido A=1 do início.
-1[LinkedList] pushBack: adicionado A=1 no final.
-1[LinkedList] popFront: removido A=1 do início.
-1[LinkedList] pushBack: adicionado A=1 no final.
-&[HashTable] get: chave A encontrada.
-#[HashTable] get: buscando chave B
-[LinkedList] Lista criada.
-+[HashTable] get: chave B não encontrada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
--[HashTable] Tabela criada com capacidade 16
-1[HashTable] put: inserindo/atualizando chave Um
-[LinkedList] Lista criada.
-2[LinkedList] pushBack: adicionado Um=1 no final.
-[LinkedList] size: 1
-2[LinkedList] popFront: removido Um=1 do início.
-2[LinkedList] pushBack: adicionado Um=1 no final.
-3[HashTable] put: inserindo/atualizando chave Dois
-[LinkedList] Lista criada.
-4[LinkedList] pushBack: adicionado Dois=2 no final.
-[LinkedList] size: 1
-4[LinkedList] popFront: removido Dois=2 do início.
-4[LinkedList] pushBack: adicionado Dois=2 no final.
-$[HashTable] get: buscando chave Um
-[LinkedList] Lista criada.
-2[LinkedList] popFront: removido Um=1 do início.
-2[LinkedList] pushBack: adicionado Um=1 no final.
-2[LinkedList] popFront: removido Um=1 do início.
-2[LinkedList] pushBack: adicionado Um=1 no final.
-'[HashTable] get: chave Um encontrada.
-&[HashTable] get: buscando chave Dois
-[LinkedList] Lista criada.
-4[LinkedList] popFront: removido Dois=2 do início.
-4[LinkedList] pushBack: adicionado Dois=2 no final.
-4[LinkedList] popFront: removido Dois=2 do início.
-4[LinkedList] pushBack: adicionado Dois=2 no final.
-)[HashTable] get: chave Dois encontrada.
-&[HashTable] get: buscando chave Tres
-[LinkedList] Lista criada.
-.[HashTable] get: chave Tres não encontrada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
--[HashTable] Tabela criada com capacidade 16
-5[HashTable] put: inserindo/atualizando chave Goblin
-[LinkedList] Lista criada.
-7[LinkedList] pushBack: adicionado Goblin=50 no final.
-[LinkedList] size: 1
-7[LinkedList] popFront: removido Goblin=50 do início.
-7[LinkedList] pushBack: adicionado Goblin=50 no final.
-3[HashTable] remove: tentando remover chave Dragao
-[LinkedList] Lista criada.
-3[HashTable] remove: chave Dragao não encontrada.
-[HashTable] size: 1
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
--[HashTable] Tabela criada com capacidade 16
-5[HashTable] put: inserindo/atualizando chave Chave0
-[LinkedList] Lista criada.
-6[LinkedList] pushBack: adicionado Chave0=0 no final.
-[LinkedList] size: 1
-6[LinkedList] popFront: removido Chave0=0 do início.
-6[LinkedList] pushBack: adicionado Chave0=0 no final.
-5[HashTable] put: inserindo/atualizando chave Chave1
-[LinkedList] Lista criada.
-6[LinkedList] pushBack: adicionado Chave1=1 no final.
-[LinkedList] size: 1
-6[LinkedList] popFront: removido Chave1=1 do início.
-6[LinkedList] pushBack: adicionado Chave1=1 no final.
-5[HashTable] put: inserindo/atualizando chave Chave2
-[LinkedList] Lista criada.
-6[LinkedList] pushBack: adicionado Chave2=2 no final.
-[LinkedList] size: 1
-6[LinkedList] popFront: removido Chave2=2 do início.
-6[LinkedList] pushBack: adicionado Chave2=2 no final.
-5[HashTable] put: inserindo/atualizando chave Chave3
-[LinkedList] Lista criada.
-6[LinkedList] pushBack: adicionado Chave3=3 no final.
-[LinkedList] size: 1
-6[LinkedList] popFront: removido Chave3=3 do início.
-6[LinkedList] pushBack: adicionado Chave3=3 no final.
-5[HashTable] put: inserindo/atualizando chave Chave4
-[LinkedList] Lista criada.
-6[LinkedList] pushBack: adicionado Chave4=4 no final.
-[LinkedList] size: 1
-6[LinkedList] popFront: removido Chave4=4 do início.
-6[LinkedList] pushBack: adicionado Chave4=4 no final.
-5[HashTable] put: inserindo/atualizando chave Chave5
-[LinkedList] Lista criada.
-6[LinkedList] pushBack: adicionado Chave5=5 no final.
-[LinkedList] size: 1
-6[LinkedList] popFront: removido Chave5=5 do início.
-6[LinkedList] pushBack: adicionado Chave5=5 no final.
-5[HashTable] put: inserindo/atualizando chave Chave6
-[LinkedList] Lista criada.
-6[LinkedList] pushBack: adicionado Chave6=6 no final.
-[LinkedList] size: 1
-6[LinkedList] popFront: removido Chave6=6 do início.
-6[LinkedList] pushBack: adicionado Chave6=6 no final.
-5[HashTable] put: inserindo/atualizando chave Chave7
-[LinkedList] Lista criada.
-6[LinkedList] pushBack: adicionado Chave7=7 no final.
-[LinkedList] size: 1
-6[LinkedList] popFront: removido Chave7=7 do início.
-6[LinkedList] pushBack: adicionado Chave7=7 no final.
-5[HashTable] put: inserindo/atualizando chave Chave8
-[LinkedList] Lista criada.
-6[LinkedList] pushBack: adicionado Chave8=8 no final.
-[LinkedList] size: 1
-6[LinkedList] popFront: removido Chave8=8 do início.
-6[LinkedList] pushBack: adicionado Chave8=8 no final.
-5[HashTable] put: inserindo/atualizando chave Chave9
-[LinkedList] Lista criada.
-6[LinkedList] pushBack: adicionado Chave9=9 no final.
-[LinkedList] size: 1
-6[LinkedList] popFront: removido Chave9=9 do início.
-6[LinkedList] pushBack: adicionado Chave9=9 no final.
-6[HashTable] put: inserindo/atualizando chave Chave10
-[LinkedList] Lista criada.
-6[LinkedList] popFront: removido Chave1=1 do início.
-6[LinkedList] pushBack: adicionado Chave1=1 no final.
-8[LinkedList] pushBack: adicionado Chave10=10 no final.
-[LinkedList] size: 2
-G[HashTable] put: colisão resolvida no índice 6 para a chave Chave10
-6[LinkedList] popFront: removido Chave1=1 do início.
-6[LinkedList] pushBack: adicionado Chave1=1 no final.
-8[LinkedList] popFront: removido Chave10=10 do início.
-8[LinkedList] pushBack: adicionado Chave10=10 no final.
-6[HashTable] put: inserindo/atualizando chave Chave11
-[LinkedList] Lista criada.
-6[LinkedList] popFront: removido Chave0=0 do início.
-6[LinkedList] pushBack: adicionado Chave0=0 no final.
-8[LinkedList] pushBack: adicionado Chave11=11 no final.
-[LinkedList] size: 2
-G[HashTable] put: colisão resolvida no índice 5 para a chave Chave11
-6[LinkedList] popFront: removido Chave0=0 do início.
-6[LinkedList] pushBack: adicionado Chave0=0 no final.
-8[LinkedList] popFront: removido Chave11=11 do início.
-8[LinkedList] pushBack: adicionado Chave11=11 no final.
-6[HashTable] put: inserindo/atualizando chave Chave12
-?[HashTable] resize: capacidade excedida, realizando rehash...
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-6[LinkedList] popFront: removido Chave0=0 do início.
-[LinkedList] Lista criada.
-6[LinkedList] pushBack: adicionado Chave0=0 no final.
-[LinkedList] size: 1
-6[LinkedList] popFront: removido Chave0=0 do início.
-6[LinkedList] pushBack: adicionado Chave0=0 no final.
-8[LinkedList] popFront: removido Chave11=11 do início.
-[LinkedList] Lista criada.
-8[LinkedList] pushBack: adicionado Chave11=11 no final.
-[LinkedList] size: 1
-8[LinkedList] popFront: removido Chave11=11 do início.
-8[LinkedList] pushBack: adicionado Chave11=11 no final.
-6[LinkedList] popFront: removido Chave1=1 do início.
-[LinkedList] Lista criada.
-6[LinkedList] pushBack: adicionado Chave1=1 no final.
-[LinkedList] size: 1
-6[LinkedList] popFront: removido Chave1=1 do início.
-6[LinkedList] pushBack: adicionado Chave1=1 no final.
-8[LinkedList] popFront: removido Chave10=10 do início.
-[LinkedList] Lista criada.
-8[LinkedList] pushBack: adicionado Chave10=10 no final.
-[LinkedList] size: 1
-8[LinkedList] popFront: removido Chave10=10 do início.
-8[LinkedList] pushBack: adicionado Chave10=10 no final.
-6[LinkedList] popFront: removido Chave2=2 do início.
-[LinkedList] Lista criada.
-6[LinkedList] pushBack: adicionado Chave2=2 no final.
-[LinkedList] size: 1
-6[LinkedList] popFront: removido Chave2=2 do início.
-6[LinkedList] pushBack: adicionado Chave2=2 no final.
-6[LinkedList] popFront: removido Chave3=3 do início.
-[LinkedList] Lista criada.
-6[LinkedList] pushBack: adicionado Chave3=3 no final.
-[LinkedList] size: 1
-6[LinkedList] popFront: removido Chave3=3 do início.
-6[LinkedList] pushBack: adicionado Chave3=3 no final.
-6[LinkedList] popFront: removido Chave4=4 do início.
-[LinkedList] Lista criada.
-6[LinkedList] pushBack: adicionado Chave4=4 no final.
-[LinkedList] size: 1
-6[LinkedList] popFront: removido Chave4=4 do início.
-6[LinkedList] pushBack: adicionado Chave4=4 no final.
-6[LinkedList] popFront: removido Chave5=5 do início.
-[LinkedList] Lista criada.
-6[LinkedList] pushBack: adicionado Chave5=5 no final.
-[LinkedList] size: 1
-6[LinkedList] popFront: removido Chave5=5 do início.
-6[LinkedList] pushBack: adicionado Chave5=5 no final.
-6[LinkedList] popFront: removido Chave6=6 do início.
-[LinkedList] Lista criada.
-6[LinkedList] pushBack: adicionado Chave6=6 no final.
-[LinkedList] size: 1
-6[LinkedList] popFront: removido Chave6=6 do início.
-6[LinkedList] pushBack: adicionado Chave6=6 no final.
-6[LinkedList] popFront: removido Chave7=7 do início.
-[LinkedList] Lista criada.
-6[LinkedList] pushBack: adicionado Chave7=7 no final.
-[LinkedList] size: 1
-6[LinkedList] popFront: removido Chave7=7 do início.
-6[LinkedList] pushBack: adicionado Chave7=7 no final.
-6[LinkedList] popFront: removido Chave8=8 do início.
-[LinkedList] Lista criada.
-6[LinkedList] pushBack: adicionado Chave8=8 no final.
-[LinkedList] size: 1
-6[LinkedList] popFront: removido Chave8=8 do início.
-6[LinkedList] pushBack: adicionado Chave8=8 no final.
-6[LinkedList] popFront: removido Chave9=9 do início.
-[LinkedList] Lista criada.
-6[LinkedList] pushBack: adicionado Chave9=9 no final.
-[LinkedList] size: 1
-6[LinkedList] popFront: removido Chave9=9 do início.
-6[LinkedList] pushBack: adicionado Chave9=9 no final.
-<[HashTable] resize: rehash concluído. Nova capacidade: 32
-[LinkedList] Lista criada.
-8[LinkedList] pushBack: adicionado Chave12=12 no final.
-[LinkedList] size: 1
-8[LinkedList] popFront: removido Chave12=12 do início.
-8[LinkedList] pushBack: adicionado Chave12=12 no final.
-6[HashTable] put: inserindo/atualizando chave Chave13
-[LinkedList] Lista criada.
-8[LinkedList] pushBack: adicionado Chave13=13 no final.
-[LinkedList] size: 1
-8[LinkedList] popFront: removido Chave13=13 do início.
-8[LinkedList] pushBack: adicionado Chave13=13 no final.
-6[HashTable] put: inserindo/atualizando chave Chave14
-[LinkedList] Lista criada.
-8[LinkedList] pushBack: adicionado Chave14=14 no final.
-[LinkedList] size: 1
-8[LinkedList] popFront: removido Chave14=14 do início.
-8[LinkedList] pushBack: adicionado Chave14=14 no final.
-6[HashTable] put: inserindo/atualizando chave Chave15
-[LinkedList] Lista criada.
-8[LinkedList] pushBack: adicionado Chave15=15 no final.
-[LinkedList] size: 1
-8[LinkedList] popFront: removido Chave15=15 do início.
-8[LinkedList] pushBack: adicionado Chave15=15 no final.
-6[HashTable] put: inserindo/atualizando chave Chave16
-[LinkedList] Lista criada.
-8[LinkedList] pushBack: adicionado Chave16=16 no final.
-[LinkedList] size: 1
-8[LinkedList] popFront: removido Chave16=16 do início.
-8[LinkedList] pushBack: adicionado Chave16=16 no final.
-6[HashTable] put: inserindo/atualizando chave Chave17
-[LinkedList] Lista criada.
-8[LinkedList] pushBack: adicionado Chave17=17 no final.
-[LinkedList] size: 1
-8[LinkedList] popFront: removido Chave17=17 do início.
-8[LinkedList] pushBack: adicionado Chave17=17 no final.
-6[HashTable] put: inserindo/atualizando chave Chave18
-[LinkedList] Lista criada.
-6[LinkedList] popFront: removido Chave9=9 do início.
-6[LinkedList] pushBack: adicionado Chave9=9 no final.
-8[LinkedList] pushBack: adicionado Chave18=18 no final.
-[LinkedList] size: 2
-H[HashTable] put: colisão resolvida no índice 14 para a chave Chave18
-6[LinkedList] popFront: removido Chave9=9 do início.
-6[LinkedList] pushBack: adicionado Chave9=9 no final.
-8[LinkedList] popFront: removido Chave18=18 do início.
-8[LinkedList] pushBack: adicionado Chave18=18 no final.
-6[HashTable] put: inserindo/atualizando chave Chave19
-[LinkedList] Lista criada.
-6[LinkedList] popFront: removido Chave8=8 do início.
-6[LinkedList] pushBack: adicionado Chave8=8 no final.
-8[LinkedList] pushBack: adicionado Chave19=19 no final.
-[LinkedList] size: 2
-H[HashTable] put: colisão resolvida no índice 13 para a chave Chave19
-6[LinkedList] popFront: removido Chave8=8 do início.
-6[LinkedList] pushBack: adicionado Chave8=8 no final.
-8[LinkedList] popFront: removido Chave19=19 do início.
-8[LinkedList] pushBack: adicionado Chave19=19 no final.
-[HashTable] size: 20
-([HashTable] get: buscando chave Chave0
-[LinkedList] Lista criada.
-6[LinkedList] popFront: removido Chave0=0 do início.
-6[LinkedList] pushBack: adicionado Chave0=0 no final.
-6[LinkedList] popFront: removido Chave0=0 do início.
-6[LinkedList] pushBack: adicionado Chave0=0 no final.
-+[HashTable] get: chave Chave0 encontrada.
-([HashTable] get: buscando chave Chave1
-[LinkedList] Lista criada.
-6[LinkedList] popFront: removido Chave1=1 do início.
-6[LinkedList] pushBack: adicionado Chave1=1 no final.
-6[LinkedList] popFront: removido Chave1=1 do início.
-6[LinkedList] pushBack: adicionado Chave1=1 no final.
-+[HashTable] get: chave Chave1 encontrada.
-([HashTable] get: buscando chave Chave2
-[LinkedList] Lista criada.
-6[LinkedList] popFront: removido Chave2=2 do início.
-6[LinkedList] pushBack: adicionado Chave2=2 no final.
-6[LinkedList] popFront: removido Chave2=2 do início.
-6[LinkedList] pushBack: adicionado Chave2=2 no final.
-+[HashTable] get: chave Chave2 encontrada.
-([HashTable] get: buscando chave Chave3
-[LinkedList] Lista criada.
-6[LinkedList] popFront: removido Chave3=3 do início.
-6[LinkedList] pushBack: adicionado Chave3=3 no final.
-6[LinkedList] popFront: removido Chave3=3 do início.
-6[LinkedList] pushBack: adicionado Chave3=3 no final.
-+[HashTable] get: chave Chave3 encontrada.
-([HashTable] get: buscando chave Chave4
-[LinkedList] Lista criada.
-6[LinkedList] popFront: removido Chave4=4 do início.
-6[LinkedList] pushBack: adicionado Chave4=4 no final.
-6[LinkedList] popFront: removido Chave4=4 do início.
-6[LinkedList] pushBack: adicionado Chave4=4 no final.
-+[HashTable] get: chave Chave4 encontrada.
-([HashTable] get: buscando chave Chave5
-[LinkedList] Lista criada.
-6[LinkedList] popFront: removido Chave5=5 do início.
-6[LinkedList] pushBack: adicionado Chave5=5 no final.
-6[LinkedList] popFront: removido Chave5=5 do início.
-6[LinkedList] pushBack: adicionado Chave5=5 no final.
-+[HashTable] get: chave Chave5 encontrada.
-([HashTable] get: buscando chave Chave6
-[LinkedList] Lista criada.
-6[LinkedList] popFront: removido Chave6=6 do início.
-6[LinkedList] pushBack: adicionado Chave6=6 no final.
-6[LinkedList] popFront: removido Chave6=6 do início.
-6[LinkedList] pushBack: adicionado Chave6=6 no final.
-+[HashTable] get: chave Chave6 encontrada.
-([HashTable] get: buscando chave Chave7
-[LinkedList] Lista criada.
-6[LinkedList] popFront: removido Chave7=7 do início.
-6[LinkedList] pushBack: adicionado Chave7=7 no final.
-6[LinkedList] popFront: removido Chave7=7 do início.
-6[LinkedList] pushBack: adicionado Chave7=7 no final.
-+[HashTable] get: chave Chave7 encontrada.
-([HashTable] get: buscando chave Chave8
-[LinkedList] Lista criada.
-6[LinkedList] popFront: removido Chave8=8 do início.
-6[LinkedList] pushBack: adicionado Chave8=8 no final.
-8[LinkedList] popFront: removido Chave19=19 do início.
-8[LinkedList] pushBack: adicionado Chave19=19 no final.
-6[LinkedList] popFront: removido Chave8=8 do início.
-6[LinkedList] pushBack: adicionado Chave8=8 no final.
-8[LinkedList] popFront: removido Chave19=19 do início.
-8[LinkedList] pushBack: adicionado Chave19=19 no final.
-+[HashTable] get: chave Chave8 encontrada.
-([HashTable] get: buscando chave Chave9
-[LinkedList] Lista criada.
-6[LinkedList] popFront: removido Chave9=9 do início.
-6[LinkedList] pushBack: adicionado Chave9=9 no final.
-8[LinkedList] popFront: removido Chave18=18 do início.
-8[LinkedList] pushBack: adicionado Chave18=18 no final.
-6[LinkedList] popFront: removido Chave9=9 do início.
-6[LinkedList] pushBack: adicionado Chave9=9 no final.
-8[LinkedList] popFront: removido Chave18=18 do início.
-8[LinkedList] pushBack: adicionado Chave18=18 no final.
-+[HashTable] get: chave Chave9 encontrada.
-)[HashTable] get: buscando chave Chave10
-[LinkedList] Lista criada.
-8[LinkedList] popFront: removido Chave10=10 do início.
-8[LinkedList] pushBack: adicionado Chave10=10 no final.
-8[LinkedList] popFront: removido Chave10=10 do início.
-8[LinkedList] pushBack: adicionado Chave10=10 no final.
-,[HashTable] get: chave Chave10 encontrada.
-)[HashTable] get: buscando chave Chave11
-[LinkedList] Lista criada.
-8[LinkedList] popFront: removido Chave11=11 do início.
-8[LinkedList] pushBack: adicionado Chave11=11 no final.
-8[LinkedList] popFront: removido Chave11=11 do início.
-8[LinkedList] pushBack: adicionado Chave11=11 no final.
-,[HashTable] get: chave Chave11 encontrada.
-)[HashTable] get: buscando chave Chave12
-[LinkedList] Lista criada.
-8[LinkedList] popFront: removido Chave12=12 do início.
-8[LinkedList] pushBack: adicionado Chave12=12 no final.
-8[LinkedList] popFront: removido Chave12=12 do início.
-8[LinkedList] pushBack: adicionado Chave12=12 no final.
-,[HashTable] get: chave Chave12 encontrada.
-)[HashTable] get: buscando chave Chave13
-[LinkedList] Lista criada.
-8[LinkedList] popFront: removido Chave13=13 do início.
-8[LinkedList] pushBack: adicionado Chave13=13 no final.
-8[LinkedList] popFront: removido Chave13=13 do início.
-8[LinkedList] pushBack: adicionado Chave13=13 no final.
-,[HashTable] get: chave Chave13 encontrada.
-)[HashTable] get: buscando chave Chave14
-[LinkedList] Lista criada.
-8[LinkedList] popFront: removido Chave14=14 do início.
-8[LinkedList] pushBack: adicionado Chave14=14 no final.
-8[LinkedList] popFront: removido Chave14=14 do início.
-8[LinkedList] pushBack: adicionado Chave14=14 no final.
-,[HashTable] get: chave Chave14 encontrada.
-)[HashTable] get: buscando chave Chave15
-[LinkedList] Lista criada.
-8[LinkedList] popFront: removido Chave15=15 do início.
-8[LinkedList] pushBack: adicionado Chave15=15 no final.
-8[LinkedList] popFront: removido Chave15=15 do início.
-8[LinkedList] pushBack: adicionado Chave15=15 no final.
-,[HashTable] get: chave Chave15 encontrada.
-)[HashTable] get: buscando chave Chave16
-[LinkedList] Lista criada.
-8[LinkedList] popFront: removido Chave16=16 do início.
-8[LinkedList] pushBack: adicionado Chave16=16 no final.
-8[LinkedList] popFront: removido Chave16=16 do início.
-8[LinkedList] pushBack: adicionado Chave16=16 no final.
-,[HashTable] get: chave Chave16 encontrada.
-)[HashTable] get: buscando chave Chave17
-[LinkedList] Lista criada.
-8[LinkedList] popFront: removido Chave17=17 do início.
-8[LinkedList] pushBack: adicionado Chave17=17 no final.
-8[LinkedList] popFront: removido Chave17=17 do início.
-8[LinkedList] pushBack: adicionado Chave17=17 no final.
-,[HashTable] get: chave Chave17 encontrada.
-)[HashTable] get: buscando chave Chave18
-[LinkedList] Lista criada.
-6[LinkedList] popFront: removido Chave9=9 do início.
-6[LinkedList] pushBack: adicionado Chave9=9 no final.
-8[LinkedList] popFront: removido Chave18=18 do início.
-8[LinkedList] pushBack: adicionado Chave18=18 no final.
-6[LinkedList] popFront: removido Chave9=9 do início.
-6[LinkedList] pushBack: adicionado Chave9=9 no final.
-8[LinkedList] popFront: removido Chave18=18 do início.
-8[LinkedList] pushBack: adicionado Chave18=18 no final.
-,[HashTable] get: chave Chave18 encontrada.
-)[HashTable] get: buscando chave Chave19
-[LinkedList] Lista criada.
-6[LinkedList] popFront: removido Chave8=8 do início.
-6[LinkedList] pushBack: adicionado Chave8=8 no final.
-8[LinkedList] popFront: removido Chave19=19 do início.
-8[LinkedList] pushBack: adicionado Chave19=19 no final.
-6[LinkedList] popFront: removido Chave8=8 do início.
-6[LinkedList] pushBack: adicionado Chave8=8 no final.
-8[LinkedList] popFront: removido Chave19=19 do início.
-8[LinkedList] pushBack: adicionado Chave19=19 no final.
-,[HashTable] get: chave Chave19 encontrada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
-[LinkedList] Lista criada.
--[HashTable] Tabela criada com capacidade 16
-5[HashTable] put: inserindo/atualizando chave Goblin
-[LinkedList] Lista criada.
-7[LinkedList] pushBack: adicionado Goblin=50 no final.
-[LinkedList] size: 1
-7[LinkedList] popFront: removido Goblin=50 do início.
-7[LinkedList] pushBack: adicionado Goblin=50 no final.
-2[HashTable] put: inserindo/atualizando chave Orc
-[LinkedList] Lista criada.
-4[LinkedList] pushBack: adicionado Orc=80 no final.
-[LinkedList] size: 1
-4[LinkedList] popFront: removido Orc=80 do início.
-4[LinkedList] pushBack: adicionado Orc=80 no final.
-3[HashTable] remove: tentando remover chave Goblin
-[LinkedList] Lista criada.
-7[LinkedList] popFront: removido Goblin=50 do início.
-,[HashTable] remove: chave Goblin removida.
-([HashTable] get: buscando chave Goblin
-[LinkedList] Lista criada.
-0[HashTable] get: chave Goblin não encontrada.
-[HashTable] size: 1
-%[HashTable] get: buscando chave Orc
-[LinkedList] Lista criada.
-4[LinkedList] popFront: removido Orc=80 do início.
-4[LinkedList] pushBack: adicionado Orc=80 no final.
-4[LinkedList] popFront: removido Orc=80 do início.
-4[LinkedList] pushBack: adicionado Orc=80 no final.
-([HashTable] get: chave Orc encontrada.
-4[MaxHeap] Heap criado com capacidade inicial de 10
-[MaxHeap] size: 0
-)[MaxHeap] insert: inserindo elemento 42
-3[MaxHeap] siftUp: ajustando elemento no índice 0
-[MaxHeap] size: 1
-5[MaxHeap] extractMax: removendo elemento máximo 42
-[MaxHeap] size: 0
-4[MaxHeap] Heap criado com capacidade inicial de 10
-)[MaxHeap] insert: inserindo elemento 10
-3[MaxHeap] siftUp: ajustando elemento no índice 0
-)[MaxHeap] insert: inserindo elemento 10
-3[MaxHeap] siftUp: ajustando elemento no índice 1
-([MaxHeap] insert: inserindo elemento 5
-3[MaxHeap] siftUp: ajustando elemento no índice 2
-5[MaxHeap] extractMax: removendo elemento máximo 10
-5[MaxHeap] siftDown: ajustando elemento no índice 0
-9[MaxHeap] swap: trocando elementos nas posições 0 e 1
-5[MaxHeap] extractMax: removendo elemento máximo 10
-5[MaxHeap] siftDown: ajustando elemento no índice 0
-4[MaxHeap] extractMax: removendo elemento máximo 5
-4[MaxHeap] Heap criado com capacidade inicial de 10
- [MaxHeap] peekMax: heap vazio.
-4[MaxHeap] Heap criado com capacidade inicial de 10
-)[MaxHeap] insert: inserindo elemento 10
-3[MaxHeap] siftUp: ajustando elemento no índice 0
-([MaxHeap] peekMax: acessado máximo 10
-)[MaxHeap] insert: inserindo elemento 30
-3[MaxHeap] siftUp: ajustando elemento no índice 1
-9[MaxHeap] swap: trocando elementos nas posições 1 e 0
-([MaxHeap] peekMax: acessado máximo 30
-)[MaxHeap] insert: inserindo elemento 20
-3[MaxHeap] siftUp: ajustando elemento no índice 2
-([MaxHeap] peekMax: acessado máximo 30
-4[MaxHeap] Heap criado com capacidade inicial de 10
-([MaxHeap] insert: inserindo elemento 3
-3[MaxHeap] siftUp: ajustando elemento no índice 0
-)[MaxHeap] insert: inserindo elemento 10
-3[MaxHeap] siftUp: ajustando elemento no índice 1
-9[MaxHeap] swap: trocando elementos nas posições 1 e 0
-([MaxHeap] insert: inserindo elemento 5
-3[MaxHeap] siftUp: ajustando elemento no índice 2
-([MaxHeap] insert: inserindo elemento 1
-3[MaxHeap] siftUp: ajustando elemento no índice 3
-([MaxHeap] insert: inserindo elemento 8
-3[MaxHeap] siftUp: ajustando elemento no índice 4
-9[MaxHeap] swap: trocando elementos nas posições 4 e 1
->[MaxHeap] heapSort: ordenando elementos (destruindo o heap).
-5[MaxHeap] extractMax: removendo elemento máximo 10
-5[MaxHeap] siftDown: ajustando elemento no índice 0
-9[MaxHeap] swap: trocando elementos nas posições 0 e 1
-4[MaxHeap] extractMax: removendo elemento máximo 8
-5[MaxHeap] siftDown: ajustando elemento no índice 0
-9[MaxHeap] swap: trocando elementos nas posições 0 e 2
-4[MaxHeap] extractMax: removendo elemento máximo 5
-5[MaxHeap] siftDown: ajustando elemento no índice 0
-9[MaxHeap] swap: trocando elementos nas posições 0 e 1
-4[MaxHeap] extractMax: removendo elemento máximo 3
-5[MaxHeap] siftDown: ajustando elemento no índice 0
-4[MaxHeap] extractMax: removendo elemento máximo 1
-4[MaxHeap] Heap criado com capacidade inicial de 10
-#[MaxHeap] extractMax: heap vazio.
-4[MaxHeap] Heap criado com capacidade inicial de 10
-)[MaxHeap] insert: inserindo elemento 15
-3[MaxHeap] siftUp: ajustando elemento no índice 0
-)[MaxHeap] insert: inserindo elemento 10
-3[MaxHeap] siftUp: ajustando elemento no índice 1
-)[MaxHeap] insert: inserindo elemento 25
-3[MaxHeap] siftUp: ajustando elemento no índice 2
-9[MaxHeap] swap: trocando elementos nas posições 2 e 0
-([MaxHeap] insert: inserindo elemento 5
-3[MaxHeap] siftUp: ajustando elemento no índice 3
-5[MaxHeap] extractMax: removendo elemento máximo 25
-5[MaxHeap] siftDown: ajustando elemento no índice 0
-9[MaxHeap] swap: trocando elementos nas posições 0 e 2
-5[MaxHeap] extractMax: removendo elemento máximo 15
-5[MaxHeap] siftDown: ajustando elemento no índice 0
-9[MaxHeap] swap: trocando elementos nas posições 0 e 1
-5[MaxHeap] extractMax: removendo elemento máximo 10
-5[MaxHeap] siftDown: ajustando elemento no índice 0
-4[MaxHeap] extractMax: removendo elemento máximo 5
-#[MaxHeap] extractMax: heap vazio.
-4[MaxHeap] Heap criado com capacidade inicial de 10
-([MaxHeap] insert: inserindo elemento 0
-3[MaxHeap] siftUp: ajustando elemento no índice 0
-([MaxHeap] insert: inserindo elemento 1
-3[MaxHeap] siftUp: ajustando elemento no índice 1
-9[MaxHeap] swap: trocando elementos nas posições 1 e 0
-([MaxHeap] insert: inserindo elemento 2
-3[MaxHeap] siftUp: ajustando elemento no índice 2
-9[MaxHeap] swap: trocando elementos nas posições 2 e 0
-([MaxHeap] insert: inserindo elemento 3
-3[MaxHeap] siftUp: ajustando elemento no índice 3
-9[MaxHeap] swap: trocando elementos nas posições 3 e 1
-9[MaxHeap] swap: trocando elementos nas posições 1 e 0
-([MaxHeap] insert: inserindo elemento 4
-3[MaxHeap] siftUp: ajustando elemento no índice 4
-9[MaxHeap] swap: trocando elementos nas posições 4 e 1
-9[MaxHeap] swap: trocando elementos nas posições 1 e 0
-([MaxHeap] insert: inserindo elemento 5
-3[MaxHeap] siftUp: ajustando elemento no índice 5
-9[MaxHeap] swap: trocando elementos nas posições 5 e 2
-9[MaxHeap] swap: trocando elementos nas posições 2 e 0
-([MaxHeap] insert: inserindo elemento 6
-3[MaxHeap] siftUp: ajustando elemento no índice 6
-9[MaxHeap] swap: trocando elementos nas posições 6 e 2
-9[MaxHeap] swap: trocando elementos nas posições 2 e 0
-([MaxHeap] insert: inserindo elemento 7
-3[MaxHeap] siftUp: ajustando elemento no índice 7
-9[MaxHeap] swap: trocando elementos nas posições 7 e 3
-9[MaxHeap] swap: trocando elementos nas posições 3 e 1
-9[MaxHeap] swap: trocando elementos nas posições 1 e 0
-([MaxHeap] insert: inserindo elemento 8
-3[MaxHeap] siftUp: ajustando elemento no índice 8
-9[MaxHeap] swap: trocando elementos nas posições 8 e 3
-9[MaxHeap] swap: trocando elementos nas posições 3 e 1
-9[MaxHeap] swap: trocando elementos nas posições 1 e 0
-([MaxHeap] insert: inserindo elemento 9
-3[MaxHeap] siftUp: ajustando elemento no índice 9
-9[MaxHeap] swap: trocando elementos nas posições 9 e 4
-9[MaxHeap] swap: trocando elementos nas posições 4 e 1
-9[MaxHeap] swap: trocando elementos nas posições 1 e 0
-)[MaxHeap] insert: inserindo elemento 10
-5[MaxHeap] resize: aumentando a capacidade do array.
-4[MaxHeap] siftUp: ajustando elemento no índice 10
-:[MaxHeap] swap: trocando elementos nas posições 10 e 4
-9[MaxHeap] swap: trocando elementos nas posições 4 e 1
-9[MaxHeap] swap: trocando elementos nas posições 1 e 0
-)[MaxHeap] insert: inserindo elemento 11
-4[MaxHeap] siftUp: ajustando elemento no índice 11
-:[MaxHeap] swap: trocando elementos nas posições 11 e 5
-9[MaxHeap] swap: trocando elementos nas posições 5 e 2
-9[MaxHeap] swap: trocando elementos nas posições 2 e 0
-)[MaxHeap] insert: inserindo elemento 12
-4[MaxHeap] siftUp: ajustando elemento no índice 12
-:[MaxHeap] swap: trocando elementos nas posições 12 e 5
-9[MaxHeap] swap: trocando elementos nas posições 5 e 2
-9[MaxHeap] swap: trocando elementos nas posições 2 e 0
-)[MaxHeap] insert: inserindo elemento 13
-4[MaxHeap] siftUp: ajustando elemento no índice 13
-:[MaxHeap] swap: trocando elementos nas posições 13 e 6
-9[MaxHeap] swap: trocando elementos nas posições 6 e 2
-9[MaxHeap] swap: trocando elementos nas posições 2 e 0
-)[MaxHeap] insert: inserindo elemento 14
-4[MaxHeap] siftUp: ajustando elemento no índice 14
-:[MaxHeap] swap: trocando elementos nas posições 14 e 6
-9[MaxHeap] swap: trocando elementos nas posições 6 e 2
-9[MaxHeap] swap: trocando elementos nas posições 2 e 0
-)[MaxHeap] insert: inserindo elemento 15
-4[MaxHeap] siftUp: ajustando elemento no índice 15
-:[MaxHeap] swap: trocando elementos nas posições 15 e 7
-9[MaxHeap] swap: trocando elementos nas posições 7 e 3
-9[MaxHeap] swap: trocando elementos nas posições 3 e 1
-9[MaxHeap] swap: trocando elementos nas posições 1 e 0
-)[MaxHeap] insert: inserindo elemento 16
-4[MaxHeap] siftUp: ajustando elemento no índice 16
-:[MaxHeap] swap: trocando elementos nas posições 16 e 7
-9[MaxHeap] swap: trocando elementos nas posições 7 e 3
-9[MaxHeap] swap: trocando elementos nas posições 3 e 1
-9[MaxHeap] swap: trocando elementos nas posições 1 e 0
-)[MaxHeap] insert: inserindo elemento 17
-4[MaxHeap] siftUp: ajustando elemento no índice 17
-:[MaxHeap] swap: trocando elementos nas posições 17 e 8
-9[MaxHeap] swap: trocando elementos nas posições 8 e 3
-9[MaxHeap] swap: trocando elementos nas posições 3 e 1
-9[MaxHeap] swap: trocando elementos nas posições 1 e 0
-)[MaxHeap] insert: inserindo elemento 18
-4[MaxHeap] siftUp: ajustando elemento no índice 18
-:[MaxHeap] swap: trocando elementos nas posições 18 e 8
-9[MaxHeap] swap: trocando elementos nas posições 8 e 3
-9[MaxHeap] swap: trocando elementos nas posições 3 e 1
-9[MaxHeap] swap: trocando elementos nas posições 1 e 0
-)[MaxHeap] insert: inserindo elemento 19
-4[MaxHeap] siftUp: ajustando elemento no índice 19
-:[MaxHeap] swap: trocando elementos nas posições 19 e 9
-9[MaxHeap] swap: trocando elementos nas posições 9 e 4
-9[MaxHeap] swap: trocando elementos nas posições 4 e 1
-9[MaxHeap] swap: trocando elementos nas posições 1 e 0
-[MaxHeap] size: 20
-([MaxHeap] peekMax: acessado máximo 19
-! [LinkedList] Lista criada.
-! [Stack] Pilha criada.
-! [LinkedList] Lista criada.
-! [Stack] Pilha criada.
-! &[Queue] Fila com duas pilhas criada.
-! 2[LinkedList] pushFront: adicionado 0 no início.
-! %[Stack] push: elemento 0 empilhado.
-! 1[Queue] enqueue: elemento 0 adicionado à fila.
-! 2[LinkedList] pushFront: adicionado 1 no início.
-! %[Stack] push: elemento 1 empilhado.
-! 1[Queue] enqueue: elemento 1 adicionado à fila.
-! 2[LinkedList] pushFront: adicionado 2 no início.
-! %[Stack] push: elemento 2 empilhado.
-! 1[Queue] enqueue: elemento 2 adicionado à fila.
-! 2[LinkedList] pushFront: adicionado 3 no início.
-! %[Stack] push: elemento 3 empilhado.
-! 1[Queue] enqueue: elemento 3 adicionado à fila.
-! 2[LinkedList] pushFront: adicionado 4 no início.
-! %[Stack] push: elemento 4 empilhado.
-! 1[Queue] enqueue: elemento 4 adicionado à fila.
-! 2[LinkedList] pushFront: adicionado 5 no início.
-! %[Stack] push: elemento 5 empilhado.
-! 1[Queue] enqueue: elemento 5 adicionado à fila.
-! 2[LinkedList] pushFront: adicionado 6 no início.
-! %[Stack] push: elemento 6 empilhado.
-! 1[Queue] enqueue: elemento 6 adicionado à fila.
-! 2[LinkedList] pushFront: adicionado 7 no início.
-! %[Stack] push: elemento 7 empilhado.
-! 1[Queue] enqueue: elemento 7 adicionado à fila.
-! 2[LinkedList] pushFront: adicionado 8 no início.
-! %[Stack] push: elemento 8 empilhado.
-! 1[Queue] enqueue: elemento 8 adicionado à fila.
-! 2[LinkedList] pushFront: adicionado 9 no início.
-! %[Stack] push: elemento 9 empilhado.
-! 1[Queue] enqueue: elemento 9 adicionado à fila.
-! A[Queue] transfer: movendo elementos da inStack para a outStack.
-! /[LinkedList] popFront: removido 9 do início.
-! '[Stack] pop: elemento 9 desempilhado.
-! 2[LinkedList] pushFront: adicionado 9 no início.
-! %[Stack] push: elemento 9 empilhado.
-! /[LinkedList] popFront: removido 8 do início.
-! '[Stack] pop: elemento 8 desempilhado.
-! 2[LinkedList] pushFront: adicionado 8 no início.
-! %[Stack] push: elemento 8 empilhado.
-! /[LinkedList] popFront: removido 7 do início.
-! '[Stack] pop: elemento 7 desempilhado.
-! 2[LinkedList] pushFront: adicionado 7 no início.
-! %[Stack] push: elemento 7 empilhado.
-! /[LinkedList] popFront: removido 6 do início.
-! '[Stack] pop: elemento 6 desempilhado.
-! 2[LinkedList] pushFront: adicionado 6 no início.
-! %[Stack] push: elemento 6 empilhado.
-! /[LinkedList] popFront: removido 5 do início.
-! '[Stack] pop: elemento 5 desempilhado.
-! 2[LinkedList] pushFront: adicionado 5 no início.
-! %[Stack] push: elemento 5 empilhado.
-! /[LinkedList] popFront: removido 4 do início.
-! '[Stack] pop: elemento 4 desempilhado.
-! 2[LinkedList] pushFront: adicionado 4 no início.
-! %[Stack] push: elemento 4 empilhado.
-! /[LinkedList] popFront: removido 3 do início.
-! '[Stack] pop: elemento 3 desempilhado.
-! 2[LinkedList] pushFront: adicionado 3 no início.
-! %[Stack] push: elemento 3 empilhado.
-! /[LinkedList] popFront: removido 2 do início.
-! '[Stack] pop: elemento 2 desempilhado.
-! 2[LinkedList] pushFront: adicionado 2 no início.
-! %[Stack] push: elemento 2 empilhado.
-! /[LinkedList] popFront: removido 1 do início.
-! '[Stack] pop: elemento 1 desempilhado.
-! 2[LinkedList] pushFront: adicionado 1 no início.
-! %[Stack] push: elemento 1 empilhado.
-! /[LinkedList] popFront: removido 0 do início.
-! '[Stack] pop: elemento 0 desempilhado.
-! 2[LinkedList] pushFront: adicionado 0 no início.
-! %[Stack] push: elemento 0 empilhado.
-! /[LinkedList] popFront: removido 0 do início.
-! '[Stack] pop: elemento 0 desempilhado.
-! /[Queue] dequeue: elemento 0 removido da fila.
-! /[LinkedList] popFront: removido 1 do início.
-! '[Stack] pop: elemento 1 desempilhado.
-! /[Queue] dequeue: elemento 1 removido da fila.
-! /[LinkedList] popFront: removido 2 do início.
-! '[Stack] pop: elemento 2 desempilhado.
-! /[Queue] dequeue: elemento 2 removido da fila.
-! /[LinkedList] popFront: removido 3 do início.
-! '[Stack] pop: elemento 3 desempilhado.
-! /[Queue] dequeue: elemento 3 removido da fila.
-! /[LinkedList] popFront: removido 4 do início.
-! '[Stack] pop: elemento 4 desempilhado.
-! /[Queue] dequeue: elemento 4 removido da fila.
-! 3[LinkedList] pushFront: adicionado 10 no início.
-! &[Stack] push: elemento 10 empilhado.
-! 2[Queue] enqueue: elemento 10 adicionado à fila.
-! 3[LinkedList] pushFront: adicionado 11 no início.
-! &[Stack] push: elemento 11 empilhado.
-! 2[Queue] enqueue: elemento 11 adicionado à fila.
-! 3[LinkedList] pushFront: adicionado 12 no início.
-! &[Stack] push: elemento 12 empilhado.
-! 2[Queue] enqueue: elemento 12 adicionado à fila.
-! 3[LinkedList] pushFront: adicionado 13 no início.
-! &[Stack] push: elemento 13 empilhado.
-! 2[Queue] enqueue: elemento 13 adicionado à fila.
-! 3[LinkedList] pushFront: adicionado 14 no início.
-! &[Stack] push: elemento 14 empilhado.
-! 2[Queue] enqueue: elemento 14 adicionado à fila.
-! /[LinkedList] popFront: removido 5 do início.
-! '[Stack] pop: elemento 5 desempilhado.
-! /[Queue] dequeue: elemento 5 removido da fila.
-! /[LinkedList] popFront: removido 6 do início.
-! '[Stack] pop: elemento 6 desempilhado.
-! /[Queue] dequeue: elemento 6 removido da fila.
-! /[LinkedList] popFront: removido 7 do início.
-! '[Stack] pop: elemento 7 desempilhado.
-! /[Queue] dequeue: elemento 7 removido da fila.
-! /[LinkedList] popFront: removido 8 do início.
-! '[Stack] pop: elemento 8 desempilhado.
-! /[Queue] dequeue: elemento 8 removido da fila.
-! /[LinkedList] popFront: removido 9 do início.
-! '[Stack] pop: elemento 9 desempilhado.
-! /[Queue] dequeue: elemento 9 removido da fila.
-! A[Queue] transfer: movendo elementos da inStack para a outStack.
-! 0[LinkedList] popFront: removido 14 do início.
-! ([Stack] pop: elemento 14 desempilhado.
-! 3[LinkedList] pushFront: adicionado 14 no início.
-! &[Stack] push: elemento 14 empilhado.
-! 0[LinkedList] popFront: removido 13 do início.
-! ([Stack] pop: elemento 13 desempilhado.
-! 3[LinkedList] pushFront: adicionado 13 no início.
-! &[Stack] push: elemento 13 empilhado.
-! 0[LinkedList] popFront: removido 12 do início.
-! ([Stack] pop: elemento 12 desempilhado.
-! 3[LinkedList] pushFront: adicionado 12 no início.
-! &[Stack] push: elemento 12 empilhado.
-! 0[LinkedList] popFront: removido 11 do início.
-! ([Stack] pop: elemento 11 desempilhado.
-! 3[LinkedList] pushFront: adicionado 11 no início.
-! &[Stack] push: elemento 11 empilhado.
-! 0[LinkedList] popFront: removido 10 do início.
-! ([Stack] pop: elemento 10 desempilhado.
-! 3[LinkedList] pushFront: adicionado 10 no início.
-! &[Stack] push: elemento 10 empilhado.
-! 0[LinkedList] popFront: removido 10 do início.
-! ([Stack] pop: elemento 10 desempilhado.
-! 0[Queue] dequeue: elemento 10 removido da fila.
-! 0[LinkedList] popFront: removido 11 do início.
-! ([Stack] pop: elemento 11 desempilhado.
-! 0[Queue] dequeue: elemento 11 removido da fila.
-! 0[LinkedList] popFront: removido 12 do início.
-! ([Stack] pop: elemento 12 desempilhado.
-! 0[Queue] dequeue: elemento 12 removido da fila.
-! 0[LinkedList] popFront: removido 13 do início.
-! ([Stack] pop: elemento 13 desempilhado.
-! 0[Queue] dequeue: elemento 13 removido da fila.
-! 0[LinkedList] popFront: removido 14 do início.
-! ([Stack] pop: elemento 14 desempilhado.
-! 0[Queue] dequeue: elemento 14 removido da fila.
-!"[LinkedList] Lista criada.
-!"[Stack] Pilha criada.
-!"[LinkedList] Lista criada.
-!"[Stack] Pilha criada.
-!"&[Queue] Fila com duas pilhas criada.
-!"[LinkedList] size: 0
-!"[Stack] size: 0
-!"[LinkedList] size: 0
-!"[Stack] size: 0
-!"[Queue] size: 0
-!"2[LinkedList] pushFront: adicionado 1 no início.
-!"%[Stack] push: elemento 1 empilhado.
-!"1[Queue] enqueue: elemento 1 adicionado à fila.
-!"2[LinkedList] pushFront: adicionado 2 no início.
-!"%[Stack] push: elemento 2 empilhado.
-!"1[Queue] enqueue: elemento 2 adicionado à fila.
-!"[LinkedList] size: 2
-!"[Stack] size: 2
-!"[LinkedList] size: 0
-!"[Stack] size: 0
-!"[Queue] size: 2
-!"A[Queue] transfer: movendo elementos da inStack para a outStack.
-!"/[LinkedList] popFront: removido 2 do início.
-!"'[Stack] pop: elemento 2 desempilhado.
-!"2[LinkedList] pushFront: adicionado 2 no início.
-!"%[Stack] push: elemento 2 empilhado.
-!"/[LinkedList] popFront: removido 1 do início.
-!"'[Stack] pop: elemento 1 desempilhado.
-!"2[LinkedList] pushFront: adicionado 1 no início.
-!"%[Stack] push: elemento 1 empilhado.
-!"/[LinkedList] popFront: removido 1 do início.
-!"'[Stack] pop: elemento 1 desempilhado.
-!"/[Queue] dequeue: elemento 1 removido da fila.
-!"[LinkedList] size: 0
-!"[Stack] size: 0
-!"[LinkedList] size: 1
-!"[Stack] size: 1
-!"[Queue] size: 1
-!#[LinkedList] Lista criada.
-!#[Stack] Pilha criada.
-!#[LinkedList] Lista criada.
-!#[Stack] Pilha criada.
-!#&[Queue] Fila com duas pilhas criada.
-!#2[LinkedList] pushFront: adicionado 1 no início.
-!#%[Stack] push: elemento 1 empilhado.
-!#1[Queue] enqueue: elemento 1 adicionado à fila.
-!#2[LinkedList] pushFront: adicionado 2 no início.
-!#%[Stack] push: elemento 2 empilhado.
-!#1[Queue] enqueue: elemento 2 adicionado à fila.
-!$[LinkedList] Lista criada.
-!$[Stack] Pilha criada.
-!$[LinkedList] Lista criada.
-!$[Stack] Pilha criada.
-!$&[Queue] Fila com duas pilhas criada.
-!$4[LinkedList] pushFront: adicionado 100 no início.
-!$'[Stack] push: elemento 100 empilhado.
-!$3[Queue] enqueue: elemento 100 adicionado à fila.
-!$A[Queue] transfer: movendo elementos da inStack para a outStack.
-!$1[LinkedList] popFront: removido 100 do início.
-!$)[Stack] pop: elemento 100 desempilhado.
-!$4[LinkedList] pushFront: adicionado 100 no início.
-!$'[Stack] push: elemento 100 empilhado.
-!$1[LinkedList] popFront: removido 100 do início.
-!$)[Stack] pop: elemento 100 desempilhado.
-!$1[Queue] dequeue: elemento 100 removido da fila.
-!$4[LinkedList] pushFront: adicionado 200 no início.
-!$'[Stack] push: elemento 200 empilhado.
-!$3[Queue] enqueue: elemento 200 adicionado à fila.
-!$4[LinkedList] pushFront: adicionado 300 no início.
-!$'[Stack] push: elemento 300 empilhado.
-!$3[Queue] enqueue: elemento 300 adicionado à fila.
-!$A[Queue] transfer: movendo elementos da inStack para a outStack.
-!$1[LinkedList] popFront: removido 300 do início.
-!$)[Stack] pop: elemento 300 desempilhado.
-!$4[LinkedList] pushFront: adicionado 300 no início.
-!$'[Stack] push: elemento 300 empilhado.
-!$1[LinkedList] popFront: removido 200 do início.
-!$)[Stack] pop: elemento 200 desempilhado.
-!$4[LinkedList] pushFront: adicionado 200 no início.
-!$'[Stack] push: elemento 200 empilhado.
-!$&[LinkedList] peekFront: acessado 200
-!$&[Stack] peek: elemento 200 acessado.
-!$.[Queue] peek: elemento 200 acessado na fila.
-!$1[LinkedList] popFront: removido 200 do início.
-!$)[Stack] pop: elemento 200 desempilhado.
-!$1[Queue] dequeue: elemento 200 removido da fila.
-!$4[LinkedList] pushFront: adicionado 400 no início.
-!$'[Stack] push: elemento 400 empilhado.
-!$3[Queue] enqueue: elemento 400 adicionado à fila.
-!$1[LinkedList] popFront: removido 300 do início.
-!$)[Stack] pop: elemento 300 desempilhado.
-!$1[Queue] dequeue: elemento 300 removido da fila.
-!$A[Queue] transfer: movendo elementos da inStack para a outStack.
-!$1[LinkedList] popFront: removido 400 do início.
-!$)[Stack] pop: elemento 400 desempilhado.
-!$4[LinkedList] pushFront: adicionado 400 no início.
-!$'[Stack] push: elemento 400 empilhado.
-!$1[LinkedList] popFront: removido 400 do início.
-!$)[Stack] pop: elemento 400 desempilhado.
-!$1[Queue] dequeue: elemento 400 removido da fila.
-!%[LinkedList] Lista criada.
-!%[Stack] Pilha criada.
-!%[LinkedList] Lista criada.
-!%[Stack] Pilha criada.
-!%&[Queue] Fila com duas pilhas criada.
-!%2[LinkedList] pushFront: adicionado 1 no início.
-!%%[Stack] push: elemento 1 empilhado.
-!%1[Queue] enqueue: elemento 1 adicionado à fila.
-!%2[LinkedList] pushFront: adicionado 2 no início.
-!%%[Stack] push: elemento 2 empilhado.
-!%1[Queue] enqueue: elemento 2 adicionado à fila.
-!%A[Queue] transfer: movendo elementos da inStack para a outStack.
-!%/[LinkedList] popFront: removido 2 do início.
-!%'[Stack] pop: elemento 2 desempilhado.
-!%2[LinkedList] pushFront: adicionado 2 no início.
-!%%[Stack] push: elemento 2 empilhado.
-!%/[LinkedList] popFront: removido 1 do início.
-!%'[Stack] pop: elemento 1 desempilhado.
-!%2[LinkedList] pushFront: adicionado 1 no início.
-!%%[Stack] push: elemento 1 empilhado.
-!%/[LinkedList] popFront: removido 1 do início.
-!%'[Stack] pop: elemento 1 desempilhado.
-!%/[Queue] dequeue: elemento 1 removido da fila.
-!%2[LinkedList] pushFront: adicionado 3 no início.
-!%%[Stack] push: elemento 3 empilhado.
-!%1[Queue] enqueue: elemento 3 adicionado à fila.
-!%2[LinkedList] pushFront: adicionado 4 no início.
-!%%[Stack] push: elemento 4 empilhado.
-!%1[Queue] enqueue: elemento 4 adicionado à fila.
-!%/[LinkedList] popFront: removido 2 do início.
-!%'[Stack] pop: elemento 2 desempilhado.
-!%/[Queue] dequeue: elemento 2 removido da fila.
-!%A[Queue] transfer: movendo elementos da inStack para a outStack.
-!%/[LinkedList] popFront: removido 4 do início.
-!%'[Stack] pop: elemento 4 desempilhado.
-!%2[LinkedList] pushFront: adicionado 4 no início.
-!%%[Stack] push: elemento 4 empilhado.
-!%/[LinkedList] popFront: removido 3 do início.
-!%'[Stack] pop: elemento 3 desempilhado.
-!%2[LinkedList] pushFront: adicionado 3 no início.
-!%%[Stack] push: elemento 3 empilhado.
-!%/[LinkedList] popFront: removido 3 do início.
-!%'[Stack] pop: elemento 3 desempilhado.
-!%/[Queue] dequeue: elemento 3 removido da fila.
-!%/[LinkedList] popFront: removido 4 do início.
-!%'[Stack] pop: elemento 4 desempilhado.
-!%/[Queue] dequeue: elemento 4 removido da fila.
-!&[LinkedList] Lista criada.
-!&[Stack] Pilha criada.
-!&[LinkedList] Lista criada.
-!&[Stack] Pilha criada.
-!&&[Queue] Fila com duas pilhas criada.
-!&3[LinkedList] pushFront: adicionado 10 no início.
-!&&[Stack] push: elemento 10 empilhado.
-!&2[Queue] enqueue: elemento 10 adicionado à fila.
-!&A[Queue] transfer: movendo elementos da inStack para a outStack.
-!&0[LinkedList] popFront: removido 10 do início.
-!&([Stack] pop: elemento 10 desempilhado.
-!&3[LinkedList] pushFront: adicionado 10 no início.
-!&&[Stack] push: elemento 10 empilhado.
-!&%[LinkedList] peekFront: acessado 10
-!&%[Stack] peek: elemento 10 acessado.
-!&-[Queue] peek: elemento 10 acessado na fila.
-!&3[LinkedList] pushFront: adicionado 20 no início.
-!&&[Stack] push: elemento 20 empilhado.
-!&2[Queue] enqueue: elemento 20 adicionado à fila.
-!&%[LinkedList] peekFront: acessado 10
-!&%[Stack] peek: elemento 10 acessado.
-!&-[Queue] peek: elemento 10 acessado na fila.
-!'[LinkedList] Lista criada.
-!'[Stack] Pilha criada.
-!'[LinkedList] Lista criada.
-!'[Stack] Pilha criada.
-!'&[Queue] Fila com duas pilhas criada.
-!'[Queue] peek: fila vazia.
-!([LinkedList] Lista criada.
-!([Stack] Pilha criada.
-!([LinkedList] Lista criada.
-!([Stack] Pilha criada.
-!(&[Queue] Fila com duas pilhas criada.
-!(3[LinkedList] pushFront: adicionado 10 no início.
-!(&[Stack] push: elemento 10 empilhado.
-!(2[Queue] enqueue: elemento 10 adicionado à fila.
-!(3[LinkedList] pushFront: adicionado 20 no início.
-!(&[Stack] push: elemento 20 empilhado.
-!(2[Queue] enqueue: elemento 20 adicionado à fila.
-!(A[Queue] transfer: movendo elementos da inStack para a outStack.
-!(0[LinkedList] popFront: removido 20 do início.
-!(([Stack] pop: elemento 20 desempilhado.
-!(3[LinkedList] pushFront: adicionado 20 no início.
-!(&[Stack] push: elemento 20 empilhado.
-!(0[LinkedList] popFront: removido 10 do início.
-!(([Stack] pop: elemento 10 desempilhado.
-!(3[LinkedList] pushFront: adicionado 10 no início.
-!(&[Stack] push: elemento 10 empilhado.
-!(0[LinkedList] popFront: removido 10 do início.
-!(([Stack] pop: elemento 10 desempilhado.
-!(0[Queue] dequeue: elemento 10 removido da fila.
-!(%[LinkedList] peekFront: acessado 20
-!(%[Stack] peek: elemento 20 acessado.
-!(-[Queue] peek: elemento 20 acessado na fila.
-!)[LinkedList] Lista criada.
-!)[Stack] Pilha criada.
-!)[LinkedList] Lista criada.
-!)[Stack] Pilha criada.
-!)&[Queue] Fila com duas pilhas criada.
-!)2[LinkedList] pushFront: adicionado 5 no início.
-!)%[Stack] push: elemento 5 empilhado.
-!)1[Queue] enqueue: elemento 5 adicionado à fila.
-!)A[Queue] transfer: movendo elementos da inStack para a outStack.
-!)/[LinkedList] popFront: removido 5 do início.
-!)'[Stack] pop: elemento 5 desempilhado.
-!)2[LinkedList] pushFront: adicionado 5 no início.
-!)%[Stack] push: elemento 5 empilhado.
-!)/[LinkedList] popFront: removido 5 do início.
-!)'[Stack] pop: elemento 5 desempilhado.
-!)/[Queue] dequeue: elemento 5 removido da fila.
-!*[LinkedList] Lista criada.
-!*[Stack] Pilha criada.
-!*[LinkedList] Lista criada.
-!*[Stack] Pilha criada.
-!*&[Queue] Fila com duas pilhas criada.
-!*[Queue] dequeue: fila vazia.
-,+[LinkedList] Lista criada.
-,+[LinkedList] size: 0
-,+2[LinkedList] pushFront: adicionado 1 no início.
-,+[LinkedList] size: 1
-,+/[LinkedList] popFront: removido 1 do início.
-,+[LinkedList] size: 0
-,-[LinkedList] Lista criada.
-,-0[LinkedList] pushBack: adicionado 10 no final.
-,-0[LinkedList] pushBack: adicionado 20 no final.
-,-%[LinkedList] peekFront: acessado 10
-,-$[LinkedList] peekBack: acessado 20
-,.[LinkedList] Lista criada.
-,.0[LinkedList] pushBack: adicionado 42 no final.
-,.0[LinkedList] popFront: removido 42 do início.
-,.%[LinkedList] peekBack: lista vazia.
-,/[LinkedList] Lista criada.
-,//[LinkedList] pushBack: adicionado 1 no final.
-,//[LinkedList] pushBack: adicionado 2 no final.
-,//[LinkedList] pushBack: adicionado 3 no final.
-,0[LinkedList] Lista criada.
-,00[LinkedList] pushBack: adicionado 10 no final.
-,00[LinkedList] pushBack: adicionado 20 no final.
-,0-[LinkedList] popBack: removido 20 do final.
-,0$[LinkedList] peekBack: acessado 10
-,0[LinkedList] size: 1
-,1[LinkedList] Lista criada.
-,13[LinkedList] pushFront: adicionado 42 no início.
-,1-[LinkedList] popBack: removido 42 do final.
-,1&[LinkedList] peekFront: lista vazia.
-,2[LinkedList] Lista criada.
-,21[LinkedList] pushBack: adicionado 100 no final.
-,21[LinkedList] pushBack: adicionado 200 no final.
-,21[LinkedList] contains: elemento 100 encontrado.
-,21[LinkedList] contains: elemento 200 encontrado.
-,26[LinkedList] contains: elemento 300 não encontrado.
-,3[LinkedList] Lista criada.
-,33[LinkedList] pushFront: adicionado 10 no início.
-,33[LinkedList] pushFront: adicionado 20 no início.
-,3%[LinkedList] peekFront: acessado 20
-,3$[LinkedList] peekBack: acessado 10
-,4[LinkedList] Lista criada.
-,4%[LinkedList] popFront: lista vazia.
-,4$[LinkedList] popBack: lista vazia.
-,5[LinkedList] Lista criada.
-,50[LinkedList] pushBack: adicionado 10 no final.
-,50[LinkedList] pushBack: adicionado 20 no final.
-,50[LinkedList] popFront: removido 10 do início.
-,5%[LinkedList] peekFront: acessado 20
-,5[LinkedList] size: 1
-76[LinkedList] Lista criada.
-76[Stack] Pilha criada.
-767[LinkedList] pushFront: adicionado Goblin no início.
-76*[Stack] push: elemento Goblin empilhado.
-76)[LinkedList] peekFront: acessado Goblin
-76)[Stack] peek: elemento Goblin acessado.
-764[LinkedList] pushFront: adicionado Orc no início.
-76'[Stack] push: elemento Orc empilhado.
-76&[LinkedList] peekFront: acessado Orc
-76&[Stack] peek: elemento Orc acessado.
-78[LinkedList] Lista criada.
-78[Stack] Pilha criada.
-782[LinkedList] pushFront: adicionado A no início.
-78%[Stack] push: elemento A empilhado.
-782[LinkedList] pushFront: adicionado B no início.
-78%[Stack] push: elemento B empilhado.
-78/[LinkedList] popFront: removido B do início.
-78'[Stack] pop: elemento B desempilhado.
-78$[LinkedList] peekFront: acessado A
-78$[Stack] peek: elemento A acessado.
-79[LinkedList] Lista criada.
-79[Stack] Pilha criada.
-79[LinkedList] size: 0
-79[Stack] size: 0
-796[LinkedList] pushFront: adicionado Item1 no início.
-79)[Stack] push: elemento Item1 empilhado.
-79[LinkedList] size: 1
-79[Stack] size: 1
-796[LinkedList] pushFront: adicionado Item2 no início.
-79)[Stack] push: elemento Item2 empilhado.
-79[LinkedList] size: 2
-79[Stack] size: 2
-793[LinkedList] popFront: removido Item2 do início.
-79+[Stack] pop: elemento Item2 desempilhado.
-79[LinkedList] size: 1
-79[Stack] size: 1
-7:[LinkedList] Lista criada.
-7:[Stack] Pilha criada.
-7:2[LinkedList] pushFront: adicionado 0 no início.
-7:%[Stack] push: elemento 0 empilhado.
-7:2[LinkedList] pushFront: adicionado 1 no início.
-7:%[Stack] push: elemento 1 empilhado.
-7:2[LinkedList] pushFront: adicionado 2 no início.
-7:%[Stack] push: elemento 2 empilhado.
-7:2[LinkedList] pushFront: adicionado 3 no início.
-7:%[Stack] push: elemento 3 empilhado.
-7:2[LinkedList] pushFront: adicionado 4 no início.
-7:%[Stack] push: elemento 4 empilhado.
-7:/[LinkedList] popFront: removido 4 do início.
-7:'[Stack] pop: elemento 4 desempilhado.
-7:/[LinkedList] popFront: removido 3 do início.
-7:'[Stack] pop: elemento 3 desempilhado.
-7:/[LinkedList] popFront: removido 2 do início.
-7:'[Stack] pop: elemento 2 desempilhado.
-7:/[LinkedList] popFront: removido 1 do início.
-7:'[Stack] pop: elemento 1 desempilhado.
-7:/[LinkedList] popFront: removido 0 do início.
-7:'[Stack] pop: elemento 0 desempilhado.
-7;[LinkedList] Lista criada.
-7;[Stack] Pilha criada.
-7;2[LinkedList] pushFront: adicionado C no início.
-7;%[Stack] push: elemento C empilhado.
-7;2[LinkedList] pushFront: adicionado B no início.
-7;%[Stack] push: elemento B empilhado.
-7;2[LinkedList] pushFront: adicionado A no início.
-7;%[Stack] push: elemento A empilhado.
-7<[LinkedList] Lista criada.
-7<[Stack] Pilha criada.
-7<[Stack] peek: pilha vazia.
-7=[LinkedList] Lista criada.
-7=[Stack] Pilha criada.
-7=5[LinkedList] pushFront: adicionado Test no início.
-7=([Stack] push: elemento Test empilhado.
-7=2[LinkedList] popFront: removido Test do início.
-7=*[Stack] pop: elemento Test desempilhado.
-7>[LinkedList] Lista criada.
-7>[Stack] Pilha criada.
-7>[Stack] pop: pilha vazia.
