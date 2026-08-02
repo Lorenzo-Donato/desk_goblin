@@ -21,6 +21,7 @@ import com.deskgoblin.DeskGoblinGame;
 import com.deskgoblin.model.HospitalManager;
 import com.deskgoblin.model.entities.Patient;
 import com.deskgoblin.model.entities.Bed;
+import com.deskgoblin.model.entities.MedicalProcess;
 import com.deskgoblin.model.datastructures.SinglyLinkedList;
 
 import java.util.Random;
@@ -59,7 +60,12 @@ public class GameScreen extends ScreenAdapter {
     private String inputBedId = "";
     private boolean isTypingBed = false;
     private String bedAssignmentResult = "";
-    private SinglyLinkedList<Patient> leftOrbSnapshot; // <--- Cache da lista
+    private SinglyLinkedList<Patient> leftOrbSnapshot;
+    // -------------------------------------
+
+    // --- VARIÁVEIS DO ORBE DIREITO ---
+    private String rightInputBedId = "M1";
+    private boolean isTypingRightBed = false;
     // -------------------------------------
     
     private boolean isTypingName = false;
@@ -120,7 +126,7 @@ public class GameScreen extends ScreenAdapter {
         
         hospitalManager = new HospitalManager();
 
-        // --- TESTES DO MIN HEAP (A SER REMOVIDO DEPOIS) ---
+        // --- TESTES ---
         hospitalManager.registerPatient(new Patient("1", "A", "Teste", 1));
         hospitalManager.registerPatient(new Patient("2", "B", "Teste", 1));
         hospitalManager.registerPatient(new Patient("3", "C", "Teste", 2));
@@ -128,9 +134,8 @@ public class GameScreen extends ScreenAdapter {
         hospitalManager.registerPatient(new Patient("5", "E", "Teste", 4));
         hospitalManager.registerPatient(new Patient("6", "F", "Teste", 5));
         hospitalManager.registerPatient(new Patient("7", "G", "Teste", 6));
-        // -----------------------------------------------------
+        // --------------
         
-        // Inicializa o cache do orbe esquerdo
         leftOrbSnapshot = hospitalManager.getPatientQueueSnapshot();
         
         spawnTimer = 0.5f;
@@ -166,7 +171,7 @@ public class GameScreen extends ScreenAdapter {
         
         Patient visiblePatient = null;
         if (isPatientWaiting) visiblePatient = patientOnCounter;
-        else if (idCardOnTable || currentState == UIState.SCROLL || currentState == UIState.SCROLL_REGISTER || currentState == UIState.SCROLL_VIEW) {
+        else if (idCardOnTable || currentState == UIState.SCROLL || currentState == UIState.SCROLL_REGISTER || currentState == UIState.SCROLL_VIEW || currentState == UIState.RIGHT_ORB) {
             visiblePatient = currentPatient; 
         } else if (currentState == UIState.LEFT_ORB) {
             visiblePatient = hospitalManager.peekNextPatient();
@@ -202,8 +207,8 @@ public class GameScreen extends ScreenAdapter {
         batch.draw(redButtonTexture, redBtnX, redBtnY);
         batch.setColor(Color.WHITE);
 
-        // --- CAMADA CINZA DO ORBE ESQUERDO ---
-        if (currentState == UIState.SCROLL_REGISTER || currentState == UIState.SCROLL_VIEW || currentState == UIState.LEFT_ORB) {
+        // --- CAMADAS CINZAS ---
+        if (currentState == UIState.SCROLL_REGISTER || currentState == UIState.SCROLL_VIEW || currentState == UIState.LEFT_ORB || currentState == UIState.RIGHT_ORB) {
             batch.setColor(0.3f, 0.3f, 0.3f, 0.9f);
             batch.draw(getWhitePixelTexture(), 0, 0, 640, 360);
             batch.setColor(Color.WHITE);
@@ -356,15 +361,12 @@ public class GameScreen extends ScreenAdapter {
                 }
                 break;
             
-            // --- TELA DO ORBE ESQUERDO (CORRIGIDO SEM PISCAR) ---
             case LEFT_ORB:
                 font.draw(batch, "--- ORBE ESQUERDO (Min Heap) ---", 160, 320);
                 
-                // Agora desenhamos usando os nós, sem destruir a lista
                 int yPos = 290;
                 int count = 0;
                 if (leftOrbSnapshot != null) {
-                    // CORRIGIDO: Agora usamos o método getHead() público!
                     SinglyLinkedList.Node<Patient> currentNode = leftOrbSnapshot.getHead(); 
                     while (currentNode != null && yPos > 120 && count < 10) {
                         Patient p = currentNode.data;
@@ -392,13 +394,68 @@ public class GameScreen extends ScreenAdapter {
                 
                 font.draw(batch, bedAssignmentResult, 100, 35);
                 break;
-            // ----------------------------------
-            
+
+            // --- ORBE DIREITO (Tela dividida) ---
             case RIGHT_ORB:
-                font.draw(batch, "--- ORBE DIREITO (Hash Table) ---", 140, 320);
-                Bed b = hospitalManager.getBed(selectedBedId);
-                if (b != null) font.draw(batch, b.toString(), 140, 290);
-                font.draw(batch, "Use os botões na mesa para gerenciar.", 140, 260);
+                font.draw(batch, "--- ORBE DIREITO (Hash Table) ---", 180, 330);
+
+                // Lado Esquerdo: Input + Status da Maca
+                font.draw(batch, "Digite a Maca:", 30, 315); // Ajustado Y para cima, evitando sobreposição
+                
+                batch.setColor(Color.BLACK);
+                batch.draw(getWhitePixelTexture(), 30, 275, 100, 25);
+                batch.setColor(Color.WHITE); 
+                font.draw(batch, rightInputBedId, 40, 293);
+                
+                boolean cursorRightBedVisible = (int)(cursorTimer * 2) % 2 == 0;
+                if (isTypingRightBed && cursorRightBedVisible) {
+                    layout.setText(font, rightInputBedId);
+                    font.draw(batch, "_", 40 + layout.width, 293);
+                }
+
+                Bed rightBed = hospitalManager.getBed(rightInputBedId.toUpperCase());
+                if (rightBed != null) {
+                    if (rightBed.isOccupied()) {
+                        Patient p = rightBed.getPatient();
+                        font.draw(batch, "Status: OCUPADA", 30, 250);
+                        font.draw(batch, "Nome: " + p.getName(), 30, 225);
+                        font.draw(batch, "Gravidade: " + p.getSeverityScore(), 30, 200);
+                        
+                        // Lado Direito: Tabela de Procedimentos
+                        // Linha divisória visual
+                        font.draw(batch, "|", 170, 320); 
+
+                        MedicalProcess process = hospitalManager.getActiveProcessForBed(rightInputBedId.toUpperCase());
+                        
+                        int lineY = 300;
+                        for (int i = 0; i < 6; i++) {
+                            String name = process != null ? process.getStageName(i) : "Procedimento " + (i+1);
+                            float timeLeft = process != null ? process.getStageTimer(i) : 0;
+                            int currentIdx = process != null ? process.getCurrentStageIndex() : 0;
+                            
+                            String timeStr = String.format("%.1f", Math.max(0, timeLeft));
+                            
+                            // Pinta os que já passaram de verde, o atual de branco, os futuros de cinza
+                            if (process != null && i < currentIdx) {
+                                batch.setColor(Color.GREEN);
+                            } else if (process != null && i == currentIdx) {
+                                batch.setColor(Color.WHITE);
+                            } else {
+                                batch.setColor(Color.LIGHT_GRAY);
+                            }
+                            font.draw(batch, (i+1) + "/6 - " + name + " (" + timeStr + "s)", 200, lineY);
+                            batch.setColor(Color.WHITE);
+                            lineY -= 20;
+                        }
+                        font.draw(batch, "Tempo total restante: " + String.format("%.1f", process != null ? process.getTotalTimeRemaining() : 0) + "s", 200, lineY);
+
+                    } else {
+                        font.draw(batch, "Status: LIVRE", 30, 250);
+                        font.draw(batch, "(Sem paciente)", 30, 220);
+                    }
+                } else {
+                    font.draw(batch, "Maca invalida!", 30, 250);
+                }
                 break;
         }
     }
@@ -430,13 +487,14 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void handleTypingInput() {
-        if (!isTypingName && !isTypingId && !isSearchingId && !isTypingBed) return;
+        if (!isTypingName && !isTypingId && !isSearchingId && !isTypingBed && !isTypingRightBed) return;
 
         java.util.function.Consumer<String> adder = (str) -> {
             if (isTypingName) { if (inputName.length() < 20) inputName += str; }
             else if (isTypingId) { if (inputId.length() < 20) inputId += str; }
             else if (isSearchingId) { if (searchInputId.length() < 20) searchInputId += str; }
             else if (isTypingBed) { if (inputBedId.length() < 10) inputBedId += str; }
+            else if (isTypingRightBed) { if (rightInputBedId.length() < 10) rightInputBedId += str; }
         };
 
         // ENTER
@@ -453,7 +511,7 @@ public class GameScreen extends ScreenAdapter {
             } 
             else if (isTypingBed) {
                 if (!inputBedId.isEmpty()) {
-                    String bedIdToUse = inputBedId.toUpperCase(); // Permite escrever m1, m2, m3...
+                    String bedIdToUse = inputBedId.toUpperCase();
                     Bed bed = hospitalManager.getBed(bedIdToUse);
 
                     if (bed == null) {
@@ -461,7 +519,6 @@ public class GameScreen extends ScreenAdapter {
                     } else if (bed.isOccupied()) {
                         bedAssignmentResult = "a maca esta ocupada";
                     } else {
-                        // Só remove o paciente se a maca estiver realmente livre!
                         Patient p = hospitalManager.popNextPatient();
                         if (p == null) {
                             bedAssignmentResult = "Fila vazia!";
@@ -469,7 +526,6 @@ public class GameScreen extends ScreenAdapter {
                             boolean success = hospitalManager.assignPatientToBed(p, bedIdToUse, 5.0f);
                             if (success) {
                                 bedAssignmentResult = "Sucesso! Alocado na " + bedIdToUse;
-                                // --- IMPORTANTE: Atualiza o cache da lista! ---
                                 leftOrbSnapshot = hospitalManager.getPatientQueueSnapshot();
                             } else {
                                 hospitalManager.addPatientToQueue(p);
@@ -480,6 +536,13 @@ public class GameScreen extends ScreenAdapter {
                 }
                 isTypingBed = false;
                 inputBedId = "";
+                return;
+            }
+            else if (isTypingRightBed) {
+                if (!rightInputBedId.isEmpty()) {
+                    rightInputBedId = rightInputBedId.toUpperCase();
+                }
+                isTypingRightBed = false;
                 return;
             }
             else {
@@ -495,6 +558,7 @@ public class GameScreen extends ScreenAdapter {
             else if (isTypingId && inputId.length() > 0) inputId = inputId.substring(0, inputId.length() - 1);
             else if (isSearchingId && searchInputId.length() > 0) searchInputId = searchInputId.substring(0, searchInputId.length() - 1);
             else if (isTypingBed && inputBedId.length() > 0) inputBedId = inputBedId.substring(0, inputBedId.length() - 1);
+            else if (isTypingRightBed && rightInputBedId.length() > 0) rightInputBedId = rightInputBedId.substring(0, rightInputBedId.length() - 1);
             return;
         }
 
@@ -533,7 +597,7 @@ public class GameScreen extends ScreenAdapter {
 
     private void handleInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            isTypingName = false; isTypingId = false; isSearchingId = false; isTypingBed = false;
+            isTypingName = false; isTypingId = false; isSearchingId = false; isTypingBed = false; isTypingRightBed = false;
             if (currentState == UIState.MAIN) {
                 game.setScreen(new OptionsScreen(game, this));
             } else {
@@ -586,10 +650,12 @@ public class GameScreen extends ScreenAdapter {
 
                 UIState targetState = null;
                 if (scrollBounds.contains(mousePos.x, mousePos.y)) targetState = UIState.SCROLL;
-                else if (orbOneBounds.contains(mousePos.x, mousePos.y)) targetState = UIState.RIGHT_ORB;
+                else if (orbOneBounds.contains(mousePos.x, mousePos.y)) {
+                    targetState = UIState.RIGHT_ORB; // Esquerdo na tela = Direito no jogo (Hash Table)
+                    rightInputBedId = "M1";
+                }
                 else if (orbTwoBounds.contains(mousePos.x, mousePos.y)) {
-                    targetState = UIState.LEFT_ORB;
-                    // --- IMPORTANTE: Atualiza o cache ao abrir a tela! ---
+                    targetState = UIState.LEFT_ORB; // Direito na tela = Esquerdo no jogo (Min Heap)
                     leftOrbSnapshot = hospitalManager.getPatientQueueSnapshot();
                 }
                 else if (greenBtnBounds.contains(mousePos.x, mousePos.y)) targetState = UIState.HEAL_MINIGAME;
@@ -610,11 +676,20 @@ public class GameScreen extends ScreenAdapter {
                 }
             }
 
-            // --- CLIQUE NO INPUT DO ORBE ESQUERDO ---
+            // --- CLIQUE NOS INPUTS DO ORBE DIREITO E ESQUERDO ---
             if (currentState == UIState.LEFT_ORB) {
                 if (mousePos.x >= 270 && mousePos.x <= 370 && mousePos.y >= 55 && mousePos.y <= 80) {
                     isTypingBed = true;
-                    isTypingName = false; isTypingId = false; isSearchingId = false;
+                    isTypingName = false; isTypingId = false; isSearchingId = false; isTypingRightBed = false;
+                    cursorTimer = 0f;
+                    return;
+                }
+            }
+            
+            if (currentState == UIState.RIGHT_ORB) {
+                if (mousePos.x >= 30 && mousePos.x <= 130 && mousePos.y >= 275 && mousePos.y <= 300) {
+                    isTypingRightBed = true;
+                    isTypingName = false; isTypingId = false; isSearchingId = false; isTypingBed = false;
                     cursorTimer = 0f;
                     return;
                 }
@@ -647,7 +722,6 @@ public class GameScreen extends ScreenAdapter {
                 if (mousePos.x >= 180 && mousePos.x <= 340 && mousePos.y >= 90 && mousePos.y <= 120) {
                     if (!inputName.isEmpty() && !inputId.isEmpty() && inputSeverity > 0) {
                         hospitalManager.registerPatient(new Patient(inputId, inputName, "Diagnosticado", inputSeverity));
-                        // --- IMPORTANTE: Atualiza cache do Orbe Esquerdo ---
                         leftOrbSnapshot = hospitalManager.getPatientQueueSnapshot();
                         
                         isPatientWaiting = false; idCardOnTable = false; patientOnCounter = null; currentPatient = null;

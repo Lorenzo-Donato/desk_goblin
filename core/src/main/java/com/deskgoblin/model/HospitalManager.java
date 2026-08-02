@@ -20,18 +20,15 @@ public class HospitalManager {
     }
 
     private void initializeBeds() {
-        // 12 macas (M1 -> M12)
         for (int i = 1; i <= 12; i++) {
             beds.put("M" + i, new Bed("M" + i));
         }
     }
 
-    // --- CORRIGIDO: FUNÇÃO DO PERGAMINHO (AVL) QUE FALTOU ---
     public SinglyLinkedList<Patient> getAllPatients() {
         return patientRecords.inOrder();
     }
 
-    // --- NOVO: Pega um "print" da fila do MinHeap sem destruí-la ---
     public SinglyLinkedList<Patient> getPatientQueueSnapshot() {
         SinglyLinkedList<Patient> result = new SinglyLinkedList<>();
         SinglyLinkedList<Patient> temp = new SinglyLinkedList<>();
@@ -46,7 +43,6 @@ public class HospitalManager {
         return result;
     }
 
-    // --- NOVO: Permite reinserir o paciente na Heap caso a maca esteja ocupada ---
     public void addPatientToQueue(Patient p) {
         patientQueue.insert(p);
     }
@@ -73,11 +69,29 @@ public class HospitalManager {
         return beds.get(id);
     }
 
+    // --- NOVO: Retorna o processo médico ativo em uma determinada maca ---
+    public MedicalProcess getActiveProcessForBed(String bedId) {
+        int size = medicalProcesses.size();
+        MedicalProcess foundProcess = null;
+        
+        // Drena a fila inteira para procurar e depois reinsere
+        for (int i = 0; i < size; i++) {
+            MedicalProcess process = medicalProcesses.dequeue();
+            if (process.getBed().getId().equals(bedId)) {
+                foundProcess = process;
+            }
+            medicalProcesses.enqueue(process);
+        }
+        return foundProcess;
+    }
+    // ----------------------------------------------------------------
+
     public boolean assignPatientToBed(Patient p, String bedId, float processTime) {
         Bed bed = beds.get(bedId);
         if (bed != null && !bed.isOccupied()) {
             bed.setPatient(p);
-            medicalProcesses.enqueue(new MedicalProcess(p, bed, processTime));
+            // Cria o processo com 6 estágios de 5s
+            medicalProcesses.enqueue(new MedicalProcess(p, bed));
             System.out.println("[Manager] Paciente " + p.getName() + " associado a maca " + bedId);
             return true;
         }
@@ -98,12 +112,16 @@ public class HospitalManager {
     public boolean updateMedicalProcesses(float delta) {
         boolean processFinished = false;
         int size = medicalProcesses.size();
+        
         for (int i = 0; i < size; i++) {
             MedicalProcess process = medicalProcesses.dequeue();
-            process.updateTime(delta);
+            process.update(delta);
+            
             if (process.isFinished()) {
                 System.out.println("[Manager] Processo médico concluído para: " + process.getPatient().getName());
                 processFinished = true;
+                // Não recolocamos na fila (o processo acabou)
+                process.getBed().setPatient(null); // Libera a maca automaticamente se quiser, ou você pode optar por não liberar (o botão direito pisca para liberar)
             } else {
                 medicalProcesses.enqueue(process);
             }
