@@ -234,9 +234,11 @@ public class GameScreen extends ScreenAdapter {
                 if (scrollBounds.contains(mousePos.x, mousePos.y)) {
                     currentState = UIState.SCROLL;
                 } else if (orbOneBounds.contains(mousePos.x, mousePos.y)) {
-                    currentState = UIState.LEFT_ORB;
-                } else if (orbTwoBounds.contains(mousePos.x, mousePos.y)) {
+                    // CORRIGIDO: Orb da direita (visual) abre o ORBE DIREITO (HashTable)
                     currentState = UIState.RIGHT_ORB;
+                } else if (orbTwoBounds.contains(mousePos.x, mousePos.y)) {
+                    // CORRIGIDO: Orb da esquerda (visual) abre o ORBE ESQUERDO (MinHeap)
+                    currentState = UIState.LEFT_ORB;
                 } else if (greenBtnBounds.contains(mousePos.x, mousePos.y)) {
                     currentState = UIState.HEAL_MINIGAME;
                 } else if (redBtnBounds.contains(mousePos.x, mousePos.y)) {
