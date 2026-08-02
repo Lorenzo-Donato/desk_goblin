@@ -50,19 +50,23 @@ public class GameScreen extends ScreenAdapter {
     private Random random = new Random();
     private boolean isZoomPopupOpen = false; 
 
-    // Variáveis da tela de cadastro
     private String inputName = "";
     private String inputId = "";
     private int inputSeverity = 0; 
     private String searchResult = ""; 
+
+    // --- VARIÁVEIS DO ORBE ESQUERDO ---
+    private String inputBedId = "";
+    private boolean isTypingBed = false;
+    private String bedAssignmentResult = "";
+    private SinglyLinkedList<Patient> leftOrbSnapshot; // <--- Cache da lista
+    // -------------------------------------
     
-    // --- VARIÁVEIS PARA DIGITAÇÃO DIRETA ---
     private boolean isTypingName = false;
     private boolean isTypingId = false;
-    private boolean isSearchingId = false; // Flag para buscar ID
-    private String searchInputId = "";     // Input da busca
+    private boolean isSearchingId = false; 
+    private String searchInputId = "";     
     private float cursorTimer = 0f;
-    // ---------------------------------------
     
     private String[] patientNames = {"Ana Silva", "Carlos Souza", "Mariana Oliveira", "João Santos", "Pedro Costa", 
                                      "Larissa Fernandes", "Lucas Almeida", "Beatriz Lima", "Gabriel Rocha", "Fernanda Dias"};
@@ -115,6 +119,19 @@ public class GameScreen extends ScreenAdapter {
         Gdx.graphics.setSystemCursor(Cursor.SystemCursor.None);
         
         hospitalManager = new HospitalManager();
+
+        // --- TESTES DO MIN HEAP (A SER REMOVIDO DEPOIS) ---
+        hospitalManager.registerPatient(new Patient("1", "A", "Teste", 1));
+        hospitalManager.registerPatient(new Patient("2", "B", "Teste", 1));
+        hospitalManager.registerPatient(new Patient("3", "C", "Teste", 2));
+        hospitalManager.registerPatient(new Patient("4", "D", "Teste", 3));
+        hospitalManager.registerPatient(new Patient("5", "E", "Teste", 4));
+        hospitalManager.registerPatient(new Patient("6", "F", "Teste", 5));
+        hospitalManager.registerPatient(new Patient("7", "G", "Teste", 6));
+        // -----------------------------------------------------
+        
+        // Inicializa o cache do orbe esquerdo
+        leftOrbSnapshot = hospitalManager.getPatientQueueSnapshot();
         
         spawnTimer = 0.5f;
         isPatientWaiting = false;
@@ -123,7 +140,6 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        // --- LÓGICA DE SPAWN ---
         if (!isPatientWaiting && !idCardOnTable && patientOnCounter == null) {
             spawnTimer -= delta;
             if (spawnTimer <= 0) {
@@ -148,7 +164,6 @@ public class GameScreen extends ScreenAdapter {
         batch.begin();
         batch.draw(groundTexture, 0, 0, 640, 360);
         
-        // Draw Patient
         Patient visiblePatient = null;
         if (isPatientWaiting) visiblePatient = patientOnCounter;
         else if (idCardOnTable || currentState == UIState.SCROLL || currentState == UIState.SCROLL_REGISTER || currentState == UIState.SCROLL_VIEW) {
@@ -162,15 +177,13 @@ public class GameScreen extends ScreenAdapter {
             float patientY = 90;
             batch.draw(patientTexture, patientX, patientY);
 
-            // --- ! MAIOR (Ajuste de escala) ---
             if (isPatientWaiting && currentState == UIState.MAIN) {
                 float origScaleX = font.getData().scaleX;
                 float origScaleY = font.getData().scaleY;
-                font.getData().setScale(2.0f); // Dobra o tamanho da fonte apenas para o "!"
+                font.getData().setScale(2.0f);
                 font.draw(batch, "!", patientX + patientTexture.getWidth()/2 - 10, patientY + patientTexture.getHeight() + 20);
-                font.getData().setScale(origScaleX, origScaleY); // Volta ao tamanho normal
+                font.getData().setScale(origScaleX, origScaleY);
             }
-            // ---------------------------
         }
         
         if (tableX == 0) tableX = (640 - tableTexture.getWidth()) / 2f;
@@ -189,7 +202,8 @@ public class GameScreen extends ScreenAdapter {
         batch.draw(redButtonTexture, redBtnX, redBtnY);
         batch.setColor(Color.WHITE);
 
-        if (currentState == UIState.SCROLL_REGISTER || currentState == UIState.SCROLL_VIEW) {
+        // --- CAMADA CINZA DO ORBE ESQUERDO ---
+        if (currentState == UIState.SCROLL_REGISTER || currentState == UIState.SCROLL_VIEW || currentState == UIState.LEFT_ORB) {
             batch.setColor(0.3f, 0.3f, 0.3f, 0.9f);
             batch.draw(getWhitePixelTexture(), 0, 0, 640, 360);
             batch.setColor(Color.WHITE);
@@ -208,7 +222,6 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void drawOverlays(float delta) {
-        // --- CORRIGIDO: Exclui o ID_ON_COUNTER para não mostrar o texto de ESC ---
         if (currentState != UIState.MAIN && currentState != UIState.ID_ON_COUNTER) {
             font.draw(batch, "[ ESC para fechar ]", 10, 350);
         }
@@ -253,7 +266,6 @@ public class GameScreen extends ScreenAdapter {
             batch.end(); batch.begin();
             batch.setColor(0, 0, 0, 0.85f); 
             batch.draw(getWhitePixelTexture(), rectX, rectY, rectWidth, rectHeight);
-            
             batch.setColor(Color.WHITE);
             batch.end(); batch.begin();
 
@@ -308,7 +320,6 @@ public class GameScreen extends ScreenAdapter {
                     if (inputSeverity == i + 1) batch.setColor(Color.GREEN);
                     else batch.setColor(Color.BLACK);
                     batch.draw(getWhitePixelTexture(), btnX, 145, 28, 28);
-                    
                     batch.setColor(Color.WHITE);
                     font.draw(batch, String.valueOf(i + 1), btnX + 8, 165);
                     batch.setColor(Color.WHITE); 
@@ -329,14 +340,11 @@ public class GameScreen extends ScreenAdapter {
                     font.draw(batch, p.getName() + " (ID: " + p.getId() + ", Sev: " + p.getSeverityScore() + ")", 100, y);
                     y -= 20;
                 }
-                
                 font.draw(batch, "[ Buscar por ID ]", 100, 40);
                 font.draw(batch, searchResult, 100, 20);
-
                 if (isSearchingId) {
                     cursorTimer += delta;
                     boolean cursorSearchVisible = (int)(cursorTimer * 2) % 2 == 0;
-
                     batch.setColor(Color.BLACK);
                     batch.draw(getWhitePixelTexture(), 260, 25, 150, 20);
                     batch.setColor(Color.WHITE); 
@@ -347,16 +355,45 @@ public class GameScreen extends ScreenAdapter {
                     }
                 }
                 break;
+            
+            // --- TELA DO ORBE ESQUERDO (CORRIGIDO SEM PISCAR) ---
             case LEFT_ORB:
                 font.draw(batch, "--- ORBE ESQUERDO (Min Heap) ---", 160, 320);
-                Patient next = hospitalManager.peekNextPatient();
-                if (next != null) {
-                    font.draw(batch, "Próximo: " + next.getName() + " (Sev: " + next.getSeverityScore() + ")", 130, 290);
-                    font.draw(batch, "Pressione 'M' para associar à Maca 1", 130, 260);
-                } else {
-                    font.draw(batch, "Fila vazia.", 250, 290);
+                
+                // Agora desenhamos usando os nós, sem destruir a lista
+                int yPos = 290;
+                int count = 0;
+                if (leftOrbSnapshot != null) {
+                    // CORRIGIDO: Agora usamos o método getHead() público!
+                    SinglyLinkedList.Node<Patient> currentNode = leftOrbSnapshot.getHead(); 
+                    while (currentNode != null && yPos > 120 && count < 10) {
+                        Patient p = currentNode.data;
+                        font.draw(batch, "ID: " + p.getId() + " | " + p.getName() + " (Sev: " + p.getSeverityScore() + ")", 100, yPos);
+                        yPos -= 20;
+                        count++;
+                        currentNode = currentNode.next;
+                    }
                 }
+
+                Patient nextPat = hospitalManager.peekNextPatient();
+                font.draw(batch, "Proximo: " + (nextPat != null ? nextPat.getName() : "Nenhum"), 100, 100);
+                font.draw(batch, "Digite a Maca (M1-M12):", 100, 75);
+                
+                batch.setColor(Color.BLACK);
+                batch.draw(getWhitePixelTexture(), 270, 55, 100, 25);
+                batch.setColor(Color.WHITE); 
+                font.draw(batch, inputBedId, 280, 73);
+                
+                boolean cursorBedVisible = (int)(cursorTimer * 2) % 2 == 0;
+                if (isTypingBed && cursorBedVisible) {
+                    layout.setText(font, inputBedId);
+                    font.draw(batch, "_", 280 + layout.width, 73);
+                }
+                
+                font.draw(batch, bedAssignmentResult, 100, 35);
                 break;
+            // ----------------------------------
+            
             case RIGHT_ORB:
                 font.draw(batch, "--- ORBE DIREITO (Hash Table) ---", 140, 320);
                 Bed b = hospitalManager.getBed(selectedBedId);
@@ -393,14 +430,16 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void handleTypingInput() {
-        if (!isTypingName && !isTypingId && !isSearchingId) return;
+        if (!isTypingName && !isTypingId && !isSearchingId && !isTypingBed) return;
 
         java.util.function.Consumer<String> adder = (str) -> {
             if (isTypingName) { if (inputName.length() < 20) inputName += str; }
             else if (isTypingId) { if (inputId.length() < 20) inputId += str; }
             else if (isSearchingId) { if (searchInputId.length() < 20) searchInputId += str; }
+            else if (isTypingBed) { if (inputBedId.length() < 10) inputBedId += str; }
         };
 
+        // ENTER
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             if (isSearchingId) {
                 if (!searchInputId.isEmpty()) {
@@ -411,17 +450,51 @@ public class GameScreen extends ScreenAdapter {
                 isSearchingId = false;
                 searchInputId = "";
                 return;
-            } else {
+            } 
+            else if (isTypingBed) {
+                if (!inputBedId.isEmpty()) {
+                    String bedIdToUse = inputBedId.toUpperCase(); // Permite escrever m1, m2, m3...
+                    Bed bed = hospitalManager.getBed(bedIdToUse);
+
+                    if (bed == null) {
+                        bedAssignmentResult = "Maca invalida!";
+                    } else if (bed.isOccupied()) {
+                        bedAssignmentResult = "a maca esta ocupada";
+                    } else {
+                        // Só remove o paciente se a maca estiver realmente livre!
+                        Patient p = hospitalManager.popNextPatient();
+                        if (p == null) {
+                            bedAssignmentResult = "Fila vazia!";
+                        } else {
+                            boolean success = hospitalManager.assignPatientToBed(p, bedIdToUse, 5.0f);
+                            if (success) {
+                                bedAssignmentResult = "Sucesso! Alocado na " + bedIdToUse;
+                                // --- IMPORTANTE: Atualiza o cache da lista! ---
+                                leftOrbSnapshot = hospitalManager.getPatientQueueSnapshot();
+                            } else {
+                                hospitalManager.addPatientToQueue(p);
+                                bedAssignmentResult = "Erro interno!";
+                            }
+                        }
+                    }
+                }
+                isTypingBed = false;
+                inputBedId = "";
+                return;
+            }
+            else {
                 isTypingName = false;
                 isTypingId = false;
             }
             return;
         }
 
+        // BACKSPACE
         if (Gdx.input.isKeyJustPressed(Input.Keys.BACKSPACE)) {
             if (isTypingName && inputName.length() > 0) inputName = inputName.substring(0, inputName.length() - 1);
-            if (isTypingId && inputId.length() > 0) inputId = inputId.substring(0, inputId.length() - 1);
-            if (isSearchingId && searchInputId.length() > 0) searchInputId = searchInputId.substring(0, searchInputId.length() - 1);
+            else if (isTypingId && inputId.length() > 0) inputId = inputId.substring(0, inputId.length() - 1);
+            else if (isSearchingId && searchInputId.length() > 0) searchInputId = searchInputId.substring(0, searchInputId.length() - 1);
+            else if (isTypingBed && inputBedId.length() > 0) inputBedId = inputBedId.substring(0, inputBedId.length() - 1);
             return;
         }
 
@@ -460,15 +533,12 @@ public class GameScreen extends ScreenAdapter {
 
     private void handleInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            isTypingName = false;
-            isTypingId = false;
-            isSearchingId = false;
+            isTypingName = false; isTypingId = false; isSearchingId = false; isTypingBed = false;
             if (currentState == UIState.MAIN) {
                 game.setScreen(new OptionsScreen(game, this));
             } else {
                 currentState = UIState.MAIN;
-                searchResult = ""; 
-                searchInputId = "";
+                searchResult = ""; searchInputId = ""; bedAssignmentResult = "";
             }
             return;
         }
@@ -486,19 +556,16 @@ public class GameScreen extends ScreenAdapter {
             float rectWidth = 300, rectHeight = 80;
             Rectangle popupBounds = new Rectangle(rectX, rectY, rectWidth, rectHeight);
 
-            // 1. Lógica do Pop-up
             if (isZoomPopupOpen) {
                 if (popupBounds.contains(mousePos.x, mousePos.y)) return; 
                 else isZoomPopupOpen = false;
             }
 
-            // 2. Clicar no cartão para abrir pop-up
             if (!isZoomPopupOpen && idCardOnTable && currentPatient != null && idBounds.contains(mousePos.x, mousePos.y)) {
                 isZoomPopupOpen = true;
                 return;
             }
 
-            // 3. INTERAÇÃO UNIFICADA DA MESA (MAIN ou ID_ON_COUNTER)
             boolean isOnTable = (currentState == UIState.MAIN || currentState == UIState.ID_ON_COUNTER);
             if (isOnTable) {
                 Rectangle orbOneBounds = new Rectangle(orbOneX, orbOneY, orbOneTexture.getWidth(), orbOneTexture.getHeight());
@@ -508,7 +575,6 @@ public class GameScreen extends ScreenAdapter {
                 Rectangle redBtnBounds = new Rectangle(redBtnX, redBtnY, redButtonTexture.getWidth(), redButtonTexture.getHeight());
                 Rectangle patientBounds = new Rectangle(patientX, patientY, patientTexture.getWidth(), patientTexture.getHeight());
                 
-                // 3.1 Clique no paciente (só se estiver no MAIN e com !)
                 if (currentState == UIState.MAIN && isPatientWaiting && patientBounds.contains(mousePos.x, mousePos.y)) {
                     isPatientWaiting = false; 
                     currentPatient = patientOnCounter;
@@ -518,11 +584,14 @@ public class GameScreen extends ScreenAdapter {
                     return;
                 }
 
-                // 3.2 Clique em outros objetos da mesa
                 UIState targetState = null;
                 if (scrollBounds.contains(mousePos.x, mousePos.y)) targetState = UIState.SCROLL;
                 else if (orbOneBounds.contains(mousePos.x, mousePos.y)) targetState = UIState.RIGHT_ORB;
-                else if (orbTwoBounds.contains(mousePos.x, mousePos.y)) targetState = UIState.LEFT_ORB;
+                else if (orbTwoBounds.contains(mousePos.x, mousePos.y)) {
+                    targetState = UIState.LEFT_ORB;
+                    // --- IMPORTANTE: Atualiza o cache ao abrir a tela! ---
+                    leftOrbSnapshot = hospitalManager.getPatientQueueSnapshot();
+                }
                 else if (greenBtnBounds.contains(mousePos.x, mousePos.y)) targetState = UIState.HEAL_MINIGAME;
                 else if (redBtnBounds.contains(mousePos.x, mousePos.y)) {
                     if (hospitalManager.removePatientFromBed("M1")) rightButtonBlinking = false;
@@ -534,7 +603,6 @@ public class GameScreen extends ScreenAdapter {
                 }
             }
 
-            // 4. Fechar o ID_ON_COUNTER se clicar em um espaço vazio
             if (currentState == UIState.ID_ON_COUNTER) {
                 if (!new Rectangle(patientX, patientY, patientTexture.getWidth(), patientTexture.getHeight()).contains(mousePos.x, mousePos.y) 
                     && !idBounds.contains(mousePos.x, mousePos.y)) {
@@ -542,13 +610,23 @@ public class GameScreen extends ScreenAdapter {
                 }
             }
 
-            // 5. Outros menus (SCROLL, SCROLL_REGISTER, SCROLL_VIEW)
+            // --- CLIQUE NO INPUT DO ORBE ESQUERDO ---
+            if (currentState == UIState.LEFT_ORB) {
+                if (mousePos.x >= 270 && mousePos.x <= 370 && mousePos.y >= 55 && mousePos.y <= 80) {
+                    isTypingBed = true;
+                    isTypingName = false; isTypingId = false; isSearchingId = false;
+                    cursorTimer = 0f;
+                    return;
+                }
+            }
+
             if (currentState == UIState.SCROLL) {
                 if (mousePos.x >= 180 && mousePos.x <= 400) {
                     if (mousePos.y >= 270 && mousePos.y <= 290) {
                         currentState = UIState.SCROLL_REGISTER;
                         inputName = ""; inputId = ""; inputSeverity = 0;
                         isTypingName = false; isTypingId = false;
+                        cursorTimer = 0f;
                     } else if (mousePos.y >= 240 && mousePos.y <= 260) {
                         currentState = UIState.SCROLL_VIEW;
                         searchResult = ""; searchInputId = ""; isSearchingId = false;
@@ -556,46 +634,35 @@ public class GameScreen extends ScreenAdapter {
                 }
             } else if (currentState == UIState.SCROLL_REGISTER) {
                 if (mousePos.x >= 100 && mousePos.x <= 540 && mousePos.y >= 270 && mousePos.y <= 330) {
-                    isTypingName = true;
-                    isTypingId = false;
-                    return;
+                    isTypingName = true; isTypingId = false; cursorTimer = 0f; return;
                 } else if (mousePos.x >= 100 && mousePos.x <= 540 && mousePos.y >= 230 && mousePos.y <= 290) {
-                    isTypingId = true;
-                    isTypingName = false;
-                    return;
+                    isTypingId = true; isTypingName = false; cursorTimer = 0f; return;
                 }
                 for (int i = 0; i < 6; i++) {
                     int btnX = 180 + i * 32;
                     if (mousePos.x >= btnX && mousePos.x <= btnX + 28 && mousePos.y >= 145 && mousePos.y <= 173) {
-                        inputSeverity = i + 1;
-                        return;
+                        inputSeverity = i + 1; return;
                     }
                 }
                 if (mousePos.x >= 180 && mousePos.x <= 340 && mousePos.y >= 90 && mousePos.y <= 120) {
                     if (!inputName.isEmpty() && !inputId.isEmpty() && inputSeverity > 0) {
-                        Patient p = new Patient(inputId, inputName, "Diagnosticado", inputSeverity);
-                        hospitalManager.registerPatient(p);
+                        hospitalManager.registerPatient(new Patient(inputId, inputName, "Diagnosticado", inputSeverity));
+                        // --- IMPORTANTE: Atualiza cache do Orbe Esquerdo ---
+                        leftOrbSnapshot = hospitalManager.getPatientQueueSnapshot();
                         
-                        isPatientWaiting = false;
-                        idCardOnTable = false;
-                        patientOnCounter = null;
-                        currentPatient = null;
+                        isPatientWaiting = false; idCardOnTable = false; patientOnCounter = null; currentPatient = null;
                         inputName = ""; inputId = ""; inputSeverity = 0;
-                        spawnTimer = 5f; 
-                        currentState = UIState.SCROLL;
-                    }
-                    return;
+                        spawnTimer = 5f; currentState = UIState.SCROLL;
+                    } return;
                 }
             } else if (currentState == UIState.SCROLL_VIEW) {
                 if (isSearchingId) {
                     if (!(mousePos.x >= 260 && mousePos.x <= 410 && mousePos.y >= 25 && mousePos.y <= 45)) {
-                        isSearchingId = false;
-                        searchInputId = "";
+                        isSearchingId = false; searchInputId = "";
                     }
                 } else if (mousePos.x >= 100 && mousePos.x <= 250 && mousePos.y >= 25 && mousePos.y <= 40) {
-                    isSearchingId = true;
-                    searchInputId = "";
-                    searchResult = "";
+                    isSearchingId = true; searchInputId = ""; searchResult = "";
+                    cursorTimer = 0f;
                 }
             }
         }

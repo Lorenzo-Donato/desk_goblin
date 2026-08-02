@@ -36,6 +36,12 @@ public class SinglyLinkedList<T> {
         System.out.println("[LinkedList] Lista criada.");
     }
 
+    // --- MÉTODO ADICIONADO PARA RESOLVER O ERRO DO GAME SCREEN ---
+    public Node<T> getHead() {
+        return head;
+    }
+    // -------------------------------------------------------------
+
     /**
      * Adiciona um elemento no início da lista.
      *
