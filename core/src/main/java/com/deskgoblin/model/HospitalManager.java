@@ -38,6 +38,11 @@ public class HospitalManager {
         }
     }
 
+    // --- NOVO MÉTODO ADICIONADO PARA CORRIGIR O ERRO ---
+    public SinglyLinkedList<Patient> getAllPatients() {
+        return patientRecords.inOrder();
+    }
+
     /**
      * S10: Salvar cadastro na BST -> Mandar os dados para o min heap
      */
