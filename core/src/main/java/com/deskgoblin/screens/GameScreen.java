@@ -33,7 +33,7 @@ public class GameScreen extends ScreenAdapter {
     private Viewport viewport;
 
     private Texture groundTexture, tableTexture, orbOneTexture, orbTwoTexture, scrollTexture, 
-                    inkwellTexture, greenButtonTexture, redButtonTexture, handTexture, patientTexture;
+                    inkwellTexture, handTexture, patientTexture, speechBubbleTexture, idCardTexture;
     
     private BitmapFont font;
     private Vector3 mousePos;
@@ -56,17 +56,13 @@ public class GameScreen extends ScreenAdapter {
     private int inputSeverity = 0; 
     private String searchResult = ""; 
 
-    // --- VARIÁVEIS DO ORBE ESQUERDO ---
     private String inputBedId = "";
     private boolean isTypingBed = false;
     private String bedAssignmentResult = "";
     private SinglyLinkedList<Patient> leftOrbSnapshot;
-    // -------------------------------------
 
-    // --- VARIÁVEIS DO ORBE DIREITO ---
     private String rightInputBedId = "M1";
     private boolean isTypingRightBed = false;
-    // -------------------------------------
     
     private boolean isTypingName = false;
     private boolean isTypingId = false;
@@ -81,16 +77,11 @@ public class GameScreen extends ScreenAdapter {
     private enum UIState { MAIN, SCROLL, SCROLL_REGISTER, SCROLL_VIEW, LEFT_ORB, RIGHT_ORB, HEAL_MINIGAME, ID_ON_COUNTER }
     private UIState currentState = UIState.MAIN;
     
-    private boolean rightButtonBlinking = false;
-    private float blinkTimer = 0f;
-
     private float tableX = 0, tableY = 0;
     private float orbOneX = 400, orbOneY = 40;
     private float orbTwoX = 148, orbTwoY = 125;
     private float scrollX = 88, scrollY = 25;
     private float inkwellX = 186, inkwellY = 82;
-    private float greenBtnX = 390, greenBtnY = 15;
-    private float redBtnX = 430, redBtnY = 15;
 
     public GameScreen(DeskGoblinGame game) {
         this.game = game;
@@ -105,10 +96,10 @@ public class GameScreen extends ScreenAdapter {
         orbTwoTexture = new Texture("orb_two.png");
         scrollTexture = new Texture("scroll.png");
         inkwellTexture = new Texture("inkwell.png");
-        greenButtonTexture = new Texture("green_button.png");
-        redButtonTexture = new Texture("red_button.png");
         handTexture = new Texture("hand.png");
         patientTexture = new Texture("patient.png");
+        speechBubbleTexture = new Texture("speechBalloon.png");
+        idCardTexture = new Texture("id.png");
         
         mousePos = new Vector3();
 
@@ -157,10 +148,6 @@ public class GameScreen extends ScreenAdapter {
             }
         }
 
-        if (hospitalManager.updateMedicalProcesses(delta)) {
-            rightButtonBlinking = true;
-        }
-
         ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1f);
         viewport.apply();
         camera.update();
@@ -198,14 +185,6 @@ public class GameScreen extends ScreenAdapter {
         batch.draw(orbTwoTexture, orbTwoX, orbTwoY);
         batch.draw(scrollTexture, scrollX, scrollY);
         batch.draw(inkwellTexture, inkwellX, inkwellY);
-        batch.draw(greenButtonTexture, greenBtnX, greenBtnY);
-        
-        if (rightButtonBlinking) {
-            blinkTimer += delta;
-            if (blinkTimer % 0.5f < 0.25f) batch.setColor(Color.RED);
-        }
-        batch.draw(redButtonTexture, redBtnX, redBtnY);
-        batch.setColor(Color.WHITE);
 
         // --- CAMADAS CINZAS ---
         if (currentState == UIState.SCROLL_REGISTER || currentState == UIState.SCROLL_VIEW || currentState == UIState.LEFT_ORB || currentState == UIState.RIGHT_ORB) {
@@ -233,53 +212,79 @@ public class GameScreen extends ScreenAdapter {
 
         float patientX = (640 - patientTexture.getWidth()) / 2f;
         float patientY = 90;
-        float idWidth = 200, idHeight = 50;
-        float idX = patientX - 85; 
-        float idY = patientY - 65;
+        
+        GlyphLayout layout = new GlyphLayout();
+        float origScaleX, origScaleY;
 
+        // 1. BALÃO DE FALA (Alargado para evitar que o texto saia)
         if (idCardOnTable && currentPatient != null) {
             if (currentState != UIState.SCROLL_REGISTER && currentState != UIState.SCROLL_VIEW) {
                 String speech = currentSpeechBubbleText;
-                float bubbleWidth = 200, bubbleHeight = 40;
-                float bubbleX = patientX - 50;
+                
+                float bubbleWidth = 280, bubbleHeight = 45;
+                float bubbleX = patientX + 40; 
                 float bubbleY = patientY + patientTexture.getHeight() + 5;
                 
                 batch.end(); batch.begin();
-                batch.setColor(Color.BLACK);
-                batch.draw(getWhitePixelTexture(), bubbleX, bubbleY, bubbleWidth, bubbleHeight);
                 batch.setColor(Color.WHITE);
+                batch.draw(speechBubbleTexture, bubbleX, bubbleY, bubbleWidth, bubbleHeight);
                 batch.end(); batch.begin();
-                font.draw(batch, speech, bubbleX + 10, bubbleY + 25);
+
+                // Centraliza o texto
+                layout.setText(font, speech);
+                font.draw(batch, speech, bubbleX + (bubbleWidth - layout.width) / 2f, bubbleY + 30);
             }
 
+            // 2. CARTÃO DE ID (Voltando ao tamanho original de 200x50 e layout igual ao seu esboço)
+            float idWidth = 200, idHeight = 50;
+            float idX = patientX - 85; 
+            float idY = patientY - 65;
+
             batch.end(); batch.begin();
-            batch.setColor(Color.BLACK);
-            batch.draw(getWhitePixelTexture(), idX, idY, idWidth, idHeight);
             batch.setColor(Color.WHITE);
+            batch.draw(idCardTexture, idX, idY, idWidth, idHeight);
             batch.end(); batch.begin();
 
-            font.draw(batch, "Nome: " + currentPatient.getName(), idX + 10, idY + 40);
-            font.draw(batch, "ID: " + currentPatient.getId(), idX + 10, idY + 15);
-            batch.setColor(Color.WHITE);
+            // Fonte ligeiramente menor para caber direitinho
+            origScaleX = font.getData().scaleX;
+            origScaleY = font.getData().scaleY;
+            font.getData().setScale(0.85f);
+
+            // ID no topo direito (ao lado do rosto)
+            font.draw(batch, "ID: " + currentPatient.getId(), idX + 70, idY + 38);
+
+            // NOME embaixo, mais à esquerda (abaixo da foto do personagem)
+            font.draw(batch, "Nome: " + currentPatient.getName(), idX + 10, idY + 18);
+
+            font.getData().setScale(origScaleX, origScaleY);
         }
 
+        // 3. ZOOM POP-UP (Voltando ao tamanho original de 300x80, layout corrigido)
         if (isZoomPopupOpen && currentPatient != null) {
             float rectX = (640 - 300) / 2f;
             float rectY = 180;
             float rectWidth = 300, rectHeight = 80;
             
             batch.end(); batch.begin();
-            batch.setColor(0, 0, 0, 0.85f); 
-            batch.draw(getWhitePixelTexture(), rectX, rectY, rectWidth, rectHeight);
             batch.setColor(Color.WHITE);
+            batch.draw(idCardTexture, rectX, rectY, rectWidth, rectHeight);
             batch.end(); batch.begin();
 
-            font.draw(batch, "Nome: " + currentPatient.getName(), rectX + 20, rectY + 60);
-            font.draw(batch, "ID: " + currentPatient.getId(), rectX + 20, rectY + 30);
-            batch.setColor(Color.WHITE);
+            origScaleX = font.getData().scaleX;
+            origScaleY = font.getData().scaleY;
+            font.getData().setScale(0.9f); // Zoom levemente maior
+
+            // ID no topo direito do pop-up
+            font.draw(batch, "ID: " + currentPatient.getId(), rectX + 105, rectY + 62);
+            // NOME embaixo à esquerda do pop-up
+            font.draw(batch, "Nome: " + currentPatient.getName(), rectX + 10, rectY + 35);
+
+            font.getData().setScale(origScaleX, origScaleY);
         }
 
-        GlyphLayout layout = new GlyphLayout();
+        // ------------------------------------------------
+        // Telas de Menu (Pergaminho, Orbes, etc.)
+        // ------------------------------------------------
 
         switch (currentState) {
             case SCROLL:
@@ -395,12 +400,10 @@ public class GameScreen extends ScreenAdapter {
                 font.draw(batch, bedAssignmentResult, 100, 35);
                 break;
 
-            // --- ORBE DIREITO (Tela dividida) ---
             case RIGHT_ORB:
                 font.draw(batch, "--- ORBE DIREITO (Hash Table) ---", 180, 330);
 
-                // Lado Esquerdo: Input + Status da Maca
-                font.draw(batch, "Digite a Maca:", 30, 315); // Ajustado Y para cima, evitando sobreposição
+                font.draw(batch, "Digite a Maca:", 30, 315);
                 
                 batch.setColor(Color.BLACK);
                 batch.draw(getWhitePixelTexture(), 30, 275, 100, 25);
@@ -421,8 +424,6 @@ public class GameScreen extends ScreenAdapter {
                         font.draw(batch, "Nome: " + p.getName(), 30, 225);
                         font.draw(batch, "Gravidade: " + p.getSeverityScore(), 30, 200);
                         
-                        // Lado Direito: Tabela de Procedimentos
-                        // Linha divisória visual
                         font.draw(batch, "|", 170, 320); 
 
                         MedicalProcess process = hospitalManager.getActiveProcessForBed(rightInputBedId.toUpperCase());
@@ -435,7 +436,6 @@ public class GameScreen extends ScreenAdapter {
                             
                             String timeStr = String.format("%.1f", Math.max(0, timeLeft));
                             
-                            // Pinta os que já passaram de verde, o atual de branco, os futuros de cinza
                             if (process != null && i < currentIdx) {
                                 batch.setColor(Color.GREEN);
                             } else if (process != null && i == currentIdx) {
@@ -497,7 +497,6 @@ public class GameScreen extends ScreenAdapter {
             else if (isTypingRightBed) { if (rightInputBedId.length() < 10) rightInputBedId += str; }
         };
 
-        // ENTER
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             if (isSearchingId) {
                 if (!searchInputId.isEmpty()) {
@@ -552,7 +551,6 @@ public class GameScreen extends ScreenAdapter {
             return;
         }
 
-        // BACKSPACE
         if (Gdx.input.isKeyJustPressed(Input.Keys.BACKSPACE)) {
             if (isTypingName && inputName.length() > 0) inputName = inputName.substring(0, inputName.length() - 1);
             else if (isTypingId && inputId.length() > 0) inputId = inputId.substring(0, inputId.length() - 1);
@@ -610,9 +608,11 @@ public class GameScreen extends ScreenAdapter {
         if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
             float patientX = (640 - patientTexture.getWidth()) / 2f;
             float patientY = 90;
+            
+            // --- NOVAS COORDENADAS DOS RETÂNGULOS DE CLIQUE ---
+            float idWidth = 200, idHeight = 50;
             float idX = patientX - 85; 
             float idY = patientY - 65;
-            float idWidth = 200, idHeight = 50;
             Rectangle idBounds = new Rectangle(idX, idY, idWidth, idHeight);
             
             float rectX = (640 - 300) / 2f;
@@ -635,8 +635,6 @@ public class GameScreen extends ScreenAdapter {
                 Rectangle orbOneBounds = new Rectangle(orbOneX, orbOneY, orbOneTexture.getWidth(), orbOneTexture.getHeight());
                 Rectangle orbTwoBounds = new Rectangle(orbTwoX, orbTwoY, orbTwoTexture.getWidth(), orbTwoTexture.getHeight());
                 Rectangle scrollBounds = new Rectangle(scrollX, scrollY, scrollTexture.getWidth(), scrollTexture.getHeight());
-                Rectangle greenBtnBounds = new Rectangle(greenBtnX, greenBtnY, greenButtonTexture.getWidth(), greenButtonTexture.getHeight());
-                Rectangle redBtnBounds = new Rectangle(redBtnX, redBtnY, redButtonTexture.getWidth(), redButtonTexture.getHeight());
                 Rectangle patientBounds = new Rectangle(patientX, patientY, patientTexture.getWidth(), patientTexture.getHeight());
                 
                 if (currentState == UIState.MAIN && isPatientWaiting && patientBounds.contains(mousePos.x, mousePos.y)) {
@@ -651,16 +649,12 @@ public class GameScreen extends ScreenAdapter {
                 UIState targetState = null;
                 if (scrollBounds.contains(mousePos.x, mousePos.y)) targetState = UIState.SCROLL;
                 else if (orbOneBounds.contains(mousePos.x, mousePos.y)) {
-                    targetState = UIState.RIGHT_ORB; // Esquerdo na tela = Direito no jogo (Hash Table)
+                    targetState = UIState.RIGHT_ORB;
                     rightInputBedId = "M1";
                 }
                 else if (orbTwoBounds.contains(mousePos.x, mousePos.y)) {
-                    targetState = UIState.LEFT_ORB; // Direito na tela = Esquerdo no jogo (Min Heap)
+                    targetState = UIState.LEFT_ORB;
                     leftOrbSnapshot = hospitalManager.getPatientQueueSnapshot();
-                }
-                else if (greenBtnBounds.contains(mousePos.x, mousePos.y)) targetState = UIState.HEAL_MINIGAME;
-                else if (redBtnBounds.contains(mousePos.x, mousePos.y)) {
-                    if (hospitalManager.removePatientFromBed("M1")) rightButtonBlinking = false;
                 }
 
                 if (targetState != null) {
@@ -676,7 +670,6 @@ public class GameScreen extends ScreenAdapter {
                 }
             }
 
-            // --- CLIQUE NOS INPUTS DO ORBE DIREITO E ESQUERDO ---
             if (currentState == UIState.LEFT_ORB) {
                 if (mousePos.x >= 270 && mousePos.x <= 370 && mousePos.y >= 55 && mousePos.y <= 80) {
                     isTypingBed = true;
@@ -751,8 +744,10 @@ public class GameScreen extends ScreenAdapter {
     public void dispose() {
         batch.dispose();
         groundTexture.dispose(); tableTexture.dispose(); orbOneTexture.dispose(); orbTwoTexture.dispose();
-        scrollTexture.dispose(); inkwellTexture.dispose(); greenButtonTexture.dispose(); redButtonTexture.dispose();
+        scrollTexture.dispose(); inkwellTexture.dispose();
         handTexture.dispose(); patientTexture.dispose();
+        speechBubbleTexture.dispose();
+        idCardTexture.dispose();
         if (whitePixel != null) whitePixel.dispose();
         font.dispose();
         Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);

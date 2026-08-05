@@ -69,12 +69,10 @@ public class HospitalManager {
         return beds.get(id);
     }
 
-    // --- NOVO: Retorna o processo médico ativo em uma determinada maca ---
     public MedicalProcess getActiveProcessForBed(String bedId) {
         int size = medicalProcesses.size();
         MedicalProcess foundProcess = null;
         
-        // Drena a fila inteira para procurar e depois reinsere
         for (int i = 0; i < size; i++) {
             MedicalProcess process = medicalProcesses.dequeue();
             if (process.getBed().getId().equals(bedId)) {
@@ -84,13 +82,11 @@ public class HospitalManager {
         }
         return foundProcess;
     }
-    // ----------------------------------------------------------------
 
     public boolean assignPatientToBed(Patient p, String bedId, float processTime) {
         Bed bed = beds.get(bedId);
         if (bed != null && !bed.isOccupied()) {
             bed.setPatient(p);
-            // Cria o processo com 6 estágios de 5s
             medicalProcesses.enqueue(new MedicalProcess(p, bed));
             System.out.println("[Manager] Paciente " + p.getName() + " associado a maca " + bedId);
             return true;
@@ -120,8 +116,8 @@ public class HospitalManager {
             if (process.isFinished()) {
                 System.out.println("[Manager] Processo médico concluído para: " + process.getPatient().getName());
                 processFinished = true;
-                // Não recolocamos na fila (o processo acabou)
-                process.getBed().setPatient(null); // Libera a maca automaticamente se quiser, ou você pode optar por não liberar (o botão direito pisca para liberar)
+                // --- LIBERAÇÃO AUTOMÁTICA DA MACA (Já que o botão vermelho foi removido) ---
+                process.getBed().setPatient(null);
             } else {
                 medicalProcesses.enqueue(process);
             }
