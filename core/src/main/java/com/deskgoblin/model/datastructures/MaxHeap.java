@@ -21,7 +21,7 @@ public class MaxHeap<T extends Comparable<T>> {
     }
 
     private void resize() {
-        System.out.println("[MaxHeap] resize: aumentando a capacidade do array.");
+        // System.out.println("[MaxHeap] resize: aumentando a capacidade do array.");
         Object[] newHeap = new Object[heap.length * 2];
         System.arraycopy(heap, 0, newHeap, 0, heap.length);
         heap = newHeap;
@@ -133,11 +133,11 @@ public class MaxHeap<T extends Comparable<T>> {
     @SuppressWarnings("unchecked")
     public T peekMax() {
         if (isEmpty()) {
-            System.out.println("[MaxHeap] peekMax: heap vazio.");
+            // System.out.println("[MaxHeap] peekMax: heap vazio.");
             return null;
         }
         T max = (T) heap[0];
-        System.out.println("[MaxHeap] peekMax: acessado máximo " + max);
+        // System.out.println("[MaxHeap] peekMax: acessado máximo " + max);
         return max;
     }
 
@@ -147,7 +147,7 @@ public class MaxHeap<T extends Comparable<T>> {
      * @return O tamanho do heap.
      */
     public int size() {
-        System.out.println("[MaxHeap] size: " + size);
+        // System.out.println("[MaxHeap] size: " + size);
         return size;
     }
 

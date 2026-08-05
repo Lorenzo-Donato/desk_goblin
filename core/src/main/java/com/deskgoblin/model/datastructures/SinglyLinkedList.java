@@ -33,7 +33,7 @@ public class SinglyLinkedList<T> {
         this.head = null;
         this.tail = null;
         this.size = 0;
-        System.out.println("[LinkedList] Lista criada.");
+        // System.out.println("[LinkedList] Lista criada.");
     }
 
     // --- MÉTODO ADICIONADO PARA RESOLVER O ERRO DO GAME SCREEN ---
@@ -56,7 +56,7 @@ public class SinglyLinkedList<T> {
             head = newNode;
         }
         size++;
-        System.out.println("[LinkedList] pushFront: adicionado " + data + " no início.");
+        // System.out.println("[LinkedList] pushFront: adicionado " + data + " no início.");
     }
 
     /**
@@ -73,7 +73,7 @@ public class SinglyLinkedList<T> {
             tail = newNode;
         }
         size++;
-        System.out.println("[LinkedList] pushBack: adicionado " + data + " no final.");
+        // System.out.println("[LinkedList] pushBack: adicionado " + data + " no final.");
     }
 
     /**
@@ -83,7 +83,7 @@ public class SinglyLinkedList<T> {
      */
     public T popFront() {
         if (isEmpty()) {
-            System.out.println("[LinkedList] popFront: lista vazia.");
+            // System.out.println("[LinkedList] popFront: lista vazia.");
             return null;
         }
         T data = head.data;
@@ -92,7 +92,7 @@ public class SinglyLinkedList<T> {
         if (isEmpty()) {
             tail = null;
         }
-        System.out.println("[LinkedList] popFront: removido " + data + " do início.");
+        // System.out.println("[LinkedList] popFront: removido " + data + " do início.");
         return data;
     }
 
@@ -103,7 +103,7 @@ public class SinglyLinkedList<T> {
      */
     public T popBack() {
         if (isEmpty()) {
-            System.out.println("[LinkedList] popBack: lista vazia.");
+            // System.out.println("[LinkedList] popBack: lista vazia.");
             return null;
         }
         T data = tail.data;
@@ -118,7 +118,7 @@ public class SinglyLinkedList<T> {
             tail = current;
         }
         size--;
-        System.out.println("[LinkedList] popBack: removido " + data + " do final.");
+        // System.out.println("[LinkedList] popBack: removido " + data + " do final.");
         return data;
     }
 
@@ -129,10 +129,10 @@ public class SinglyLinkedList<T> {
      */
     public T peekFront() {
         if (isEmpty()) {
-            System.out.println("[LinkedList] peekFront: lista vazia.");
+            // System.out.println("[LinkedList] peekFront: lista vazia.");
             return null;
         }
-        System.out.println("[LinkedList] peekFront: acessado " + head.data);
+        // System.out.println("[LinkedList] peekFront: acessado " + head.data);
         return head.data;
     }
 
@@ -143,10 +143,10 @@ public class SinglyLinkedList<T> {
      */
     public T peekBack() {
         if (isEmpty()) {
-            System.out.println("[LinkedList] peekBack: lista vazia.");
+            // System.out.println("[LinkedList] peekBack: lista vazia.");
             return null;
         }
-        System.out.println("[LinkedList] peekBack: acessado " + tail.data);
+        // System.out.println("[LinkedList] peekBack: acessado " + tail.data);
         return tail.data;
     }
 
@@ -156,7 +156,7 @@ public class SinglyLinkedList<T> {
      * @return O número de elementos na lista.
      */
     public int size() {
-        System.out.println("[LinkedList] size: " + size);
+        // System.out.println("[LinkedList] size: " + size);
         return size;
     }
 
@@ -179,12 +179,12 @@ public class SinglyLinkedList<T> {
         Node<T> current = head;
         while (current != null) {
             if (current.data.equals(data)) {
-                System.out.println("[LinkedList] contains: elemento " + data + " encontrado.");
+                // System.out.println("[LinkedList] contains: elemento " + data + " encontrado.");
                 return true;
             }
             current = current.next;
         }
-        System.out.println("[LinkedList] contains: elemento " + data + " não encontrado.");
+        // System.out.println("[LinkedList] contains: elemento " + data + " não encontrado.");
         return false;
     }
 

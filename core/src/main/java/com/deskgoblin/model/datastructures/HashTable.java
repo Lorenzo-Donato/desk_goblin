@@ -52,7 +52,7 @@ public class HashTable<K, V> {
 
     @SuppressWarnings("unchecked")
     private void resize() {
-        System.out.println("[HashTable] resize: capacidade excedida, realizando rehash...");
+        // System.out.println("[HashTable] resize: capacidade excedida, realizando rehash...");
         int oldCapacity = capacity;
         capacity *= 2;
         SinglyLinkedList<Entry<K, V>>[] oldTable = table;
@@ -70,7 +70,7 @@ public class HashTable<K, V> {
                 putWithoutResizeCheck(entry.key, entry.value);
             }
         }
-        System.out.println("[HashTable] resize: rehash concluído. Nova capacidade: " + capacity);
+        // System.out.println("[HashTable] resize: rehash concluído. Nova capacidade: " + capacity);
     }
 
     private void putWithoutResizeCheck(K key, V value) {
@@ -126,7 +126,7 @@ public class HashTable<K, V> {
      * @return O valor associado, ou null se não for encontrado.
      */
     public V get(K key) {
-        System.out.println("[HashTable] get: buscando chave " + key);
+        // System.out.println("[HashTable] get: buscando chave " + key);
         int index = hash(key);
         SinglyLinkedList<Entry<K, V>> bucket = table[index];
         SinglyLinkedList<Entry<K, V>> temp = new SinglyLinkedList<>();
@@ -146,9 +146,9 @@ public class HashTable<K, V> {
         }
 
         if (result != null) {
-            System.out.println("[HashTable] get: chave " + key + " encontrada.");
+            // System.out.println("[HashTable] get: chave " + key + " encontrada.");
         } else {
-            System.out.println("[HashTable] get: chave " + key + " não encontrada.");
+            // System.out.println("[HashTable] get: chave " + key + " não encontrada.");
         }
 
         return result;
@@ -184,7 +184,7 @@ public class HashTable<K, V> {
         if (removed) {
             System.out.println("[HashTable] remove: chave " + key + " removida.");
         } else {
-            System.out.println("[HashTable] remove: chave " + key + " não encontrada.");
+            // System.out.println("[HashTable] remove: chave " + key + " não encontrada.");
         }
     }
 
@@ -204,7 +204,7 @@ public class HashTable<K, V> {
      * @return O tamanho da tabela.
      */
     public int size() {
-        System.out.println("[HashTable] size: " + size);
+        // System.out.println("[HashTable] size: " + size);
         return size;
     }
 
@@ -223,7 +223,7 @@ public class HashTable<K, V> {
      * @return SinglyLinkedList contendo as chaves.
      */
     public SinglyLinkedList<K> keys() {
-        System.out.println("[HashTable] keys: coletando todas as chaves.");
+        // System.out.println("[HashTable] keys: coletando todas as chaves.");
         SinglyLinkedList<K> allKeys = new SinglyLinkedList<>();
         
         for (int i = 0; i < capacity; i++) {

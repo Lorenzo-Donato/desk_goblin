@@ -753,12 +753,12 @@ public class GameScreen extends ScreenAdapter {
 
             if (currentState == UIState.SCROLL) {
                 if (mousePos.x >= 220 && mousePos.x <= 440) {
-                    if (mousePos.y >= 270 && mousePos.y <= 290) {
+                    if (mousePos.y >= 270 && mousePos.y <= 310) {
                         currentState = UIState.SCROLL_REGISTER;
                         inputName = ""; inputId = ""; inputSeverity = 0;
                         isTypingName = false; isTypingId = false;
                         cursorTimer = 0f;
-                    } else if (mousePos.y >= 240 && mousePos.y <= 260) {
+                    } else if (mousePos.y >= 240 && mousePos.y <= 270) {
                         currentState = UIState.SCROLL_VIEW;
                         searchResult = ""; searchInputId = ""; isSearchingId = false;
                     }
@@ -787,11 +787,12 @@ public class GameScreen extends ScreenAdapter {
                 }
             } else if (currentState == UIState.SCROLL_VIEW) {
                 if (isSearchingId) {
-                    if (!(mousePos.x >= 330 && mousePos.x <= 480 && mousePos.y >= 25 && mousePos.y <= 45)) {
+                    if (!(mousePos.x >= 170 && mousePos.x <= 480 && mousePos.y >= 20 && mousePos.y <= 60)) {
                         isSearchingId = false; searchInputId = "";
                     }
-                } else if (mousePos.x >= 170 && mousePos.x <= 320 && mousePos.y >= 25 && mousePos.y <= 40) {
+                } else if (mousePos.x >= 170 && mousePos.x <= 480 && mousePos.y >= 20 && mousePos.y <= 60) {
                     isSearchingId = true; searchInputId = ""; searchResult = "";
+                    isTypingName = false; isTypingId = false; isTypingBed = false; isTypingRightBed = false;
                     cursorTimer = 0f;
                 }
             }
