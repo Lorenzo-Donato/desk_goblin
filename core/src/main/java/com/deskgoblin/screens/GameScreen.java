@@ -34,6 +34,9 @@ public class GameScreen extends ScreenAdapter {
 
     private Texture groundTexture, tableTexture, orbOneTexture, orbTwoTexture, scrollTexture, 
                     inkwellTexture, handTexture, patientTexture, speechBubbleTexture, idCardTexture;
+    private Texture bgTableTex, vacantBedTex, occupiedBedTex, patientQueueBgTex, patientQueueTex, redOrbTex;
+    private Texture brownBgTex, bigScrollTex;
+    private boolean showSpeechBubble = true;
     
     private BitmapFont font;
     private Vector3 mousePos;
@@ -100,6 +103,14 @@ public class GameScreen extends ScreenAdapter {
         patientTexture = new Texture("patient.png");
         speechBubbleTexture = new Texture("speechBalloon.png");
         idCardTexture = new Texture("id.png");
+        bgTableTex = new Texture("bg_table.png");
+        vacantBedTex = new Texture("vacant_bed.png");
+        occupiedBedTex = new Texture("occupied_bed.png");
+        patientQueueBgTex = new Texture("patient_queue_bg.png");
+        patientQueueTex = new Texture("patient_queue.png");
+        redOrbTex = new Texture("red_orb.png");
+        brownBgTex = new Texture("brown_bg.png");
+        bigScrollTex = new Texture("big_scroll.png");
         
         mousePos = new Vector3();
 
@@ -151,6 +162,8 @@ public class GameScreen extends ScreenAdapter {
         ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1f);
         viewport.apply();
         camera.update();
+        
+        hospitalManager.updateMedicalProcesses(delta);
         batch.setProjectionMatrix(camera.combined);
 
         batch.begin();
@@ -186,11 +199,11 @@ public class GameScreen extends ScreenAdapter {
         batch.draw(scrollTexture, scrollX, scrollY);
         batch.draw(inkwellTexture, inkwellX, inkwellY);
 
-        // --- CAMADAS CINZAS ---
-        if (currentState == UIState.SCROLL_REGISTER || currentState == UIState.SCROLL_VIEW || currentState == UIState.LEFT_ORB || currentState == UIState.RIGHT_ORB) {
-            batch.setColor(0.3f, 0.3f, 0.3f, 0.9f);
-            batch.draw(getWhitePixelTexture(), 0, 0, 640, 360);
-            batch.setColor(Color.WHITE);
+        // --- FUNDO SCROLL ---
+        if (currentState == UIState.SCROLL || currentState == UIState.SCROLL_REGISTER || currentState == UIState.SCROLL_VIEW) {
+            batch.draw(brownBgTex, 0, 0, 640, 360);
+            float scrollBgX = (640 - 465) / 2f;
+            batch.draw(bigScrollTex, scrollBgX, 0, 465, 360);
         }
         
         drawOverlays(delta);
@@ -217,7 +230,7 @@ public class GameScreen extends ScreenAdapter {
         float origScaleX, origScaleY;
 
         // 1. BALÃO DE FALA (Alargado para evitar que o texto saia)
-        if (idCardOnTable && currentPatient != null) {
+        if (idCardOnTable && currentPatient != null && showSpeechBubble) {
             if (currentState != UIState.SCROLL_REGISTER && currentState != UIState.SCROLL_VIEW) {
                 String speech = currentSpeechBubbleText;
                 
@@ -288,45 +301,45 @@ public class GameScreen extends ScreenAdapter {
 
         switch (currentState) {
             case SCROLL:
-                font.draw(batch, "--- PERGAMINHO (AVL Tree) ---", 160, 320);
-                font.draw(batch, "1. Cadastrar Paciente", 180, 290);
-                font.draw(batch, "2. Ver Pacientes", 180, 260);
+                font.draw(batch, "--- PERGAMINHO (AVL Tree) ---", 200, 320);
+                font.draw(batch, "1. Cadastrar Paciente", 220, 290);
+                font.draw(batch, "2. Ver Pacientes", 220, 260);
                 break;
             case SCROLL_REGISTER:
-                font.draw(batch, "--- CADASTRO ---", 230, 330);
+                font.draw(batch, "--- CADASTRO ---", 270, 330);
 
                 cursorTimer += delta;
                 boolean cursorVisible = (int)(cursorTimer * 2) % 2 == 0;
 
                 batch.setColor(Color.BLACK);
-                batch.draw(getWhitePixelTexture(), 180, 280, 280, 30);
+                batch.draw(getWhitePixelTexture(), 220, 280, 280, 30);
                 batch.setColor(Color.WHITE); 
-                font.draw(batch, "Nome: ", 185, 300);
-                font.draw(batch, inputName, 240, 300);
+                font.draw(batch, "Nome: ", 225, 300);
+                font.draw(batch, inputName, 280, 300);
                 if (isTypingName && cursorVisible) {
                     layout.setText(font, inputName);
-                    font.draw(batch, "_", 240 + layout.width, 300);
+                    font.draw(batch, "_", 280 + layout.width, 300);
                 }
                 if (!isTypingName && inputName.isEmpty()) {
-                    font.draw(batch, "[ Clique aqui ]", 240, 300);
+                    font.draw(batch, "[ Clique aqui ]", 280, 300);
                 }
 
                 batch.setColor(Color.BLACK);
-                batch.draw(getWhitePixelTexture(), 180, 240, 280, 30);
+                batch.draw(getWhitePixelTexture(), 220, 240, 280, 30);
                 batch.setColor(Color.WHITE); 
-                font.draw(batch, "ID: ", 185, 260);
-                font.draw(batch, inputId, 225, 260);
+                font.draw(batch, "ID: ", 225, 260);
+                font.draw(batch, inputId, 265, 260);
                 if (isTypingId && cursorVisible) {
                     layout.setText(font, inputId);
-                    font.draw(batch, "_", 225 + layout.width, 260);
+                    font.draw(batch, "_", 265 + layout.width, 260);
                 }
                 if (!isTypingId && inputId.isEmpty()) {
-                    font.draw(batch, "[ Clique aqui ]", 225, 260);
+                    font.draw(batch, "[ Clique aqui ]", 265, 260);
                 }
 
-                font.draw(batch, "Gravidade:", 180, 215);
+                font.draw(batch, "Gravidade:", 220, 215);
                 for (int i = 0; i < 6; i++) {
-                    int btnX = 180 + i * 32;
+                    int btnX = 220 + i * 32;
                     if (inputSeverity == i + 1) batch.setColor(Color.GREEN);
                     else batch.setColor(Color.BLACK);
                     batch.draw(getWhitePixelTexture(), btnX, 145, 28, 28);
@@ -336,99 +349,126 @@ public class GameScreen extends ScreenAdapter {
                 }
 
                 batch.setColor(Color.BLACK);
-                batch.draw(getWhitePixelTexture(), 180, 90, 160, 30);
+                batch.draw(getWhitePixelTexture(), 220, 90, 160, 30);
                 batch.setColor(Color.WHITE); 
-                font.draw(batch, "[ CONFIRMAR ]", 190, 112);
+                font.draw(batch, "[ CONFIRMAR ]", 230, 112);
                 batch.setColor(Color.WHITE); 
                 break;
             case SCROLL_VIEW:
-                font.draw(batch, "--- PACIENTES CADASTRADOS (AVL) ---", 100, 320);
+                font.draw(batch, "--- PACIENTES CADASTRADOS (AVL) ---", 170, 320);
                 SinglyLinkedList<Patient> list = hospitalManager.getAllPatients();
                 int y = 290;
                 while (!list.isEmpty() && y > 50) {
                     Patient p = list.popFront();
-                    font.draw(batch, p.getName() + " (ID: " + p.getId() + ", Sev: " + p.getSeverityScore() + ")", 100, y);
+                    font.draw(batch, p.getName() + " (ID: " + p.getId() + ", Sev: " + p.getSeverityScore() + ")", 170, y);
                     y -= 20;
                 }
-                font.draw(batch, "[ Buscar por ID ]", 100, 40);
-                font.draw(batch, searchResult, 100, 20);
+                font.draw(batch, "[ Buscar por ID ]", 170, 40);
+                font.draw(batch, searchResult, 170, 20);
                 if (isSearchingId) {
                     cursorTimer += delta;
                     boolean cursorSearchVisible = (int)(cursorTimer * 2) % 2 == 0;
                     batch.setColor(Color.BLACK);
-                    batch.draw(getWhitePixelTexture(), 260, 25, 150, 20);
+                    batch.draw(getWhitePixelTexture(), 330, 25, 150, 20);
                     batch.setColor(Color.WHITE); 
-                    font.draw(batch, searchInputId, 270, 40);
+                    font.draw(batch, searchInputId, 340, 40);
                     if (cursorSearchVisible) {
                         layout.setText(font, searchInputId);
-                        font.draw(batch, "_", 270 + layout.width, 40);
+                        font.draw(batch, "_", 340 + layout.width, 40);
                     }
                 }
                 break;
             
             case LEFT_ORB:
-                font.draw(batch, "--- ORBE ESQUERDO (Min Heap) ---", 160, 320);
+                batch.draw(patientQueueBgTex, 0, 0, 640, 360);
+                float orbX = (640 - 360) / 2f;
+                float orbY = (360 - 274) / 2f;
+                batch.draw(redOrbTex, orbX, orbY, 360, 274);
                 
-                int yPos = 290;
-                int count = 0;
+                int queueSize = 0;
+                SinglyLinkedList.Node<Patient> node = null;
                 if (leftOrbSnapshot != null) {
-                    SinglyLinkedList.Node<Patient> currentNode = leftOrbSnapshot.getHead(); 
-                    while (currentNode != null && yPos > 120 && count < 10) {
-                        Patient p = currentNode.data;
-                        font.draw(batch, "ID: " + p.getId() + " | " + p.getName() + " (Sev: " + p.getSeverityScore() + ")", 100, yPos);
-                        yPos -= 20;
-                        count++;
-                        currentNode = currentNode.next;
+                    node = leftOrbSnapshot.getHead();
+                    SinglyLinkedList.Node<Patient> temp = node;
+                    while(temp != null) { queueSize++; temp = temp.next; }
+                }
+                
+                int displayCount = Math.min(queueSize, 5);
+                float spacing = 10f;
+                float totalWidth = displayCount * 33f + Math.max(0, displayCount - 1) * spacing;
+                float startX = orbX + (360f - totalWidth) / 2f;
+                float pY = orbY + (274f - 79f) / 2f;
+                
+                for(int i = 0; i < displayCount; i++) {
+                    batch.draw(patientQueueTex, startX + i * (33f + spacing), pY, 33, 79);
+                    if (node != null) {
+                        font.draw(batch, "S:" + node.data.getSeverityScore(), startX + i * (33f + spacing) + 4, pY - 5);
+                        node = node.next;
                     }
                 }
-
+                if (queueSize > 5) {
+                    font.draw(batch, "...", startX + displayCount * (33f + spacing) + 10, pY + 40);
+                }
+                
                 Patient nextPat = hospitalManager.peekNextPatient();
-                font.draw(batch, "Proximo: " + (nextPat != null ? nextPat.getName() : "Nenhum"), 100, 100);
-                font.draw(batch, "Digite a Maca (M1-M12):", 100, 75);
+                font.draw(batch, "Proximo: " + (nextPat != null ? nextPat.getName() : "Nenhum"), 100, 70);
+                font.draw(batch, "Digite a Maca (M1-M12):", 100, 45);
                 
                 batch.setColor(Color.BLACK);
-                batch.draw(getWhitePixelTexture(), 270, 55, 100, 25);
+                batch.draw(getWhitePixelTexture(), 270, 25, 100, 25);
                 batch.setColor(Color.WHITE); 
-                font.draw(batch, inputBedId, 280, 73);
+                font.draw(batch, inputBedId, 280, 43);
                 
                 boolean cursorBedVisible = (int)(cursorTimer * 2) % 2 == 0;
                 if (isTypingBed && cursorBedVisible) {
                     layout.setText(font, inputBedId);
-                    font.draw(batch, "_", 280 + layout.width, 73);
+                    font.draw(batch, "_", 280 + layout.width, 43);
                 }
                 
-                font.draw(batch, bedAssignmentResult, 100, 35);
+                font.draw(batch, bedAssignmentResult, 400, 45);
                 break;
 
             case RIGHT_ORB:
-                font.draw(batch, "--- ORBE DIREITO (Hash Table) ---", 180, 330);
+                float tableX = (640 - 592) / 2f;
+                float tableY = (360 - 320) / 2f;
+                batch.draw(bgTableTex, tableX, tableY, 592, 320);
+                
+                float bedX = tableX + 14;
+                float bedY = tableY + (320 - 287) / 2f;
 
-                font.draw(batch, "Digite a Maca:", 30, 315);
+                Bed rightBed = hospitalManager.getBed(rightInputBedId.toUpperCase());
+                boolean isOccupied = rightBed != null && rightBed.isOccupied();
+                
+                if (isOccupied) {
+                    batch.draw(occupiedBedTex, bedX, bedY, 287, 287);
+                } else {
+                    batch.draw(vacantBedTex, bedX, bedY, 287, 287);
+                }
+                
+                float rightPaneX = tableX + 320;
+                
+                font.draw(batch, "Maca:", rightPaneX, 315);
                 
                 batch.setColor(Color.BLACK);
-                batch.draw(getWhitePixelTexture(), 30, 275, 100, 25);
+                batch.draw(getWhitePixelTexture(), rightPaneX + 45, 297, 60, 22);
                 batch.setColor(Color.WHITE); 
-                font.draw(batch, rightInputBedId, 40, 293);
+                font.draw(batch, rightInputBedId, rightPaneX + 50, 314);
                 
                 boolean cursorRightBedVisible = (int)(cursorTimer * 2) % 2 == 0;
                 if (isTypingRightBed && cursorRightBedVisible) {
                     layout.setText(font, rightInputBedId);
-                    font.draw(batch, "_", 40 + layout.width, 293);
+                    font.draw(batch, "_", rightPaneX + 50 + layout.width, 314);
                 }
 
-                Bed rightBed = hospitalManager.getBed(rightInputBedId.toUpperCase());
                 if (rightBed != null) {
-                    if (rightBed.isOccupied()) {
+                    if (isOccupied) {
                         Patient p = rightBed.getPatient();
-                        font.draw(batch, "Status: OCUPADA", 30, 250);
-                        font.draw(batch, "Nome: " + p.getName(), 30, 225);
-                        font.draw(batch, "Gravidade: " + p.getSeverityScore(), 30, 200);
-                        
-                        font.draw(batch, "|", 170, 320); 
+                        font.draw(batch, "Paciente: " + p.getName(), rightPaneX, 275);
+                        font.draw(batch, "Gravidade: " + p.getSeverityScore(), rightPaneX, 255);
 
                         MedicalProcess process = hospitalManager.getActiveProcessForBed(rightInputBedId.toUpperCase());
                         
-                        int lineY = 300;
+                        int lineY = 225;
                         for (int i = 0; i < 6; i++) {
                             String name = process != null ? process.getStageName(i) : "Procedimento " + (i+1);
                             float timeLeft = process != null ? process.getStageTimer(i) : 0;
@@ -443,18 +483,18 @@ public class GameScreen extends ScreenAdapter {
                             } else {
                                 batch.setColor(Color.LIGHT_GRAY);
                             }
-                            font.draw(batch, (i+1) + "/6 - " + name + " (" + timeStr + "s)", 200, lineY);
+                            font.draw(batch, (i+1) + "/6 - " + name + " (" + timeStr + "s)", rightPaneX, lineY);
                             batch.setColor(Color.WHITE);
                             lineY -= 20;
                         }
-                        font.draw(batch, "Tempo total restante: " + String.format("%.1f", process != null ? process.getTotalTimeRemaining() : 0) + "s", 200, lineY);
+                        font.draw(batch, "Tempo restante: " + String.format("%.1f", process != null ? process.getTotalTimeRemaining() : 0) + "s", rightPaneX, lineY - 10);
 
                     } else {
-                        font.draw(batch, "Status: LIVRE", 30, 250);
-                        font.draw(batch, "(Sem paciente)", 30, 220);
+                        font.draw(batch, "Status: LIVRE", rightPaneX, 275);
+                        font.draw(batch, "(Sem paciente)", rightPaneX, 255);
                     }
                 } else {
-                    font.draw(batch, "Maca invalida!", 30, 250);
+                    font.draw(batch, "Maca invalida!", rightPaneX, 275);
                 }
                 break;
         }
@@ -643,6 +683,7 @@ public class GameScreen extends ScreenAdapter {
                     idCardOnTable = true;     
                     currentState = UIState.ID_ON_COUNTER;
                     currentSpeechBubbleText = getRandomPhrase(currentPatient.getSeverityScore());
+                    showSpeechBubble = true;
                     return;
                 }
 
@@ -664,14 +705,33 @@ public class GameScreen extends ScreenAdapter {
             }
 
             if (currentState == UIState.ID_ON_COUNTER) {
-                if (!new Rectangle(patientX, patientY, patientTexture.getWidth(), patientTexture.getHeight()).contains(mousePos.x, mousePos.y) 
-                    && !idBounds.contains(mousePos.x, mousePos.y)) {
+                float bubbleWidth = 280, bubbleHeight = 45;
+                float bubbleX = patientX + 40; 
+                float bubbleY = patientY + patientTexture.getHeight() + 5;
+                Rectangle bubbleBounds = new Rectangle(bubbleX, bubbleY, bubbleWidth, bubbleHeight);
+                Rectangle patientBounds = new Rectangle(patientX, patientY, patientTexture.getWidth(), patientTexture.getHeight());
+                
+                if (showSpeechBubble && bubbleBounds.contains(mousePos.x, mousePos.y)) {
+                    showSpeechBubble = false;
+                    return;
+                }
+                if (!showSpeechBubble && patientBounds.contains(mousePos.x, mousePos.y)) {
+                    showSpeechBubble = true;
+                    currentSpeechBubbleText = getRandomPhrase(currentPatient.getSeverityScore());
+                    return;
+                }
+
+                if (!patientBounds.contains(mousePos.x, mousePos.y) 
+                    && !idBounds.contains(mousePos.x, mousePos.y)
+                    && (!showSpeechBubble || !bubbleBounds.contains(mousePos.x, mousePos.y))) {
                     currentState = UIState.MAIN; 
+                    idCardOnTable = false;
+                    isPatientWaiting = true;
                 }
             }
 
             if (currentState == UIState.LEFT_ORB) {
-                if (mousePos.x >= 270 && mousePos.x <= 370 && mousePos.y >= 55 && mousePos.y <= 80) {
+                if (mousePos.x >= 270 && mousePos.x <= 370 && mousePos.y >= 25 && mousePos.y <= 50) {
                     isTypingBed = true;
                     isTypingName = false; isTypingId = false; isSearchingId = false; isTypingRightBed = false;
                     cursorTimer = 0f;
@@ -680,7 +740,7 @@ public class GameScreen extends ScreenAdapter {
             }
             
             if (currentState == UIState.RIGHT_ORB) {
-                if (mousePos.x >= 30 && mousePos.x <= 130 && mousePos.y >= 275 && mousePos.y <= 300) {
+                if (mousePos.x >= 389 && mousePos.x <= 449 && mousePos.y >= 297 && mousePos.y <= 319) {
                     isTypingRightBed = true;
                     isTypingName = false; isTypingId = false; isSearchingId = false; isTypingBed = false;
                     cursorTimer = 0f;
@@ -689,7 +749,7 @@ public class GameScreen extends ScreenAdapter {
             }
 
             if (currentState == UIState.SCROLL) {
-                if (mousePos.x >= 180 && mousePos.x <= 400) {
+                if (mousePos.x >= 220 && mousePos.x <= 440) {
                     if (mousePos.y >= 270 && mousePos.y <= 290) {
                         currentState = UIState.SCROLL_REGISTER;
                         inputName = ""; inputId = ""; inputSeverity = 0;
@@ -701,18 +761,18 @@ public class GameScreen extends ScreenAdapter {
                     }
                 }
             } else if (currentState == UIState.SCROLL_REGISTER) {
-                if (mousePos.x >= 100 && mousePos.x <= 540 && mousePos.y >= 270 && mousePos.y <= 330) {
+                if (mousePos.x >= 140 && mousePos.x <= 580 && mousePos.y >= 270 && mousePos.y <= 330) {
                     isTypingName = true; isTypingId = false; cursorTimer = 0f; return;
-                } else if (mousePos.x >= 100 && mousePos.x <= 540 && mousePos.y >= 230 && mousePos.y <= 290) {
+                } else if (mousePos.x >= 140 && mousePos.x <= 580 && mousePos.y >= 230 && mousePos.y <= 290) {
                     isTypingId = true; isTypingName = false; cursorTimer = 0f; return;
                 }
                 for (int i = 0; i < 6; i++) {
-                    int btnX = 180 + i * 32;
+                    int btnX = 220 + i * 32;
                     if (mousePos.x >= btnX && mousePos.x <= btnX + 28 && mousePos.y >= 145 && mousePos.y <= 173) {
                         inputSeverity = i + 1; return;
                     }
                 }
-                if (mousePos.x >= 180 && mousePos.x <= 340 && mousePos.y >= 90 && mousePos.y <= 120) {
+                if (mousePos.x >= 220 && mousePos.x <= 380 && mousePos.y >= 90 && mousePos.y <= 120) {
                     if (!inputName.isEmpty() && !inputId.isEmpty() && inputSeverity > 0) {
                         hospitalManager.registerPatient(new Patient(inputId, inputName, "Diagnosticado", inputSeverity));
                         leftOrbSnapshot = hospitalManager.getPatientQueueSnapshot();
@@ -724,10 +784,10 @@ public class GameScreen extends ScreenAdapter {
                 }
             } else if (currentState == UIState.SCROLL_VIEW) {
                 if (isSearchingId) {
-                    if (!(mousePos.x >= 260 && mousePos.x <= 410 && mousePos.y >= 25 && mousePos.y <= 45)) {
+                    if (!(mousePos.x >= 330 && mousePos.x <= 480 && mousePos.y >= 25 && mousePos.y <= 45)) {
                         isSearchingId = false; searchInputId = "";
                     }
-                } else if (mousePos.x >= 100 && mousePos.x <= 250 && mousePos.y >= 25 && mousePos.y <= 40) {
+                } else if (mousePos.x >= 170 && mousePos.x <= 320 && mousePos.y >= 25 && mousePos.y <= 40) {
                     isSearchingId = true; searchInputId = ""; searchResult = "";
                     cursorTimer = 0f;
                 }
@@ -748,6 +808,14 @@ public class GameScreen extends ScreenAdapter {
         handTexture.dispose(); patientTexture.dispose();
         speechBubbleTexture.dispose();
         idCardTexture.dispose();
+        bgTableTex.dispose();
+        vacantBedTex.dispose();
+        occupiedBedTex.dispose();
+        patientQueueBgTex.dispose();
+        patientQueueTex.dispose();
+        redOrbTex.dispose();
+        brownBgTex.dispose();
+        bigScrollTex.dispose();
         if (whitePixel != null) whitePixel.dispose();
         font.dispose();
         Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);

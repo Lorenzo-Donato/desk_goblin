@@ -6,13 +6,13 @@ import com.deskgoblin.model.entities.*;
 public class HospitalManager {
     
     private AVLTree<String, Patient> patientRecords;
-    private MinHeap<Patient> patientQueue;
+    private SinglyLinkedList<Patient> patientQueue;
     private HashTable<String, Bed> beds;
     private QueueWithTwoStacks<MedicalProcess> medicalProcesses;
 
     public HospitalManager() {
         patientRecords = new AVLTree<>();
-        patientQueue = new MinHeap<>();
+        patientQueue = new SinglyLinkedList<>();
         beds = new HashTable<>();
         medicalProcesses = new QueueWithTwoStacks<>();
         
@@ -31,26 +31,22 @@ public class HospitalManager {
 
     public SinglyLinkedList<Patient> getPatientQueueSnapshot() {
         SinglyLinkedList<Patient> result = new SinglyLinkedList<>();
-        SinglyLinkedList<Patient> temp = new SinglyLinkedList<>();
-        while (patientQueue.size() > 0) {
-            Patient p = patientQueue.extractMin();
-            temp.pushBack(p);
-            result.pushBack(p);
-        }
-        while (!temp.isEmpty()) {
-            patientQueue.insert(temp.popFront());
+        SinglyLinkedList.Node<Patient> current = patientQueue.getHead();
+        while (current != null) {
+            result.pushBack(current.data);
+            current = current.next;
         }
         return result;
     }
 
     public void addPatientToQueue(Patient p) {
-        patientQueue.insert(p);
+        patientQueue.pushBack(p);
     }
 
     public void registerPatient(Patient p) {
         patientRecords.insert(p.getId(), p);
-        patientQueue.insert(p);
-        System.out.println("[Manager] Paciente registrado na AVL e adicionado ao MinHeap: " + p.getName());
+        patientQueue.pushBack(p);
+        System.out.println("[Manager] Paciente registrado na AVL e adicionado à fila: " + p.getName());
     }
 
     public Patient getPatientRecord(String id) {
@@ -58,11 +54,11 @@ public class HospitalManager {
     }
 
     public Patient peekNextPatient() {
-        return patientQueue.peekMin();
+        return patientQueue.peekFront();
     }
 
     public Patient popNextPatient() {
-        return patientQueue.extractMin();
+        return patientQueue.popFront();
     }
 
     public Bed getBed(String id) {
