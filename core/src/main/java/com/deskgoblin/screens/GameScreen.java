@@ -229,9 +229,9 @@ public class GameScreen extends ScreenAdapter {
         GlyphLayout layout = new GlyphLayout();
         float origScaleX, origScaleY;
 
-        // 1. BALÃO DE FALA (Alargado para evitar que o texto saia)
-        if (idCardOnTable && currentPatient != null && showSpeechBubble) {
-            if (currentState != UIState.SCROLL_REGISTER && currentState != UIState.SCROLL_VIEW) {
+        // 1. BALÃO DE FALA e CARTÃO DE ID
+        if (idCardOnTable && currentPatient != null && (currentState == UIState.MAIN || currentState == UIState.ID_ON_COUNTER)) {
+            if (showSpeechBubble) {
                 String speech = currentSpeechBubbleText;
                 
                 float bubbleWidth = 280, bubbleHeight = 45;
@@ -273,7 +273,7 @@ public class GameScreen extends ScreenAdapter {
         }
 
         // 3. ZOOM POP-UP (Voltando ao tamanho original de 300x80, layout corrigido)
-        if (isZoomPopupOpen && currentPatient != null) {
+        if (isZoomPopupOpen && currentPatient != null && (currentState == UIState.MAIN || currentState == UIState.ID_ON_COUNTER)) {
             float rectX = (640 - 300) / 2f;
             float rectY = 180;
             float rectWidth = 300, rectHeight = 80;
@@ -433,7 +433,7 @@ public class GameScreen extends ScreenAdapter {
                 float tableY = (360 - 320) / 2f;
                 batch.draw(bgTableTex, tableX, tableY, 592, 320);
                 
-                float bedX = tableX + 14;
+                float bedX = tableX + 17;
                 float bedY = tableY + (320 - 287) / 2f;
 
                 Bed rightBed = hospitalManager.getBed(rightInputBedId.toUpperCase());
@@ -662,7 +662,10 @@ public class GameScreen extends ScreenAdapter {
 
             if (isZoomPopupOpen) {
                 if (popupBounds.contains(mousePos.x, mousePos.y)) return; 
-                else isZoomPopupOpen = false;
+                else {
+                    isZoomPopupOpen = false;
+                    return;
+                }
             }
 
             if (!isZoomPopupOpen && idCardOnTable && currentPatient != null && idBounds.contains(mousePos.x, mousePos.y)) {
