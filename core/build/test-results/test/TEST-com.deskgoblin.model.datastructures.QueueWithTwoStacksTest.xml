@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.deskgoblin.model.datastructures.QueueWithTwoStacksTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-08-05T03:01:42" hostname="DESKTOP-FE9UO8M" time="0.007">
+  <properties/>
+  <testcase name="testQueueOrderIntegrity()" classname="com.deskgoblin.model.datastructures.QueueWithTwoStacksTest" time="0.0"/>
+  <testcase name="testSize()" classname="com.deskgoblin.model.datastructures.QueueWithTwoStacksTest" time="0.0"/>
+  <testcase name="testToString()" classname="com.deskgoblin.model.datastructures.QueueWithTwoStacksTest" time="0.0"/>
+  <testcase name="testMultipleInterleavedOps()" classname="com.deskgoblin.model.datastructures.QueueWithTwoStacksTest" time="0.0"/>
+  <testcase name="testTransferMechanism()" classname="com.deskgoblin.model.datastructures.QueueWithTwoStacksTest" time="0.001"/>
+  <testcase name="testEnqueueAndPeek()" classname="com.deskgoblin.model.datastructures.QueueWithTwoStacksTest" time="0.001"/>
+  <testcase name="testPeekEmptyQueue()" classname="com.deskgoblin.model.datastructures.QueueWithTwoStacksTest" time="0.0"/>
+  <testcase name="testDequeue()" classname="com.deskgoblin.model.datastructures.QueueWithTwoStacksTest" time="0.0"/>
+  <testcase name="testIsEmpty()" classname="com.deskgoblin.model.datastructures.QueueWithTwoStacksTest" time="0.001"/>
+  <testcase name="testDequeueEmptyQueue()" classname="com.deskgoblin.model.datastructures.QueueWithTwoStacksTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

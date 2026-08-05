@@ -20,8 +20,21 @@ public class Patient implements Comparable<Patient> {
 
     @Override
     public int compareTo(Patient other) {
-        // Pacientes com maior severityScore terão prioridade na MaxHeap
+        // Ordena por severityScore em ordem crescente (usado pelo MinHeap para priorizar menor severidade)
         return Integer.compare(this.severityScore, other.severityScore);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Patient patient = (Patient) o;
+        return id.equals(patient.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 
     @Override

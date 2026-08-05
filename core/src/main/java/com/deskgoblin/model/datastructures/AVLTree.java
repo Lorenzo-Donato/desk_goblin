@@ -34,7 +34,6 @@ public class AVLTree<K extends Comparable<K>, V> {
     public AVLTree() {
         this.root = null;
         this.size = 0;
-        // System.out.println("[AVL] Árvore criada.");
     }
 
     /**
@@ -154,13 +153,10 @@ public class AVLTree<K extends Comparable<K>, V> {
      * @return O valor associado, ou null se não for encontrado.
      */
     public V search(K key) {
-        // System.out.println("[AVL] search: buscando chave " + key);
         AVLNode<K, V> result = searchRec(root, key);
         if (result != null) {
-            // System.out.println("[AVL] search: chave " + key + " encontrada.");
             return result.value;
         }
-        // System.out.println("[AVL] search: chave " + key + " não encontrada.");
         return null;
     }
 
@@ -190,8 +186,6 @@ public class AVLTree<K extends Comparable<K>, V> {
         root = deleteRec(root, key);
         if (size < oldSize) {
             System.out.println("[AVL] delete: chave " + key + " removida.");
-        } else {
-            // System.out.println("[AVL] delete: chave " + key + " não encontrada para remoção.");
         }
     }
 
@@ -244,7 +238,6 @@ public class AVLTree<K extends Comparable<K>, V> {
      * @return Lista encadeada com os valores em ordem de chave.
      */
     public SinglyLinkedList<V> inOrder() {
-        // System.out.println("[AVL] inOrder: gerando travessia em ordem.");
         SinglyLinkedList<V> list = new SinglyLinkedList<>();
         inOrderRec(root, list);
         return list;
@@ -264,7 +257,6 @@ public class AVLTree<K extends Comparable<K>, V> {
      * @return O número de elementos.
      */
     public int size() {
-        // System.out.println("[AVL] size: " + size);
         return size;
     }
 

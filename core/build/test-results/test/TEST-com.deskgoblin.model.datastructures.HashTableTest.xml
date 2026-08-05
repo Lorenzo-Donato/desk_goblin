@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.deskgoblin.model.datastructures.HashTableTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-08-05T03:01:42" hostname="DESKTOP-FE9UO8M" time="0.013">
+  <properties/>
+  <testcase name="testSizeAndIsEmpty()" classname="com.deskgoblin.model.datastructures.HashTableTest" time="0.002"/>
+  <testcase name="testUpdateExistingKey()" classname="com.deskgoblin.model.datastructures.HashTableTest" time="0.001"/>
+  <testcase name="testKeys()" classname="com.deskgoblin.model.datastructures.HashTableTest" time="0.001"/>
+  <testcase name="testContainsKey()" classname="com.deskgoblin.model.datastructures.HashTableTest" time="0.001"/>
+  <testcase name="testPutAndGet()" classname="com.deskgoblin.model.datastructures.HashTableTest" time="0.001"/>
+  <testcase name="testRemoveNonExistent()" classname="com.deskgoblin.model.datastructures.HashTableTest" time="0.001"/>
+  <testcase name="testResizeAndCollision()" classname="com.deskgoblin.model.datastructures.HashTableTest" time="0.002"/>
+  <testcase name="testRemove()" classname="com.deskgoblin.model.datastructures.HashTableTest" time="0.001"/>
+  <system-out><![CDATA[[HashTable] Tabela criada com capacidade 16
+[HashTable] put: inserindo/atualizando chave Teste
+[HashTable] remove: tentando remover chave Teste
+[HashTable] remove: chave Teste removida.
+[HashTable] Tabela criada com capacidade 16
+[HashTable] put: inserindo/atualizando chave Moeda
+[HashTable] put: inserindo/atualizando chave Moeda
+[HashTable] Tabela criada com capacidade 16
+[HashTable] put: inserindo/atualizando chave A
+[HashTable] put: inserindo/atualizando chave B
+[HashTable] put: inserindo/atualizando chave C
+[HashTable] Tabela criada com capacidade 16
+[HashTable] put: inserindo/atualizando chave A
+[HashTable] Tabela criada com capacidade 16
+[HashTable] put: inserindo/atualizando chave Um
+[HashTable] put: inserindo/atualizando chave Dois
+[HashTable] Tabela criada com capacidade 16
+[HashTable] put: inserindo/atualizando chave Goblin
+[HashTable] remove: tentando remover chave Dragao
+[HashTable] Tabela criada com capacidade 16
+[HashTable] put: inserindo/atualizando chave Chave0
+[HashTable] put: inserindo/atualizando chave Chave1
+[HashTable] put: inserindo/atualizando chave Chave2
+[HashTable] put: inserindo/atualizando chave Chave3
+[HashTable] put: inserindo/atualizando chave Chave4
+[HashTable] put: inserindo/atualizando chave Chave5
+[HashTable] put: inserindo/atualizando chave Chave6
+[HashTable] put: inserindo/atualizando chave Chave7
+[HashTable] put: inserindo/atualizando chave Chave8
+[HashTable] put: inserindo/atualizando chave Chave9
+[HashTable] put: inserindo/atualizando chave Chave10
+[HashTable] put: colisão resolvida no índice 6 para a chave Chave10
+[HashTable] put: inserindo/atualizando chave Chave11
+[HashTable] put: colisão resolvida no índice 5 para a chave Chave11
+[HashTable] put: inserindo/atualizando chave Chave12
+[HashTable] put: inserindo/atualizando chave Chave13
+[HashTable] put: inserindo/atualizando chave Chave14
+[HashTable] put: inserindo/atualizando chave Chave15
+[HashTable] put: inserindo/atualizando chave Chave16
+[HashTable] put: inserindo/atualizando chave Chave17
+[HashTable] put: inserindo/atualizando chave Chave18
+[HashTable] put: colisão resolvida no índice 14 para a chave Chave18
+[HashTable] put: inserindo/atualizando chave Chave19
+[HashTable] put: colisão resolvida no índice 13 para a chave Chave19
+[HashTable] Tabela criada com capacidade 16
+[HashTable] put: inserindo/atualizando chave Goblin
+[HashTable] put: inserindo/atualizando chave Orc
+[HashTable] remove: tentando remover chave Goblin
+[HashTable] remove: chave Goblin removida.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

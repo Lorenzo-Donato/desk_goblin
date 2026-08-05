@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.deskgoblin.model.datastructures.MinHeapTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-08-05T03:01:42" hostname="DESKTOP-FE9UO8M" time="0.007">
+  <properties/>
+  <testcase name="testPeekMinFromEmpty()" classname="com.deskgoblin.model.datastructures.MinHeapTest" time="0.0"/>
+  <testcase name="testPeekDoesNotRemove()" classname="com.deskgoblin.model.datastructures.MinHeapTest" time="0.0"/>
+  <testcase name="testSingleElement()" classname="com.deskgoblin.model.datastructures.MinHeapTest" time="0.0"/>
+  <testcase name="testExtractMinOrder()" classname="com.deskgoblin.model.datastructures.MinHeapTest" time="0.001"/>
+  <testcase name="testInsertAndPeekMin()" classname="com.deskgoblin.model.datastructures.MinHeapTest" time="0.0"/>
+  <testcase name="testSizeTracking()" classname="com.deskgoblin.model.datastructures.MinHeapTest" time="0.0"/>
+  <testcase name="testDuplicateValues()" classname="com.deskgoblin.model.datastructures.MinHeapTest" time="0.001"/>
+  <testcase name="testExtractMinFromEmpty()" classname="com.deskgoblin.model.datastructures.MinHeapTest" time="0.0"/>
+  <testcase name="testResizeOnManyInserts()" classname="com.deskgoblin.model.datastructures.MinHeapTest" time="0.0"/>
+  <testcase name="testIsEmpty()" classname="com.deskgoblin.model.datastructures.MinHeapTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

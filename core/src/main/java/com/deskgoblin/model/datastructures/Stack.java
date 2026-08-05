@@ -14,7 +14,6 @@ public class Stack<T> {
      */
     public Stack() {
         this.list = new SinglyLinkedList<>();
-        // System.out.println("[Stack] Pilha criada.");
     }
 
     /**
@@ -24,7 +23,6 @@ public class Stack<T> {
      */
     public void push(T data) {
         list.pushFront(data);
-        // System.out.println("[Stack] push: elemento " + data + " empilhado.");
     }
 
     /**
@@ -34,11 +32,9 @@ public class Stack<T> {
      */
     public T pop() {
         if (isEmpty()) {
-            // System.out.println("[Stack] pop: pilha vazia.");
             return null;
         }
         T data = list.popFront();
-        // System.out.println("[Stack] pop: elemento " + data + " desempilhado.");
         return data;
     }
 
@@ -49,11 +45,9 @@ public class Stack<T> {
      */
     public T peek() {
         if (isEmpty()) {
-            // System.out.println("[Stack] peek: pilha vazia.");
             return null;
         }
         T data = list.peekFront();
-        // System.out.println("[Stack] peek: elemento " + data + " acessado.");
         return data;
     }
 
@@ -64,7 +58,6 @@ public class Stack<T> {
      */
     public int size() {
         int size = list.size();
-        // System.out.println("[Stack] size: " + size);
         return size;
     }
 

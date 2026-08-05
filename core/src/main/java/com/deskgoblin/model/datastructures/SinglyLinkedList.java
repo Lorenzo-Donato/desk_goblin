@@ -1,11 +1,13 @@
 package com.deskgoblin.model.datastructures;
 
+import java.util.Iterator;
+
 /**
  * Classe que implementa uma Lista Encadeada Simples (Singly Linked List).
  *
  * @param <T> O tipo de dado armazenado na lista.
  */
-public class SinglyLinkedList<T> {
+public class SinglyLinkedList<T> implements Iterable<T> {
 
     /**
      * Classe interna que representa um nó na lista.
@@ -33,7 +35,6 @@ public class SinglyLinkedList<T> {
         this.head = null;
         this.tail = null;
         this.size = 0;
-        // System.out.println("[LinkedList] Lista criada.");
     }
 
     // --- MÉTODO ADICIONADO PARA RESOLVER O ERRO DO GAME SCREEN ---
@@ -56,7 +57,6 @@ public class SinglyLinkedList<T> {
             head = newNode;
         }
         size++;
-        // System.out.println("[LinkedList] pushFront: adicionado " + data + " no início.");
     }
 
     /**
@@ -73,7 +73,6 @@ public class SinglyLinkedList<T> {
             tail = newNode;
         }
         size++;
-        // System.out.println("[LinkedList] pushBack: adicionado " + data + " no final.");
     }
 
     /**
@@ -83,7 +82,6 @@ public class SinglyLinkedList<T> {
      */
     public T popFront() {
         if (isEmpty()) {
-            // System.out.println("[LinkedList] popFront: lista vazia.");
             return null;
         }
         T data = head.data;
@@ -92,7 +90,6 @@ public class SinglyLinkedList<T> {
         if (isEmpty()) {
             tail = null;
         }
-        // System.out.println("[LinkedList] popFront: removido " + data + " do início.");
         return data;
     }
 
@@ -103,7 +100,6 @@ public class SinglyLinkedList<T> {
      */
     public T popBack() {
         if (isEmpty()) {
-            // System.out.println("[LinkedList] popBack: lista vazia.");
             return null;
         }
         T data = tail.data;
@@ -118,7 +114,6 @@ public class SinglyLinkedList<T> {
             tail = current;
         }
         size--;
-        // System.out.println("[LinkedList] popBack: removido " + data + " do final.");
         return data;
     }
 
@@ -129,10 +124,8 @@ public class SinglyLinkedList<T> {
      */
     public T peekFront() {
         if (isEmpty()) {
-            // System.out.println("[LinkedList] peekFront: lista vazia.");
             return null;
         }
-        // System.out.println("[LinkedList] peekFront: acessado " + head.data);
         return head.data;
     }
 
@@ -143,10 +136,8 @@ public class SinglyLinkedList<T> {
      */
     public T peekBack() {
         if (isEmpty()) {
-            // System.out.println("[LinkedList] peekBack: lista vazia.");
             return null;
         }
-        // System.out.println("[LinkedList] peekBack: acessado " + tail.data);
         return tail.data;
     }
 
@@ -156,7 +147,6 @@ public class SinglyLinkedList<T> {
      * @return O número de elementos na lista.
      */
     public int size() {
-        // System.out.println("[LinkedList] size: " + size);
         return size;
     }
 
@@ -179,12 +169,10 @@ public class SinglyLinkedList<T> {
         Node<T> current = head;
         while (current != null) {
             if (current.data.equals(data)) {
-                // System.out.println("[LinkedList] contains: elemento " + data + " encontrado.");
                 return true;
             }
             current = current.next;
         }
-        // System.out.println("[LinkedList] contains: elemento " + data + " não encontrado.");
         return false;
     }
 
@@ -202,5 +190,26 @@ public class SinglyLinkedList<T> {
         }
         sb.append("]");
         return sb.toString();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new SinglyLinkedListIterator();
+    }
+
+    private class SinglyLinkedListIterator implements Iterator<T> {
+        private Node<T> current = head;
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public T next() {
+            T data = current.data;
+            current = current.next;
+            return data;
+        }
     }
 }

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.deskgoblin.model.datastructures.AVLTreeTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-08-05T03:01:42" hostname="DESKTOP-FE9UO8M" time="0.021">
+  <properties/>
+  <testcase name="testLeftRightRotation()" classname="com.deskgoblin.model.datastructures.AVLTreeTest" time="0.001"/>
+  <testcase name="testInsertAndSearch()" classname="com.deskgoblin.model.datastructures.AVLTreeTest" time="0.0"/>
+  <testcase name="testSizeAndIsEmpty()" classname="com.deskgoblin.model.datastructures.AVLTreeTest" time="0.002"/>
+  <testcase name="testDeleteNonExistent()" classname="com.deskgoblin.model.datastructures.AVLTreeTest" time="0.001"/>
+  <testcase name="testUpdateExistingKey()" classname="com.deskgoblin.model.datastructures.AVLTreeTest" time="0.002"/>
+  <testcase name="testLeftRotation()" classname="com.deskgoblin.model.datastructures.AVLTreeTest" time="0.001"/>
+  <testcase name="testInOrderTraversal()" classname="com.deskgoblin.model.datastructures.AVLTreeTest" time="0.001"/>
+  <testcase name="testRightRotation()" classname="com.deskgoblin.model.datastructures.AVLTreeTest" time="0.001"/>
+  <testcase name="testDeleteNodeWithTwoChildren()" classname="com.deskgoblin.model.datastructures.AVLTreeTest" time="0.001"/>
+  <testcase name="testDeleteLeaf()" classname="com.deskgoblin.model.datastructures.AVLTreeTest" time="0.001"/>
+  <testcase name="testDeleteNodeWithOneChild()" classname="com.deskgoblin.model.datastructures.AVLTreeTest" time="0.001"/>
+  <testcase name="testRightLeftRotation()" classname="com.deskgoblin.model.datastructures.AVLTreeTest" time="0.001"/>
+  <system-out><![CDATA[[AVL] insert: inserindo chave 30
+[AVL] insert: chave 30 inserida com sucesso.
+[AVL] insert: inserindo chave 10
+[AVL] insert: chave 10 inserida com sucesso.
+[AVL] insert: inserindo chave 20
+[AVL] rebalance: nó 30 desbalanceado para a esquerda (fator 2).
+[AVL] rotateLeft: realizando rotação à ESQUERDA no nó 10
+[AVL] rotateRight: realizando rotação à DIREITA no nó 30
+[AVL] insert: chave 20 inserida com sucesso.
+[AVL] insert: inserindo chave 10
+[AVL] insert: chave 10 inserida com sucesso.
+[AVL] insert: inserindo chave 1
+[AVL] insert: chave 1 inserida com sucesso.
+[AVL] delete: tentando remover chave 1
+[AVL] delete: chave 1 removida.
+[AVL] insert: inserindo chave 10
+[AVL] insert: chave 10 inserida com sucesso.
+[AVL] delete: tentando remover chave 99
+[AVL] insert: inserindo chave 5
+[AVL] insert: chave 5 inserida com sucesso.
+[AVL] insert: inserindo chave 5
+[AVL] insert: chave 5 atualizada.
+[AVL] insert: inserindo chave 10
+[AVL] insert: chave 10 inserida com sucesso.
+[AVL] insert: inserindo chave 20
+[AVL] insert: chave 20 inserida com sucesso.
+[AVL] insert: inserindo chave 30
+[AVL] rebalance: nó 10 desbalanceado para a direita (fator -2).
+[AVL] rotateLeft: realizando rotação à ESQUERDA no nó 10
+[AVL] insert: chave 30 inserida com sucesso.
+[AVL] insert: inserindo chave 50
+[AVL] insert: chave 50 inserida com sucesso.
+[AVL] insert: inserindo chave 30
+[AVL] insert: chave 30 inserida com sucesso.
+[AVL] insert: inserindo chave 70
+[AVL] insert: chave 70 inserida com sucesso.
+[AVL] insert: inserindo chave 20
+[AVL] insert: chave 20 inserida com sucesso.
+[AVL] insert: inserindo chave 40
+[AVL] insert: chave 40 inserida com sucesso.
+[AVL] insert: inserindo chave 30
+[AVL] insert: chave 30 inserida com sucesso.
+[AVL] insert: inserindo chave 20
+[AVL] insert: chave 20 inserida com sucesso.
+[AVL] insert: inserindo chave 10
+[AVL] rebalance: nó 30 desbalanceado para a esquerda (fator 2).
+[AVL] rotateRight: realizando rotação à DIREITA no nó 30
+[AVL] insert: chave 10 inserida com sucesso.
+[AVL] insert: inserindo chave 10
+[AVL] insert: chave 10 inserida com sucesso.
+[AVL] insert: inserindo chave 5
+[AVL] insert: chave 5 inserida com sucesso.
+[AVL] insert: inserindo chave 15
+[AVL] insert: chave 15 inserida com sucesso.
+[AVL] insert: inserindo chave 12
+[AVL] insert: chave 12 inserida com sucesso.
+[AVL] insert: inserindo chave 17
+[AVL] insert: chave 17 inserida com sucesso.
+[AVL] delete: tentando remover chave 15
+[AVL] delete: chave 15 removida.
+[AVL] insert: inserindo chave 10
+[AVL] insert: chave 10 inserida com sucesso.
+[AVL] delete: tentando remover chave 10
+[AVL] delete: chave 10 removida.
+[AVL] insert: inserindo chave 10
+[AVL] insert: chave 10 inserida com sucesso.
+[AVL] insert: inserindo chave 5
+[AVL] insert: chave 5 inserida com sucesso.
+[AVL] delete: tentando remover chave 10
+[AVL] delete: chave 10 removida.
+[AVL] insert: inserindo chave 10
+[AVL] insert: chave 10 inserida com sucesso.
+[AVL] insert: inserindo chave 30
+[AVL] insert: chave 30 inserida com sucesso.
+[AVL] insert: inserindo chave 20
+[AVL] rebalance: nó 10 desbalanceado para a direita (fator -2).
+[AVL] rotateRight: realizando rotação à DIREITA no nó 30
+[AVL] rotateLeft: realizando rotação à ESQUERDA no nó 10
+[AVL] insert: chave 20 inserida com sucesso.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

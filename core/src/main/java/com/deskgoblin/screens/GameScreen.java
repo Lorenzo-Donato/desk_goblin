@@ -668,12 +668,12 @@ public class GameScreen extends ScreenAdapter {
                 }
             }
 
-            if (!isZoomPopupOpen && idCardOnTable && currentPatient != null && idBounds.contains(mousePos.x, mousePos.y)) {
+            boolean isOnTable = (currentState == UIState.MAIN || currentState == UIState.ID_ON_COUNTER);
+
+            if (isOnTable && !isZoomPopupOpen && idCardOnTable && currentPatient != null && idBounds.contains(mousePos.x, mousePos.y)) {
                 isZoomPopupOpen = true;
                 return;
             }
-
-            boolean isOnTable = (currentState == UIState.MAIN || currentState == UIState.ID_ON_COUNTER);
             if (isOnTable) {
                 Rectangle orbOneBounds = new Rectangle(orbOneX, orbOneY, orbOneTexture.getWidth(), orbOneTexture.getHeight());
                 Rectangle orbTwoBounds = new Rectangle(orbTwoX, orbTwoY, orbTwoTexture.getWidth(), orbTwoTexture.getHeight());
@@ -695,10 +695,17 @@ public class GameScreen extends ScreenAdapter {
                 else if (orbOneBounds.contains(mousePos.x, mousePos.y)) {
                     targetState = UIState.RIGHT_ORB;
                     rightInputBedId = "M1";
+                    isTypingRightBed = true;
+                    isTypingName = false; isTypingId = false; isSearchingId = false; isTypingBed = false;
+                    cursorTimer = 0f;
                 }
                 else if (orbTwoBounds.contains(mousePos.x, mousePos.y)) {
                     targetState = UIState.LEFT_ORB;
                     leftOrbSnapshot = hospitalManager.getPatientQueueSnapshot();
+                    isTypingBed = true;
+                    isTypingName = false; isTypingId = false; isSearchingId = false; isTypingRightBed = false;
+                    inputBedId = "";
+                    cursorTimer = 0f;
                 }
 
                 if (targetState != null) {

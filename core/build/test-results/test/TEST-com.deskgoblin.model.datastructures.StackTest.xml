@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.deskgoblin.model.datastructures.StackTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-08-05T03:01:42" hostname="DESKTOP-FE9UO8M" time="0.006">
+  <properties/>
+  <testcase name="testPushAndPeek()" classname="com.deskgoblin.model.datastructures.StackTest" time="0.001"/>
+  <testcase name="testPop()" classname="com.deskgoblin.model.datastructures.StackTest" time="0.001"/>
+  <testcase name="testSize()" classname="com.deskgoblin.model.datastructures.StackTest" time="0.0"/>
+  <testcase name="testMultiplePushAndPop()" classname="com.deskgoblin.model.datastructures.StackTest" time="0.0"/>
+  <testcase name="testToString()" classname="com.deskgoblin.model.datastructures.StackTest" time="0.0"/>
+  <testcase name="testPeekEmptyStack()" classname="com.deskgoblin.model.datastructures.StackTest" time="0.0"/>
+  <testcase name="testIsEmpty()" classname="com.deskgoblin.model.datastructures.StackTest" time="0.001"/>
+  <testcase name="testPopEmptyStack()" classname="com.deskgoblin.model.datastructures.StackTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
