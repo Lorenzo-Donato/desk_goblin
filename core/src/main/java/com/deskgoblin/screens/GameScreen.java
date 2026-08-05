@@ -23,12 +23,15 @@ import com.deskgoblin.model.entities.Patient;
 import com.deskgoblin.model.entities.Bed;
 import com.deskgoblin.model.entities.MedicalProcess;
 import com.deskgoblin.model.datastructures.SinglyLinkedList;
+import com.deskgoblin.model.datastructures.AVLTree;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import java.util.Random;
 
 public class GameScreen extends ScreenAdapter {
     private DeskGoblinGame game;
     private SpriteBatch batch;
+    private ShapeRenderer shapeRenderer;
     private OrthographicCamera camera;
     private Viewport viewport;
 
@@ -77,7 +80,7 @@ public class GameScreen extends ScreenAdapter {
                                      "Larissa Fernandes", "Lucas Almeida", "Beatriz Lima", "Gabriel Rocha", "Fernanda Dias"};
     private int nextPatientId = 1;
 
-    private enum UIState { MAIN, SCROLL, SCROLL_REGISTER, SCROLL_VIEW, LEFT_ORB, RIGHT_ORB, HEAL_MINIGAME, ID_ON_COUNTER }
+    private enum UIState { MAIN, SCROLL, SCROLL_REGISTER, SCROLL_VIEW, SCROLL_AVL, LEFT_ORB, RIGHT_ORB, HEAL_MINIGAME, ID_ON_COUNTER }
     private UIState currentState = UIState.MAIN;
     
     private float tableX = 0, tableY = 0;
@@ -89,6 +92,7 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(DeskGoblinGame game) {
         this.game = game;
         batch = new SpriteBatch();
+        shapeRenderer = new ShapeRenderer();
         camera = new OrthographicCamera();
         viewport = new FitViewport(640, 360, camera);
         camera.position.set(viewport.getWorldWidth() / 2f, viewport.getWorldHeight() / 2f, 0);
@@ -200,7 +204,7 @@ public class GameScreen extends ScreenAdapter {
         batch.draw(inkwellTexture, inkwellX, inkwellY);
 
         // --- FUNDO SCROLL ---
-        if (currentState == UIState.SCROLL || currentState == UIState.SCROLL_REGISTER || currentState == UIState.SCROLL_VIEW) {
+        if (currentState == UIState.SCROLL || currentState == UIState.SCROLL_REGISTER || currentState == UIState.SCROLL_VIEW || currentState == UIState.SCROLL_AVL) {
             batch.draw(brownBgTex, 0, 0, 640, 360);
             float scrollBgX = (640 - 465) / 2f;
             batch.draw(bigScrollTex, scrollBgX, 0, 465, 360);
@@ -301,9 +305,10 @@ public class GameScreen extends ScreenAdapter {
 
         switch (currentState) {
             case SCROLL:
-                font.draw(batch, "--- PERGAMINHO (AVL Tree) ---", 200, 320);
+                font.draw(batch, "--- PERGAMINHO (Menu) ---", 220, 320);
                 font.draw(batch, "1. Cadastrar Paciente", 220, 290);
-                font.draw(batch, "2. Ver Pacientes", 220, 260);
+                font.draw(batch, "2. Buscar Pacientes", 220, 260);
+                font.draw(batch, "3. Ver Arvore AVL", 220, 230);
                 break;
             case SCROLL_REGISTER:
                 font.draw(batch, "--- CADASTRO ---", 270, 330);
@@ -377,6 +382,19 @@ public class GameScreen extends ScreenAdapter {
                         font.draw(batch, "_", 340 + layout.width, 40);
                     }
                 }
+                break;
+            case SCROLL_AVL:
+                font.draw(batch, "--- ARVORE AVL VISUAL ---", 210, 320);
+                batch.end();
+
+                shapeRenderer.setProjectionMatrix(camera.combined);
+                shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+                shapeRenderer.setColor(Color.WHITE);
+                drawAVLLines(hospitalManager.getPatientRecords().getRoot(), 320, 270, 100, 50);
+                shapeRenderer.end();
+
+                batch.begin();
+                drawAVLNodes(hospitalManager.getPatientRecords().getRoot(), 320, 270, 100, 50);
                 break;
             
             case LEFT_ORB:
@@ -768,6 +786,8 @@ public class GameScreen extends ScreenAdapter {
                     } else if (mousePos.y >= 240 && mousePos.y <= 270) {
                         currentState = UIState.SCROLL_VIEW;
                         searchResult = ""; searchInputId = ""; isSearchingId = false;
+                    } else if (mousePos.y >= 210 && mousePos.y <= 240) {
+                        currentState = UIState.SCROLL_AVL;
                     }
                 }
             } else if (currentState == UIState.SCROLL_REGISTER) {
@@ -784,7 +804,7 @@ public class GameScreen extends ScreenAdapter {
                 }
                 if (mousePos.x >= 220 && mousePos.x <= 380 && mousePos.y >= 90 && mousePos.y <= 120) {
                     if (!inputName.isEmpty() && !inputId.isEmpty() && inputSeverity > 0) {
-                        hospitalManager.registerPatient(new Patient(inputId, inputName, "Diagnosticado", inputSeverity));
+                        hospitalManager.registerPatient(new Patient(inputId.toUpperCase(), inputName, "Diagnosticado", inputSeverity));
                         leftOrbSnapshot = hospitalManager.getPatientQueueSnapshot();
                         
                         isPatientWaiting = false; idCardOnTable = false; patientOnCounter = null; currentPatient = null;
@@ -811,9 +831,61 @@ public class GameScreen extends ScreenAdapter {
         viewport.update(width, height, true);
     }
 
+    private void drawAVLLines(AVLTree.AVLNode<Integer, Patient> node, float x, float y, float hSpacing, float vSpacing) {
+        if (node == null) return;
+        if (node.left != null) {
+            float childX = x - hSpacing;
+            float childY = y - vSpacing;
+            shapeRenderer.line(x, y, childX, childY);
+            drawAVLLines(node.left, childX, childY, hSpacing / 1.5f, vSpacing);
+        }
+        if (node.right != null) {
+            float childX = x + hSpacing;
+            float childY = y - vSpacing;
+            shapeRenderer.line(x, y, childX, childY);
+            drawAVLLines(node.right, childX, childY, hSpacing / 1.5f, vSpacing);
+        }
+    }
+
+    private void drawAVLNodes(AVLTree.AVLNode<Integer, Patient> node, float x, float y, float hSpacing, float vSpacing) {
+        if (node == null) return;
+        float orbScale = 0.4f;
+        float w = orbOneTexture.getWidth() * orbScale;
+        float h = orbOneTexture.getHeight() * orbScale;
+        
+        batch.draw(orbOneTexture, x - w/2, y - h/2, w, h);
+        float origScaleX = font.getData().scaleX;
+        float origScaleY = font.getData().scaleY;
+        font.getData().setScale(0.7f);
+
+        String topText = "ID: P" + node.key;
+        if (node.value != null) {
+            topText += " Sev: " + node.value.getSeverityScore();
+        }
+        
+        GlyphLayout topLayout = new GlyphLayout(font, topText);
+        font.draw(batch, topText, x - topLayout.width/2, y + topLayout.height/2 + 6);
+        
+        if (node.value != null) {
+            String firstName = node.value.getName().split(" ")[0];
+            GlyphLayout nameLayout = new GlyphLayout(font, firstName);
+            font.draw(batch, firstName, x - nameLayout.width/2, y - 8);
+        }
+        
+        font.getData().setScale(origScaleX, origScaleY);
+
+        if (node.left != null) {
+            drawAVLNodes(node.left, x - hSpacing, y - vSpacing, hSpacing / 1.5f, vSpacing);
+        }
+        if (node.right != null) {
+            drawAVLNodes(node.right, x + hSpacing, y - vSpacing, hSpacing / 1.5f, vSpacing);
+        }
+    }
+
     @Override
     public void dispose() {
         batch.dispose();
+        shapeRenderer.dispose();
         groundTexture.dispose(); tableTexture.dispose(); orbOneTexture.dispose(); orbTwoTexture.dispose();
         scrollTexture.dispose(); inkwellTexture.dispose();
         handTexture.dispose(); patientTexture.dispose();

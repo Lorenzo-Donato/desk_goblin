@@ -37,6 +37,15 @@ public class AVLTree<K extends Comparable<K>, V> {
     }
 
     /**
+     * Retorna a raiz da árvore AVL.
+     *
+     * @return O nó raiz.
+     */
+    public AVLNode<K, V> getRoot() {
+        return root;
+    }
+
+    /**
      * Retorna a altura da árvore.
      *
      * @return A altura da árvore.

@@ -5,7 +5,7 @@ import com.deskgoblin.model.entities.*;
 
 public class HospitalManager {
     
-    private AVLTree<String, Patient> patientRecords;
+    private AVLTree<Integer, Patient> patientRecords;
     private MinHeap<Patient> patientQueue;
     private HashTable<String, Bed> beds;
     private QueueWithTwoStacks<MedicalProcess> medicalProcesses;
@@ -29,6 +29,18 @@ public class HospitalManager {
         return patientRecords.inOrder();
     }
 
+    public AVLTree<Integer, Patient> getPatientRecords() {
+        return patientRecords;
+    }
+
+    private int parsePatientId(String id) {
+        try {
+            return Integer.parseInt(id.replaceAll("\\D+", ""));
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+
     public SinglyLinkedList<Patient> getPatientQueueSnapshot() {
         SinglyLinkedList<Patient> result = new SinglyLinkedList<>();
         SinglyLinkedList<Patient> temp = new SinglyLinkedList<>();
@@ -48,13 +60,13 @@ public class HospitalManager {
     }
 
     public void registerPatient(Patient p) {
-        patientRecords.insert(p.getId(), p);
+        patientRecords.insert(parsePatientId(p.getId()), p);
         patientQueue.insert(p);
         System.out.println("[Manager] Paciente registrado na AVL e adicionado à fila: " + p.getName());
     }
 
     public Patient getPatientRecord(String id) {
-        return patientRecords.search(id);
+        return patientRecords.search(parsePatientId(id));
     }
 
     public Patient peekNextPatient() {
