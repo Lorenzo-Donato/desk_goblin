@@ -20,7 +20,6 @@ public class Patient implements Comparable<Patient> {
 
     @Override
     public int compareTo(Patient other) {
-        // Ordena por severityScore em ordem crescente (usado pelo MinHeap para priorizar menor severidade)
         return Integer.compare(this.severityScore, other.severityScore);
     }
 

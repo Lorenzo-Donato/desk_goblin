@@ -40,7 +40,7 @@ public class StartScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        // ESSAS 3 LINHAS SÃO OBRIGATÓRIAS PARA CENTRALIZAR CORRETAMENTE
+
         viewport.apply();
         camera.update();
         batch.setProjectionMatrix(camera.combined);

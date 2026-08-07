@@ -132,7 +132,6 @@ public class GameScreen extends ScreenAdapter {
         
         hospitalManager = new HospitalManager();
 
-        // --- TESTES ---
         hospitalManager.registerPatient(new Patient("1", "A", "Teste", 1));
         hospitalManager.registerPatient(new Patient("2", "B", "Teste", 1));
         hospitalManager.registerPatient(new Patient("3", "C", "Teste", 2));
@@ -140,7 +139,6 @@ public class GameScreen extends ScreenAdapter {
         hospitalManager.registerPatient(new Patient("5", "E", "Teste", 4));
         hospitalManager.registerPatient(new Patient("6", "F", "Teste", 5));
         hospitalManager.registerPatient(new Patient("7", "G", "Teste", 6));
-        // --------------
         
         leftOrbSnapshot = hospitalManager.getPatientQueueSnapshot();
         
@@ -203,7 +201,7 @@ public class GameScreen extends ScreenAdapter {
         batch.draw(scrollTexture, scrollX, scrollY);
         batch.draw(inkwellTexture, inkwellX, inkwellY);
 
-        // --- FUNDO SCROLL ---
+
         if (currentState == UIState.SCROLL || currentState == UIState.SCROLL_REGISTER || currentState == UIState.SCROLL_VIEW || currentState == UIState.SCROLL_AVL) {
             batch.draw(brownBgTex, 0, 0, 640, 360);
             float scrollBgX = (640 - 465) / 2f;
@@ -233,7 +231,7 @@ public class GameScreen extends ScreenAdapter {
         GlyphLayout layout = new GlyphLayout();
         float origScaleX, origScaleY;
 
-        // 1. BALÃO DE FALA e CARTÃO DE ID
+
         if (idCardOnTable && currentPatient != null && (currentState == UIState.MAIN || currentState == UIState.ID_ON_COUNTER)) {
             if (showSpeechBubble) {
                 String speech = currentSpeechBubbleText;
@@ -247,12 +245,12 @@ public class GameScreen extends ScreenAdapter {
                 batch.draw(speechBubbleTexture, bubbleX, bubbleY, bubbleWidth, bubbleHeight);
                 batch.end(); batch.begin();
 
-                // Centraliza o texto
+
                 layout.setText(font, speech);
                 font.draw(batch, speech, bubbleX + (bubbleWidth - layout.width) / 2f, bubbleY + 30);
             }
 
-            // 2. CARTÃO DE ID (Voltando ao tamanho original de 200x50 e layout igual ao seu esboço)
+
             float idWidth = 200, idHeight = 50;
             float idX = patientX - 85; 
             float idY = patientY - 65;
@@ -262,21 +260,21 @@ public class GameScreen extends ScreenAdapter {
             batch.draw(idCardTexture, idX, idY, idWidth, idHeight);
             batch.end(); batch.begin();
 
-            // Fonte ligeiramente menor para caber direitinho
+
             origScaleX = font.getData().scaleX;
             origScaleY = font.getData().scaleY;
             font.getData().setScale(0.85f);
 
-            // ID no topo direito (ao lado do rosto)
+
             font.draw(batch, "ID: " + currentPatient.getId(), idX + 70, idY + 38);
 
-            // NOME embaixo, mais à esquerda (abaixo da foto do personagem)
+
             font.draw(batch, "Nome: " + currentPatient.getName(), idX + 10, idY + 18);
 
             font.getData().setScale(origScaleX, origScaleY);
         }
 
-        // 3. ZOOM POP-UP (Voltando ao tamanho original de 300x80, layout corrigido)
+
         if (isZoomPopupOpen && currentPatient != null && (currentState == UIState.MAIN || currentState == UIState.ID_ON_COUNTER)) {
             float rectX = (640 - 300) / 2f;
             float rectY = 180;
@@ -289,19 +287,15 @@ public class GameScreen extends ScreenAdapter {
 
             origScaleX = font.getData().scaleX;
             origScaleY = font.getData().scaleY;
-            font.getData().setScale(0.9f); // Zoom levemente maior
+            font.getData().setScale(0.9f);
 
-            // ID no topo direito do pop-up
             font.draw(batch, "ID: " + currentPatient.getId(), rectX + 105, rectY + 62);
-            // NOME embaixo à esquerda do pop-up
             font.draw(batch, "Nome: " + currentPatient.getName(), rectX + 10, rectY + 35);
 
             font.getData().setScale(origScaleX, origScaleY);
         }
 
-        // ------------------------------------------------
-        // Telas de Menu (Pergaminho, Orbes, etc.)
-        // ------------------------------------------------
+
 
         switch (currentState) {
             case SCROLL:
@@ -667,7 +661,7 @@ public class GameScreen extends ScreenAdapter {
             float patientX = (640 - patientTexture.getWidth()) / 2f;
             float patientY = 90;
             
-            // --- NOVAS COORDENADAS DOS RETÂNGULOS DE CLIQUE ---
+
             float idWidth = 200, idHeight = 50;
             float idX = patientX - 85; 
             float idY = patientY - 65;

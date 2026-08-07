@@ -1,19 +1,11 @@
 package com.deskgoblin.model.datastructures;
 
-/**
- * Classe que implementa um Heap Máximo (Max Heap) baseado em array.
- *
- * @param <T> O tipo de dado armazenado, que deve ser comparável.
- */
 public class MaxHeap<T extends Comparable<T>> {
 
     private Object[] heap;
     private int size;
     private static final int DEFAULT_CAPACITY = 10;
 
-    /**
-     * Construtor do MaxHeap. Inicializa o array interno.
-     */
     public MaxHeap() {
         this.heap = new Object[DEFAULT_CAPACITY];
         this.size = 0;
@@ -83,11 +75,6 @@ public class MaxHeap<T extends Comparable<T>> {
         }
     }
 
-    /**
-     * Insere um novo elemento no Heap Máximo.
-     *
-     * @param data O elemento a ser inserido.
-     */
     public void insert(T data) {
         System.out.println("[MaxHeap] insert: inserindo elemento " + data);
         if (size == heap.length) {
@@ -98,11 +85,6 @@ public class MaxHeap<T extends Comparable<T>> {
         size++;
     }
 
-    /**
-     * Remove e retorna o maior elemento (raiz) do heap.
-     *
-     * @return O maior elemento, ou null se estiver vazio.
-     */
     @SuppressWarnings("unchecked")
     public T extractMax() {
         if (isEmpty()) {
@@ -114,7 +96,7 @@ public class MaxHeap<T extends Comparable<T>> {
         System.out.println("[MaxHeap] extractMax: removendo elemento máximo " + max);
         
         heap[0] = heap[size - 1];
-        heap[size - 1] = null; // evita vazamento de memória
+        heap[size - 1] = null;
         size--;
         
         if (size > 0) {
@@ -124,11 +106,6 @@ public class MaxHeap<T extends Comparable<T>> {
         return max;
     }
 
-    /**
-     * Retorna, sem remover, o maior elemento do heap.
-     *
-     * @return O maior elemento, ou null se estiver vazio.
-     */
     @SuppressWarnings("unchecked")
     public T peekMax() {
         if (isEmpty()) {
@@ -138,32 +115,14 @@ public class MaxHeap<T extends Comparable<T>> {
         return max;
     }
 
-    /**
-     * Retorna a quantidade de elementos no heap.
-     *
-     * @return O tamanho do heap.
-     */
     public int size() {
         return size;
     }
 
-    /**
-     * Verifica se o heap está vazio.
-     *
-     * @return true se estiver vazio, false caso contrário.
-     */
     public boolean isEmpty() {
         return size == 0;
     }
 
-    /**
-     * Realiza a ordenação (HeapSort) consumindo todos os elementos, 
-     * retornando um array de forma decrescente (ou crescente dependendo do uso externo, 
-     * como extraímos sempre o máximo, os primeiros serão os maiores).
-     * Nota: Este método destrói o heap (esvazia).
-     *
-     * @return Um array genérico contendo os elementos extraídos.
-     */
     public Object[] heapSort() {
         System.out.println("[MaxHeap] heapSort: ordenando elementos (destruindo o heap).");
         Object[] sorted = new Object[size];

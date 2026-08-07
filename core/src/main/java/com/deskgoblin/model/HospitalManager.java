@@ -128,7 +128,6 @@ public class HospitalManager {
             if (process.isFinished()) {
                 System.out.println("[Manager] Processo médico concluído para: " + process.getPatient().getName());
                 processFinished = true;
-                // --- LIBERAÇÃO AUTOMÁTICA DA MACA (Já que o botão vermelho foi removido) ---
                 process.getBed().setPatient(null);
             } else {
                 medicalProcesses.enqueue(process);

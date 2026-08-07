@@ -17,6 +17,7 @@ public class TutorialScreen extends ScreenAdapter {
     private DeskGoblinGame game;
     private SpriteBatch batch;
     private BitmapFont font;
+    private BitmapFont titleFont;
     private OrthographicCamera camera;
     private Viewport viewport;
 
@@ -32,6 +33,11 @@ public class TutorialScreen extends ScreenAdapter {
         parameter.size = 20;
         parameter.color = Color.WHITE;
         font = generator.generateFont(parameter);
+
+        FreeTypeFontGenerator.FreeTypeFontParameter titleParam = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        titleParam.size = 28;
+        titleParam.color = Color.YELLOW;
+        titleFont = generator.generateFont(titleParam);
         generator.dispose();
     }
 
@@ -40,7 +46,6 @@ public class TutorialScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(0.1f, 0.3f, 0.3f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        // ESSAS 3 LINHAS SÃO OBRIGATÓRIAS PARA CENTRALIZAR CORRETAMENTE
         viewport.apply();
         camera.update();
         batch.setProjectionMatrix(camera.combined);
@@ -48,15 +53,25 @@ public class TutorialScreen extends ScreenAdapter {
         batch.begin();
         GlyphLayout layout = new GlyphLayout();
 
-        layout.setText(font, "TUTORIAL");
-        font.draw(batch, "TUTORIAL", (viewport.getWorldWidth() - layout.width) / 2f, 300);
+        layout.setText(titleFont, "COMO JOGAR");
+        titleFont.draw(batch, "COMO JOGAR", (viewport.getWorldWidth() - layout.width) / 2f, 330);
 
-        font.draw(batch, "- O Pergaminho registra os pacientes na AVL Tree.", 50, 250);
-        font.draw(batch, "- O Orbe Esquerdo puxa pacientes em estado grave (Min Heap).", 50, 200);
-        font.draw(batch, "- O Orbe Direito gerencia as macas (Hash Table).", 50, 150);
+        font.draw(batch, "- Pacientes chegam ao balcao. Clique neles para", 50, 280);
+        font.draw(batch, "  ver seu cartao de ID e ouvir sua queixa.", 50, 260);
 
-        layout.setText(font, "Clique para Fechar e Iniciar o Loop do Jogo");
-        font.draw(batch, "Clique para Fechar e Iniciar o Loop do Jogo", (viewport.getWorldWidth() - layout.width) / 2f, 80);
+        font.draw(batch, "- Use o Pergaminho para cadastrar o paciente", 50, 230);
+        font.draw(batch, "  (nome, ID e gravidade), buscar ou ver a Arvore AVL.", 50, 210);
+
+        font.draw(batch, "- Use o Orbe Esquerdo (pequeno) para ver a fila de", 50, 180);
+        font.draw(batch, "  prioridade e alocar o paciente mais grave a uma maca.", 50, 160);
+
+        font.draw(batch, "- Use o Orbe Direito (grande) para visualizar as macas,", 50, 130);
+        font.draw(batch, "  ver pacientes internados e acompanhar procedimentos.", 50, 110);
+
+        font.draw(batch, "- Pressione ESC para pausar o jogo.", 50, 80);
+
+        layout.setText(font, "Clique para Iniciar");
+        font.draw(batch, "Clique para Iniciar", (viewport.getWorldWidth() - layout.width) / 2f, 40);
         batch.end();
 
         if (Gdx.input.justTouched()) {
@@ -73,5 +88,6 @@ public class TutorialScreen extends ScreenAdapter {
     public void dispose() {
         batch.dispose();
         font.dispose();
+        titleFont.dispose();
     }
 }

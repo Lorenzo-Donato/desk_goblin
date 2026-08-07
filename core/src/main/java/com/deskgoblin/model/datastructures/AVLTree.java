@@ -1,16 +1,7 @@
 package com.deskgoblin.model.datastructures;
 
-/**
- * Classe que implementa uma Árvore AVL (Árvore Binária de Busca Balanceada).
- *
- * @param <K> O tipo da chave, que deve ser comparável.
- * @param <V> O tipo do valor associado à chave.
- */
 public class AVLTree<K extends Comparable<K>, V> {
 
-    /**
-     * Classe interna que representa um nó na árvore AVL.
-     */
     public static class AVLNode<K, V> {
         public K key;
         public V value;
@@ -28,28 +19,15 @@ public class AVLTree<K extends Comparable<K>, V> {
     private AVLNode<K, V> root;
     private int size;
 
-    /**
-     * Construtor da Árvore AVL. Inicializa a árvore vazia.
-     */
     public AVLTree() {
         this.root = null;
         this.size = 0;
     }
 
-    /**
-     * Retorna a raiz da árvore AVL.
-     *
-     * @return O nó raiz.
-     */
     public AVLNode<K, V> getRoot() {
         return root;
     }
 
-    /**
-     * Retorna a altura da árvore.
-     *
-     * @return A altura da árvore.
-     */
     public int height() {
         return height(root);
     }
@@ -119,12 +97,6 @@ public class AVLTree<K extends Comparable<K>, V> {
         return node;
     }
 
-    /**
-     * Insere uma nova chave e valor na árvore. Se a chave já existir, o valor será atualizado.
-     *
-     * @param key A chave a ser inserida.
-     * @param value O valor correspondente.
-     */
     public void insert(K key, V value) {
         System.out.println("[AVL] insert: inserindo chave " + key);
         int oldSize = size;
@@ -155,12 +127,6 @@ public class AVLTree<K extends Comparable<K>, V> {
         return rebalance(node);
     }
 
-    /**
-     * Busca um valor na árvore através da sua chave.
-     *
-     * @param key A chave a ser buscada.
-     * @return O valor associado, ou null se não for encontrado.
-     */
     public V search(K key) {
         AVLNode<K, V> result = searchRec(root, key);
         if (result != null) {
@@ -184,11 +150,6 @@ public class AVLTree<K extends Comparable<K>, V> {
         }
     }
 
-    /**
-     * Remove um nó da árvore pela sua chave.
-     *
-     * @param key A chave a ser removida.
-     */
     public void delete(K key) {
         System.out.println("[AVL] delete: tentando remover chave " + key);
         int oldSize = size;
@@ -209,7 +170,6 @@ public class AVLTree<K extends Comparable<K>, V> {
         } else if (cmp > 0) {
             node.right = deleteRec(node.right, key);
         } else {
-            // Nó encontrado
             if (node.left == null || node.right == null) {
                 AVLNode<K, V> temp = (node.left != null) ? node.left : node.right;
                 if (temp == null) {
@@ -241,11 +201,6 @@ public class AVLTree<K extends Comparable<K>, V> {
         return current;
     }
 
-    /**
-     * Realiza a travessia em ordem e retorna uma lista encadeada com os valores.
-     *
-     * @return Lista encadeada com os valores em ordem de chave.
-     */
     public SinglyLinkedList<V> inOrder() {
         SinglyLinkedList<V> list = new SinglyLinkedList<>();
         inOrderRec(root, list);
@@ -260,20 +215,10 @@ public class AVLTree<K extends Comparable<K>, V> {
         }
     }
 
-    /**
-     * Retorna a quantidade de elementos na árvore.
-     *
-     * @return O número de elementos.
-     */
     public int size() {
         return size;
     }
 
-    /**
-     * Verifica se a árvore está vazia.
-     *
-     * @return true se vazia, false caso contrário.
-     */
     public boolean isEmpty() {
         return size == 0;
     }

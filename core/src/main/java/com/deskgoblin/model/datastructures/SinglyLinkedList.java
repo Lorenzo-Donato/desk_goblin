@@ -2,18 +2,8 @@ package com.deskgoblin.model.datastructures;
 
 import java.util.Iterator;
 
-/**
- * Classe que implementa uma Lista Encadeada Simples (Singly Linked List).
- *
- * @param <T> O tipo de dado armazenado na lista.
- */
 public class SinglyLinkedList<T> implements Iterable<T> {
 
-    /**
-     * Classe interna que representa um nó na lista.
-     *
-     * @param <T> O tipo de dado armazenado no nó.
-     */
     public static class Node<T> {
         public T data;
         public Node<T> next;
@@ -28,26 +18,16 @@ public class SinglyLinkedList<T> implements Iterable<T> {
     private Node<T> tail;
     private int size;
 
-    /**
-     * Construtor da lista encadeada. Inicializa uma lista vazia.
-     */
     public SinglyLinkedList() {
         this.head = null;
         this.tail = null;
         this.size = 0;
     }
 
-    // --- MÉTODO ADICIONADO PARA RESOLVER O ERRO DO GAME SCREEN ---
     public Node<T> getHead() {
         return head;
     }
-    // -------------------------------------------------------------
 
-    /**
-     * Adiciona um elemento no início da lista.
-     *
-     * @param data O elemento a ser adicionado.
-     */
     public void pushFront(T data) {
         Node<T> newNode = new Node<>(data);
         if (isEmpty()) {
@@ -59,11 +39,6 @@ public class SinglyLinkedList<T> implements Iterable<T> {
         size++;
     }
 
-    /**
-     * Adiciona um elemento no final da lista.
-     *
-     * @param data O elemento a ser adicionado.
-     */
     public void pushBack(T data) {
         Node<T> newNode = new Node<>(data);
         if (isEmpty()) {
@@ -75,11 +50,6 @@ public class SinglyLinkedList<T> implements Iterable<T> {
         size++;
     }
 
-    /**
-     * Remove e retorna o elemento do início da lista.
-     *
-     * @return O elemento removido, ou null se a lista estiver vazia.
-     */
     public T popFront() {
         if (isEmpty()) {
             return null;
@@ -93,11 +63,6 @@ public class SinglyLinkedList<T> implements Iterable<T> {
         return data;
     }
 
-    /**
-     * Remove e retorna o elemento do final da lista.
-     *
-     * @return O elemento removido, ou null se a lista estiver vazia.
-     */
     public T popBack() {
         if (isEmpty()) {
             return null;
@@ -117,11 +82,6 @@ public class SinglyLinkedList<T> implements Iterable<T> {
         return data;
     }
 
-    /**
-     * Retorna, sem remover, o elemento do início da lista.
-     *
-     * @return O elemento do início, ou null se a lista estiver vazia.
-     */
     public T peekFront() {
         if (isEmpty()) {
             return null;
@@ -129,11 +89,6 @@ public class SinglyLinkedList<T> implements Iterable<T> {
         return head.data;
     }
 
-    /**
-     * Retorna, sem remover, o elemento do final da lista.
-     *
-     * @return O elemento do final, ou null se a lista estiver vazia.
-     */
     public T peekBack() {
         if (isEmpty()) {
             return null;
@@ -141,30 +96,14 @@ public class SinglyLinkedList<T> implements Iterable<T> {
         return tail.data;
     }
 
-    /**
-     * Retorna o tamanho atual da lista.
-     *
-     * @return O número de elementos na lista.
-     */
     public int size() {
         return size;
     }
 
-    /**
-     * Verifica se a lista está vazia.
-     *
-     * @return true se a lista estiver vazia, false caso contrário.
-     */
     public boolean isEmpty() {
         return size == 0;
     }
 
-    /**
-     * Verifica se a lista contém o elemento especificado.
-     *
-     * @param data O elemento a ser buscado.
-     * @return true se o elemento for encontrado, false caso contrário.
-     */
     public boolean contains(T data) {
         Node<T> current = head;
         while (current != null) {
