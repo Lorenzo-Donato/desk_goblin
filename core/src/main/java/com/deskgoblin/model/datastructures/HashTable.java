@@ -24,13 +24,35 @@ public class HashTable<K, V> {
 
     @SuppressWarnings("unchecked")
     public HashTable() {
-        this.capacity = 16;
+        this.capacity = 17;
         this.table = new SinglyLinkedList[this.capacity];
         for (int i = 0; i < capacity; i++) {
             table[i] = new SinglyLinkedList<>();
         }
         this.size = 0;
         System.out.println("[HashTable] Tabela criada com capacidade " + capacity);
+    }
+
+    private boolean isPrime(int num) {
+        if (num <= 1) return false;
+        if (num <= 3) return true;
+        if (num % 2 == 0 || num % 3 == 0) return false;
+        for (int i = 5; i * i <= num; i += 6) {
+            if (num % i == 0 || num % (i + 2) == 0) return false;
+        }
+        return true;
+    }
+
+    private int nextPrime(int num) {
+        int prime = num;
+        boolean found = false;
+        while (!found) {
+            prime++;
+            if (isPrime(prime)) {
+                found = true;
+            }
+        }
+        return prime;
     }
 
     private int hash(K key) {
@@ -40,7 +62,7 @@ public class HashTable<K, V> {
     @SuppressWarnings("unchecked")
     private void resize() {
         int oldCapacity = capacity;
-        capacity *= 2;
+        capacity = nextPrime(capacity * 2);
         SinglyLinkedList<Entry<K, V>>[] oldTable = table;
 
         table = new SinglyLinkedList[capacity];

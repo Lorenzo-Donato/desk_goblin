@@ -19,3 +19,17 @@ application {
 tasks.named<JavaExec>("run") {
     workingDir = file("../assets")
 }
+
+tasks.register<Jar>("dist") {
+    archiveBaseName.set("DeskGoblin")
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest {
+        attributes["Main-Class"] = "com.deskgoblin.desktop.DesktopLauncher"
+    }
+    from(sourceSets.main.get().output)
+    from(fileTree("../assets"))
+    dependsOn(configurations.runtimeClasspath)
+    from({
+        configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
+    })
+}
